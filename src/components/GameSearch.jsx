@@ -27,7 +27,6 @@ export default function GameSearch() {
 
     function renderFiveResults(results){
       return results.map((result, index) => {  
-        console.log(index, num, (num + 3))  
         if(index >= (num + 0) && index < (num + 3)){
               return <GameSearchResult 
                           key={result.id} 
@@ -49,12 +48,11 @@ export default function GameSearch() {
         </div>
       : null
       }
-      {results.length > 0
-        ? null
-        : <form className='searchForm' onSubmit={processSearch}>
+      <form className='searchForm' onSubmit={processSearch}>
                 <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
-                <button className='searchBtn btn'>Search</button>
-          </form>}
+                <button type='submit' className='searchBtn btn'>Search</button>
+      </form>
+      {/* <img className='footerIcon searchIcon' src="./search.png" alt="magnifying glass search icon" onClick={() => setResults([])}/> */}
     </div>
   )
 }
