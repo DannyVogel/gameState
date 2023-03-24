@@ -155,7 +155,6 @@ input {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
     gap: 10px;
     align-items: center;
 }
@@ -238,40 +237,13 @@ input {
     background-color: #eba24e;
 }
 
-.searchForm {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    margin-bottom: 5px;
-}
-
-.searchBar {
-    -webkit-text-size-adjust: 100%;
-    font-size: 16px;
-    text-align: center;
-}
-
-.searchBar::placeholder {
-    text-align: center;
-}
-
-.searchBar:focus::placeholder {
-    color: transparent;
-}
-
-.searchBar:focus {
-    text-align: center;
-}
 
 .pageSelectContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .pageSelectText {
@@ -298,9 +270,39 @@ input {
     margin-top: auto;
 }
 
+.searchForm {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.searchBar {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: 16px;
+    text-align: center;
+}
+
+.searchBar::placeholder {
+    text-align: center;
+}
+
+.searchBar:focus::placeholder {
+    color: transparent;
+}
+
+.searchBar:focus {
+    text-align: center;
+}
+
 .footerIcon {
     width: 35px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .searchIcon {
