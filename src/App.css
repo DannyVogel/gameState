@@ -278,20 +278,6 @@ input {
     color: #146C94;
 }
 
-.footerContainer {
-    position: sticky relative;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: space-around;
-    gap: 70px;
-    align-items: center;
-    padding: 0 10px;
-    background-color: #19A7CE;
-    border-radius: 0 0 10px 10px;
-    margin-top: auto;
-}
-
 .searchForm {
     width: 90%;
     display: flex;
@@ -300,7 +286,7 @@ input {
     align-items: center;
     padding: 10px 0;
     margin-top: auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .searchBar {
@@ -320,6 +306,20 @@ input {
 
 .searchBar:focus {
     text-align: center;
+}
+
+.footerContainer {
+    position: sticky relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+    gap: 70px;
+    align-items: center;
+    padding: 0 10px;
+    background-color: #19A7CE;
+    border-radius: 0 0 10px 10px;
+    margin-top: auto;
 }
 
 .footerIcon {
