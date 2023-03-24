@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import { auth, onAuthStateChanged } from "./firebaseConfig";
 import GameSearch from './components/GameSearch';
 
@@ -26,6 +27,7 @@ export default function App() {
       />
       <p className='introText'>Find a game and add it to a list of games played or games you want to play!</p>
       <GameSearch />
+      <Footer />
     </div>
   )
 }
