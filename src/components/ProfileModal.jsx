@@ -107,7 +107,7 @@ export default function ProfileModal(props) {
             </div>
 
         :   <div className="profileInfo">
-                <p>Logged in!</p>
+                <p>Hello {props.user}</p>
                 <button onClick={handleSignOut}>Sign Out</button>
                 {/* add links for lists: games played/games to play */}
             </div>
