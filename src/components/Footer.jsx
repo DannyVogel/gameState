@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function Footer() {
+export default function Footer(props) {
   return (
     <div className='footerContainer'>
-        <img className='footerIcon' src="./gamesToPlay1.png" alt="shopping bag with controller icon" />
-        <img className='footerIcon searchIcon' src="./search.png" alt="magnifying glass search icon" />
-        <img className='footerIcon' src="./gamesPlayed1.png" alt="papers with controller icon" />
+        <img id='gamesToPlay' className='footerIcon' src="./gamesToPlay1.png" alt="shopping bag with controller icon" onClick={props.handlePageChange}/>
+        <img id='search' className='footerIcon searchIcon' src="./search.png" alt="magnifying glass search icon" onClick={props.handlePageChange}/>
+        <img id='gamesPlayed' className='footerIcon' src="./gamesPlayed1.png" alt="papers with controller icon" onClick={props.handlePageChange}/>
     </div>
   )
 }
