@@ -25,7 +25,6 @@ export default function App() {
         loggedIn={loggedIn}
         user={user}
       />
-      <p className='introText'>Find a game and add it to a list of games played or games you want to play!</p>
       <GameSearch />
       <Footer />
     </div>
