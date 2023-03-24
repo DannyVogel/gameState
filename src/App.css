@@ -37,11 +37,11 @@ body {
 .headerTitle {
     margin: 0 auto 0 auto;
     letter-spacing: 1px;
-    background: linear-gradient(147deg,#792acb 40%, #ff0027 55%);
     background: -webkit-linear-gradient(147deg,#792acb 40%, #ff0027 55%);
     background: -moz-linear-gradient(147deg,#792acb 40%, #ff0027 55%);
-    background-clip: text;
+    background: linear-gradient(147deg,#792acb 40%, #ff0027 55%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 1px 1px 2px linear-gradient(147deg,#792acb 40%, #ff0027 55%);
 }
@@ -271,7 +271,7 @@ input {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    margin-top: auto;
+    margin-bottom: 50px;
 }
 
 .pageSelectText {
