@@ -6,7 +6,7 @@ export default function GameSearchResult(props) {
     
   return (
     <div key={props.result.id} className="resultContainer">
-      <h3>
+      <h3 className='resultHeader'>
         <a
           className="resultLink"
           href={`https://www.rawg.io/games/${props.result.slug}`}
@@ -43,14 +43,14 @@ export default function GameSearchResult(props) {
 
       <div className="endResultContainer">
         <button
-          className="resultButton green btn" /*onClick={() => props.handleAddGame(props.result)}*/
-        >
-          I played it
-        </button>
-        <button
           className="resultButton red btn" /*onClick={() => props.handleAddGame(props.result)}*/
         >
           I want to play it
+        </button>
+        <button
+          className="resultButton green btn" /*onClick={() => props.handleAddGame(props.result)}*/
+        >
+          I played it
         </button>
       </div>
 
