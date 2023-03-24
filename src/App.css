@@ -230,9 +230,14 @@ input {
 }
 
 @media screen and (max-width: 450px) {
+    .body {
+        background-color: #F6F1F1;
+    }
     .appContainer {
         margin: 0 auto;
         min-height: 100vh;
+        border: none;
+        border-radius: none;
     }
 
 
