@@ -156,7 +156,6 @@ input {
 }
 
 .welcomeContainer {
-    width: 420px;
     height: 625px;
     display: flex;
     flex-direction: column;
@@ -166,7 +165,7 @@ input {
 }
 
 .listsContainer {
-    width: 420px;
+    width: 350px;
     display: flex;
     justify-content: space-around;
 }
