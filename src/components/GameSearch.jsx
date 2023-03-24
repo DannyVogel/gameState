@@ -36,13 +36,8 @@ export default function GameSearch() {
 
   return (
     <div className='gameSearchContainer'>
-      <h1 className='headerTitle'><span className="gameItalic">game</span>Search</h1>
-      <form className='searchForm' onSubmit={processSearch}>
-          <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
-          <button className='searchBtn btn'>Search</button>
-      </form>
       <div className='resultsContainer'>
-          {results.length > 0 ? renderFiveResults(results) : null}
+          {results.length > 0 ? renderFiveResults(results) : <p className='introText'>Find a game, add it to a list: games played or games you want to play!</p>}
       </div>
       {results.length > 0 
       ? <div className="pageSelectContainer">
@@ -52,6 +47,10 @@ export default function GameSearch() {
         </div>
       : null
       }
+      <form className='searchForm' onSubmit={processSearch}>
+          <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
+          <button className='searchBtn btn'>Search</button>
+      </form>
     </div>
   )
 }
