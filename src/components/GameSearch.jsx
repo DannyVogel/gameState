@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import GameSearchResults from './GameSearchResults'
+import GameSearchResult from './GameSearchResult'
+import Result from '../utility/resultsConstructor'
 
 export default function GameSearch() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -16,13 +17,12 @@ export default function GameSearch() {
     fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${searchTerm}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            setResults(data.results)
+            setResults(data.results.map(result => new Result(result)))
         })
     }
 
     const searchResultsEl = results.map(result => {
-        return <GameSearchResults 
+        return <GameSearchResult 
                     key={result.id} 
                     result={result}
                 />
@@ -30,13 +30,13 @@ export default function GameSearch() {
 
   return (
     <div className='gameSearchContainer'>
-        <h1>gameSearch</h1>
+        <h1 className='headerTitle'><span className="gameItalic">game</span>Search</h1>
         <form className='searchForm' onSubmit={processSearch}>
             <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
             <button className='searchBtn btn' >Search</button>
         </form>
         <div className='resultsContainer'>
-            {results.length > 0 ? searchResultsEl : <p>No results</p>}
+            {results.length > 0 ? searchResultsEl : null}
         </div>
     </div>
   )
