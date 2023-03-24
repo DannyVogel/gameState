@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import Header from './components/Header'
+import GameSearch from './components/GameSearch';
+import GamesPlayedList from './components/GamesPlayedList';
+import GamesToPlayList from './components/GamesToPlayList';
 import Footer from './components/Footer'
 import { auth, onAuthStateChanged } from "./firebaseConfig";
-import GameSearch from './components/GameSearch';
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState('')
+  const [page, setPage] = useState('search')
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -19,14 +22,23 @@ export default function App() {
     }
   });
 
+  function handlePageChange(e){
+    const {id} = e.target
+    setPage(id)
+  }
+
   return (
     <div className='appContainer'>
       <Header 
         loggedIn={loggedIn}
         user={user}
       />
-      <GameSearch />
-      <Footer />
+      {page === 'search' ? <GameSearch /> : null}
+      {page === 'gamesToPlay' ? <GamesToPlayList /> : null}
+      {page === 'gamesPlayed' ? <GamesPlayedList /> : null}
+      <Footer 
+        handlePageChange={(e) => handlePageChange(e)}
+      />
     </div>
   )
 }
