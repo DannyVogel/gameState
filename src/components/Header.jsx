@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import ProfileModal from './ProfileModal'
+import { Zoom } from "react-awesome-reveal";
 
 export default function Header(props) {
   const [profileClicked, setProfileClicked] = useState(false)
@@ -9,10 +10,10 @@ export default function Header(props) {
   }
   
   return (
-      <div className="headerContainer">
-        <h1 className="headerTitle">
-          <span className="gameItalic">game</span>State
-        </h1>
+      <div className="headerContainer">       
+          <Zoom className="headerTitle">
+            <h1><span className="gameItalic">game</span>State</h1>
+          </Zoom>
         {props.loggedIn 
           ? <img
             src="./loggedInUser.png"
