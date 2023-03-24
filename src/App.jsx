@@ -22,8 +22,9 @@ export default function App() {
     <div className='appContainer'>
       <Header 
         loggedIn={loggedIn}
+        user={user}
       />
-      <p>{loggedIn ? `${user} logged in!` : "Not logged in!"}</p>
+      <p className='introText'>Find a game and add it to a list of games played or games you want to play!</p>
       <GameSearch />
     </div>
   )
