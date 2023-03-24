@@ -3,9 +3,9 @@ import React from 'react'
 export default function Footer() {
   return (
     <div className='footerContainer'>
-        <img className='footerIcon' src="./gamesPlayed1.png" alt="" />
-        <img className='footerIcon searchIcon' src="./search.png" alt="" />
         <img className='footerIcon' src="./gamesToPlay1.png" alt="" />
+        <img className='footerIcon searchIcon' src="./search.png" alt="" />
+        <img className='footerIcon' src="./gamesPlayed1.png" alt="" />
     </div>
   )
 }
