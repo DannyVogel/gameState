@@ -9,7 +9,6 @@ export default function Header(props) {
   }
   
   return (
-    <div>
       <div className="headerContainer">
         <h1 className="headerTitle">
           <span className="gameItalic">game</span>State
@@ -28,7 +27,6 @@ export default function Header(props) {
             onClick={handleProfileClick}
           />
         }
-      </div>
       {profileClicked && (
         <ProfileModal
           handleProfileClick={handleProfileClick}
@@ -36,6 +34,6 @@ export default function Header(props) {
           user={props.user}
         />
       )}
-    </div>
+      </div>
   );
 }
