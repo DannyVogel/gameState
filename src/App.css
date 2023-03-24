@@ -228,3 +228,12 @@ input {
 .pageSelectText:hover {
     color: #146C94;
 }
+
+@media screen and (max-width: 450px) {
+    .appContainer {
+        margin-top: 0px;
+        min-height: 100vh;
+    }
+
+
+  }
