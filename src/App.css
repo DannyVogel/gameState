@@ -37,13 +37,13 @@ body {
 .headerTitle {
     margin: 0 auto 0 auto;
     letter-spacing: 1px;
-    background: linear-gradient(147deg,#792acb 40%, #ff0027 80%);
-    background: -webkit-linear-gradient(147deg,#792acb 40%, #ff0027 80%);
-    background: -moz-linear-gradient(147deg,#792acb 40%, #ff0027 80%);
+    background: linear-gradient(147deg,#792acb 40%, #ff0027 55%);
+    background: -webkit-linear-gradient(147deg,#792acb 40%, #ff0027 55%);
+    background: -moz-linear-gradient(147deg,#792acb 40%, #ff0027 55%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 1px 1px 2px linear-gradient(147deg,#792acb 40%, #ff0027 80%);
+    text-shadow: 1px 1px 2px linear-gradient(147deg,#792acb 40%, #ff0027 55%);
 }
 
 .gameItalic {
