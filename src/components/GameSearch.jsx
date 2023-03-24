@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import WelcomeSplash from './WelcomeSplash'
 import GameSearchResult from './GameSearchResult'
 import Result from '../utility/resultsConstructor'
 
@@ -38,7 +39,7 @@ export default function GameSearch() {
   return (
     <div className='gameSearchContainer'>
       <div className='resultsContainer'>
-          {results.length > 0 ? renderFiveResults(results) : <p className='introText'>Find a game, add it to a list: games played or games you want to play!</p>}
+          {results.length > 0 ? renderFiveResults(results) : <WelcomeSplash />}
       </div>
       {results.length > 0 
       ? <div className="pageSelectContainer">
