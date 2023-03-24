@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function GameSearchResult(props) {
   
-  console.log(props.result)
+
     
   return (
     <div key={props.result.id} className="resultContainer">
