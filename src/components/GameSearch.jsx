@@ -15,6 +15,7 @@ export default function GameSearch() {
 
   function processSearch(e){
     e.preventDefault()
+    setNum(0)
     fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${searchTerm}`)
         .then(response => response.json())
         .then(data => {

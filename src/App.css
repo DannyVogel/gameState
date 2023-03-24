@@ -155,8 +155,8 @@ input {
 }
 
 .resultImageContainer {
-    max-width: 125px;
-    max-height: 100%;
+    width: 125px;
+    height: 80px;
 }
 
 .resultImage {
@@ -175,6 +175,7 @@ input {
 
 .resultHeader {
     margin: 5px 0;
+    text-align: center;
 }
 
 .resultLink {
