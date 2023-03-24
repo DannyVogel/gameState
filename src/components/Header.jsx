@@ -10,15 +10,32 @@ export default function Header(props) {
   
   return (
     <div>
-        <div className='headerContainer'>
-            <h1 className='headerTitle'>gameState</h1>
-            <img src="./user.png" alt="profile icon" className='profileIcon empty' onClick={handleProfileClick}/>
-        </div>
-        {profileClicked && 
-            <ProfileModal
-                handleProfileClick={handleProfileClick}
-                loggedIn={props.loggedIn}
-            />}
+      <div className="headerContainer">
+        <h1 className="headerTitle">
+          <span className="gameItalic">game</span>State
+        </h1>
+        {props.loggedIn 
+          ? <img
+            src="./loggedInUser.png"
+            alt="profile icon"
+            className="profileIcon empty"
+            onClick={handleProfileClick}
+          />
+          : <img
+            src="./loggedOutUser.png"
+            alt="profile icon"
+            className="profileIcon empty"
+            onClick={handleProfileClick}
+          />
+        }
+      </div>
+      {profileClicked && (
+        <ProfileModal
+          handleProfileClick={handleProfileClick}
+          loggedIn={props.loggedIn}
+          user={props.user}
+        />
+      )}
     </div>
-  )
+  );
 }
