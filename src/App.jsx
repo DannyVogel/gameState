@@ -1,15 +1,17 @@
 import React, {useState} from 'react'
-import SignIn from './components/SignIn'
+import Header from './components/Header'
 import { auth, onAuthStateChanged } from "./firebaseConfig";
+import GameSearch from './components/GameSearch';
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState('')
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
       setLoggedIn(true)
-      console.log(user.email)
+      setUser(user.email.slice(0, (user.email).indexOf("@")))
     } else {
       setLoggedIn(false)
       // User is signed out
@@ -17,9 +19,12 @@ export default function App() {
   });
 
   return (
-    <div>
-      <SignIn />
-      <h1>{loggedIn ? "Logged in!" : "Not logged in!"}</h1>
+    <div className='appContainer'>
+      <Header 
+        loggedIn={loggedIn}
+      />
+      <p>{loggedIn ? `${user} logged in!` : "Not logged in!"}</p>
+      <GameSearch />
     </div>
   )
 }
