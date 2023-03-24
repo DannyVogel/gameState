@@ -161,7 +161,6 @@ input {
     /* justify-content: space-around; */
     gap: 60px;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .listsContainer {
@@ -300,7 +299,8 @@ input {
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    margin-bottom: 10px;
+    margin-top: auto;
+    margin-bottom: 20px;
 }
 
 .searchBar {
