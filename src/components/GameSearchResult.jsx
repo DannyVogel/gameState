@@ -18,13 +18,15 @@ export default function GameSearchResult(props) {
       </h3>
 
       <div className="midResultContainer">
-        {props.result.image && (
-          <img
-            className="resultImage"
-            src={props.result.image}
-            alt={props.result.name}
-          />
-        )}
+        <div className="resultImageContainer">
+          {props.result.image && (
+            <img
+              className="resultImage"
+              src={props.result.image}
+              alt={props.result.name}
+            />
+          )}
+        </div>
         <div className="resultInfoContainer">
           <p className="resultText">Released: {props.result.released}</p>
           <p className="resultText">
