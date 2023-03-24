@@ -18,7 +18,7 @@ export default function WelcomeSplash() {
                 <p className='headerTitle'>Games <span>{<br/>}</span> played</p>
             </div>
         </div>
-        <h1 className='headerTitle'>Sign up to save your <span>{<br/>}</span> lists across devices!</h1>
+        <h1 className='headerTitle'>Sign up to see your <span>{<br/>}</span> lists across devices!</h1>
     </div>
   )
 }
