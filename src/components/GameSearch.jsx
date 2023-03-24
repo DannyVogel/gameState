@@ -49,10 +49,12 @@ export default function GameSearch() {
         </div>
       : null
       }
-      <form className='searchForm' onSubmit={processSearch}>
-          <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
-          <button className='searchBtn btn'>Search</button>
-      </form>
+      {results.length > 0
+        ? null
+        : <form className='searchForm' onSubmit={processSearch}>
+                <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
+                <button className='searchBtn btn'>Search</button>
+          </form>}
     </div>
   )
 }
