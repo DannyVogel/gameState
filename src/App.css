@@ -156,12 +156,32 @@ input {
 }
 
 .welcomeContainer {
+    width: 420px;
     height: 625px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
+}
+
+.listsContainer {
+    width: 420px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.iconContainer {
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.iconContainer > img {
+    width: 45px;
 }
 
 .resultContainer {

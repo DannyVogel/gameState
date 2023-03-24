@@ -4,7 +4,7 @@ import { Fade } from "react-awesome-reveal";
 export default function WelcomeSplash() {
   return (
     <div className='welcomeContainer'>
-        <Fade cascade={true} duration={1500} delay={500}>
+        <Fade cascade={true} duration={1500} delay={500} style={{width: '100%', height: '100%'}}>
             <div className="iconContainer">
                 <h1 className='headerTitle'>Find Games!</h1>
                 <img className='footerIcon' src="./search.png" alt="magnifying glass search icon" />
