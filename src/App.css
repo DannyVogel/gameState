@@ -155,11 +155,11 @@ input {
 }
 
 .welcomeContainer {
-    height: 625px;
+    height: auto;
     display: flex;
     flex-direction: column;
     /* justify-content: space-around; */
-    gap: 60px;
+    gap: 50px;
     align-items: center;
 }
 
@@ -265,7 +265,6 @@ input {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
 .pageSelectText {
@@ -300,7 +299,7 @@ input {
     align-items: center;
     padding: 10px 0;
     margin-top: auto;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .searchBar {
