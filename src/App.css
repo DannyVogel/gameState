@@ -123,6 +123,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .welcomeContainer {
@@ -257,7 +258,7 @@ input {
 }
 
 .footerContainer {
-    position: relative;
+    position: sticky relative;
     width: 100%;
     height: 60px;
     display: flex;
