@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from './components/Header'
 import GameSearch from './components/GameSearch';
 import GamesPlayedList from './components/GamesPlayedList';
@@ -11,16 +11,20 @@ export default function App() {
   const [user, setUser] = useState('')
   const [page, setPage] = useState('search')
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      setLoggedIn(true)
-      setUser(user.email.slice(0, (user.email).indexOf("@")))
-    } else {
-      setLoggedIn(false)
-      // User is signed out
-    }
-  });
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setLoggedIn(true)
+        setUser(user.email.slice(0, (user.email).indexOf("@")))
+      } else {
+        setLoggedIn(false)
+        // User is signed out
+      }
+    });
+  }, [])
+    
 
   function handlePageChange(e){
     const {id} = e.target
@@ -36,9 +40,11 @@ export default function App() {
       {page === 'search' ? <GameSearch /> : null}
       {page === 'gamesToPlay' ? <GamesToPlayList /> : null}
       {page === 'gamesPlayed' ? <GamesPlayedList /> : null}
+
       <Footer 
         handlePageChange={(e) => handlePageChange(e)}
       />
+
     </div>
   )
 }
