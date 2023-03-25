@@ -45,13 +45,13 @@ export default function GameCard(props) {
 
       <div className="endResultContainer">
         <button
-          id='gamesPlayedList'
+          id='gamesToPlayList' 
           className="resultButton red btn" onClick={(e) => props.handleAddGameToList(e, props.result)}
         >
           I want to play it
         </button>
         <button
-          id='gamesToPlayList'
+          id='gamesPlayedList'
           className="resultButton green btn" onClick={(e) => props.handleAddGameToList(e, props.result)}
         >
           I played it
