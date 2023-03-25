@@ -311,10 +311,10 @@ input {
 .footerContainer {
     position: sticky relative;
     width: 100%;
-    min-height: 50px;
+    min-height: 70px;
     display: flex;
     justify-content: space-around;
-    gap: 70px;
+    gap: 65px;
     align-items: center;
     padding: 0 10px;
     background-color: #19A7CE;
