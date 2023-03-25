@@ -331,7 +331,7 @@ input {
 .searchIcon {
     position: absolute;
     width: 50px;
-    bottom: 25px;
+    bottom: 30px;
     background-color: #19A7CE;
     border-radius: 50% 50% 0 0;
 }
