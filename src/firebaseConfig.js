@@ -20,5 +20,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+const gameStateDB = ref(db, "gameState")
 
-export {auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, db, ref, get, child, update, remove, onValue}
+export {auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, db, gameStateDB, ref, get, child, update, remove, onValue}
