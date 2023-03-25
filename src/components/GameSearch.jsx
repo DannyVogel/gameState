@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react'
 import WelcomeSplash from './WelcomeSplash'
 import GameSearchResult from './GameSearchResult'
 import Result from '../utility/resultsConstructor'
+import {db, ref, update, remove, onValue} from '../firebaseConfig'
 
-export default function GameSearch() {
+export default function GameSearch(props) {
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState([])
   const [num, setNum] = useState(0)
@@ -25,15 +26,23 @@ export default function GameSearch() {
         })
     }
 
-    function renderFiveResults(results){
-      return results.map((result, index) => {  
-        if(index >= (num + 0) && index < (num + 3)){
-              return <GameSearchResult 
-                          key={result.id} 
-                          result={result}
-                      />
-        }})
-    }
+function addGameToList(e, game){
+    const list = e.target.id
+    const gameRef = ref(db, `users/${props.userUID}/${list}/${game.id}`) 
+    update(gameRef, game)
+}
+
+  
+  function renderFiveResults(results){
+    return results.map((result, index) => {  
+      if(index >= (num + 0) && index < (num + 3)){
+            return <GameSearchResult 
+                        key={result.id} 
+                        result={result}
+                        handleAddGameToList={addGameToList}
+                    />
+      }})
+  }
 
   return (
     <div className='gameSearchContainer'>
