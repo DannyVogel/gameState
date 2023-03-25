@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import WelcomeSplash from './WelcomeSplash'
 import GameCard from './GameCard'
 import Result from '../utility/resultsConstructor'
-import {db, ref, update, remove, onValue} from '../firebaseConfig'
+import {gameStateDB, ref, update, remove, onValue} from '../firebaseConfig'
 
 export default function GameSearch(props) {
   const [searchTerm, setSearchTerm] = useState('')
@@ -26,12 +26,13 @@ export default function GameSearch(props) {
         })
     }
 
-function addGameToList(e, game){
-    const list = e.target.id
-    const gameRef = ref(db, `users/${props.userUID}/${list}/${game.id}`) 
-    update(gameRef, game)
-}
-
+  function addGameToList(e, game){
+      const list = e.target.id
+      const updates = {};
+      console.log(game.id)
+      updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
+      update(gameStateDB, updates);
+  }
   
   function renderFiveResults(results){
     return results.map((result, index) => {  
