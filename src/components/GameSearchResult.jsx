@@ -45,12 +45,14 @@ export default function GameSearchResult(props) {
 
       <div className="endResultContainer">
         <button
-          className="resultButton red btn" /*onClick={() => props.handleAddGame(props.result)}*/
+          id='gamesPlayedList'
+          className="resultButton red btn" onClick={(e) => props.handleAddGameToList(e, props.result)}
         >
           I want to play it
         </button>
         <button
-          className="resultButton green btn" /*onClick={() => props.handleAddGame(props.result)}*/
+          id='gamesToPlayList'
+          className="resultButton green btn" onClick={(e) => props.handleAddGameToList(e, props.result)}
         >
           I played it
         </button>
