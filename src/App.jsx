@@ -34,24 +34,14 @@ export default function App() {
   }
 
   return (
-    <div className='appContainer'>
-      <Header 
-        loggedIn={loggedIn}
-        user={user}
-      />
-      {page === 'search' 
-        ? <GameSearch 
-            userUID={userUID}
-        /> 
-        : null}
-      {page === 'gamesToPlay' ? <GamesToPlayList /> : null}
-      {page === 'gamesPlayed' ? <GamesPlayedList /> : null}
+    <div className="appContainer">
+      <Header loggedIn={loggedIn} user={user} />
+      {page === "search" ? <GameSearch userUID={userUID} /> : null}
+      {page === "gamesToPlay" ? <GamesToPlayList userUID={userUID} /> : null}
+      {page === "gamesPlayed" ? <GamesPlayedList userUID={userUID} /> : null}
 
-      <Footer 
-        handlePageChange={(e) => handlePageChange(e)}
-      />
-
+      <Footer handlePageChange={(e) => handlePageChange(e)} />
     </div>
-  )
+  );
 }
 
