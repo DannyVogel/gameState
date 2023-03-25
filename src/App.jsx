@@ -9,6 +9,7 @@ import { auth, onAuthStateChanged } from "./firebaseConfig";
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState('')
+  const [userUID, setUserUID] = useState('')
   const [page, setPage] = useState('search')
 
 
@@ -18,6 +19,7 @@ export default function App() {
         const uid = user.uid;
         setLoggedIn(true)
         setUser(user.email.slice(0, (user.email).indexOf("@")))
+        setUserUID(uid)
       } else {
         setLoggedIn(false)
         // User is signed out
@@ -37,7 +39,11 @@ export default function App() {
         loggedIn={loggedIn}
         user={user}
       />
-      {page === 'search' ? <GameSearch /> : null}
+      {page === 'search' 
+        ? <GameSearch 
+            userUID={userUID}
+        /> 
+        : null}
       {page === 'gamesToPlay' ? <GamesToPlayList /> : null}
       {page === 'gamesPlayed' ? <GamesPlayedList /> : null}
 
