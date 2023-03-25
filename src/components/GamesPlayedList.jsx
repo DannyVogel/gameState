@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import GameCard from './GameCard'
-import {db, gameStateDB, ref, update, remove, onValue} from '../firebaseConfig'
+import {db, ref, remove, onValue} from '../firebaseConfig'
 
 export default function GamesPlayedList(props) {
   const [savedList, setSavedList] = useState(()=>[])
