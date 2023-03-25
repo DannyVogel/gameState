@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import WelcomeSplash from './WelcomeSplash'
-import GameSearchResult from './GameSearchResult'
+import GameCard from './GameCard'
 import Result from '../utility/resultsConstructor'
 import {db, ref, update, remove, onValue} from '../firebaseConfig'
 
@@ -36,7 +36,7 @@ function addGameToList(e, game){
   function renderFiveResults(results){
     return results.map((result, index) => {  
       if(index >= (num + 0) && index < (num + 3)){
-            return <GameSearchResult 
+            return <GameCard 
                         key={result.id} 
                         result={result}
                         handleAddGameToList={addGameToList}

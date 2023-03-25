@@ -1,5 +1,5 @@
 import React from 'react'
-import GameSearchResult from './GameSearchResult'
+import GameCard from './GameCard'
 
 export default function GamesPlayedList() {
   
