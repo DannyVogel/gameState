@@ -22,17 +22,8 @@ export default function GameSearch(props) {
         .then(response => response.json())
         .then(data => {
             setResults(data.results.map(result => new Result(result)))
-            console.log(data.results)
         })
     }
-
-  function addGameToList(e, game){
-      const list = e.target.id
-      const updates = {};
-      console.log(game.id)
-      updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
-      update(gameStateDB, updates);
-  }
   
   function renderFiveResults(results){
     return results.map((result, index) => {  
@@ -40,7 +31,7 @@ export default function GameSearch(props) {
             return <GameCard 
                         key={result.id} 
                         result={result}
-                        handleAddGameToList={addGameToList}
+                        userUID={props.userUID}
                     />
       }})
   }
