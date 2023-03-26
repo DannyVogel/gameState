@@ -8,8 +8,7 @@ export default function GamesToPlayList(props) {
   useEffect(() => {
     const gameRef = ref(db, `gameState/users/${props.userUID}/gamesToPlayList`)
     onValue(gameRef, (snapshot) => {
-      snapshot.exists() ? setSavedList(Object.values(snapshot.val())) : null
-      console.log(Object.values(snapshot.val()))
+      snapshot.exists() ? setSavedList(Object.values(snapshot.val())) : setSavedList([])
     })
   }, []);
   
@@ -18,12 +17,15 @@ export default function GamesToPlayList(props) {
             return <GameCard 
                         key={game[0].id} 
                         result={game[0]}
+                        onList={'gamesToPlayList'}
+                        userUID={props.userUID}                        
                     />
       })
   }
   
   return (
     <div className='gameSearchContainer'>
+      <h1>Games To Play</h1>
       {renderList(savedList)}
     </div>
   )
