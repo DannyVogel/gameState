@@ -4,3 +4,4 @@ dist
 dist-ssr
 *.local
 src/utility/apikey.js
+src/firebaseConfig.js

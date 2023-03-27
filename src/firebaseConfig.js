@@ -5,7 +5,7 @@ import { getDatabase, ref, get, child, update, remove, onValue } from "firebase/
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration 
 const firebaseConfig = {
   apiKey: "AIzaSyDvZtRn9B9OgWOIVHnICiq0_eoNreJBUs0",
   authDomain: "gamestate-327e2.firebaseapp.com",
