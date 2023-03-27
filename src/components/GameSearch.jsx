@@ -3,12 +3,12 @@ import WelcomeSplash from './WelcomeSplash'
 import GameCard from './GameCard'
 import Result from '../utility/resultsConstructor'
 import {gameStateDB, ref, update, remove, onValue} from '../firebaseConfig'
+import apikey from '../utility/apikey'
 
 export default function GameSearch(props) {
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState([])
   const [num, setNum] = useState(0)
-  const apiKey = 'b0bf8fc68ea6427fab93a3535a4be903'
   
   function handleChange(e){
     const {value} = e.target
