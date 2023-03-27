@@ -356,6 +356,7 @@ input {
 
     .appContainer {
         margin: 0 auto;
+        max-width: 100%;
         max-height: 1000px;
         border: none;
         border-radius: 0;
