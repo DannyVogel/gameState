@@ -130,7 +130,7 @@ input {
     grid-area: main;
     margin: 0 auto;
     display: grid;
-    grid-template-rows: 1fr 10px;
+    grid-template-rows: 1fr 70px;
     grid-template-areas: 
     "results"
     "search";
@@ -276,6 +276,8 @@ input {
     gap: 10px;
     grid-area: pages;
     margin-top: auto;
+    margin-bottom: 20px;
+    justify-self: start;
 }
 
 .pageSelectText {
@@ -293,6 +295,7 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-self: start;
     grid-area: search;
 }
 
