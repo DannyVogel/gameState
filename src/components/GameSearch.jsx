@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import WelcomeSplash from './WelcomeSplash'
 import GameCard from './GameCard'
 import Result from '../utility/resultsConstructor'
-import {gameStateDB, ref, update, remove, onValue} from '../firebaseConfig'
 import apiKey from '../utility/apikey'
 
 export default function GameSearch(props) {
@@ -53,7 +52,6 @@ export default function GameSearch(props) {
                 <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
                 <button type='submit' className='searchBtn btn'>Search</button>
       </form>
-      {/* <img className='footerIcon searchIcon' src="./search.png" alt="magnifying glass search icon" onClick={() => setResults([])}/> */}
     </div>
   )
 }
