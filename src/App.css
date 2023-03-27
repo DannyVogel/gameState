@@ -130,7 +130,7 @@ input {
     grid-area: main;
     margin: 0 auto;
     display: grid;
-    grid-template-rows: 1fr 70px;
+    grid-template-rows: 7fr 1fr;
     grid-template-areas: 
     "results"
     "search";
@@ -356,7 +356,7 @@ input {
 
     .appContainer {
         margin: 0 auto;
-        max-height: 100dvh;
+        max-height: 1000px;
         border: none;
         border-radius: 0;
     }
