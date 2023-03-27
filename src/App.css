@@ -130,7 +130,7 @@ input {
     grid-area: main;
     margin: 0 auto;
     display: grid;
-    grid-template-rows: 1fr 120px;
+    grid-template-rows: 1fr 10px;
     grid-template-areas: 
     "results"
     "search";
