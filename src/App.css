@@ -129,12 +129,10 @@ input {
     width: 95%;
     grid-area: main;
     margin: 0 auto;
-
     display: grid;
-    grid-template-rows: 1fr 40px 120px;
+    grid-template-rows: 1fr 120px;
     grid-template-areas: 
     "results"
-    "pages"
     "search";
     justify-items: center;
     align-content: start;
@@ -277,7 +275,7 @@ input {
     justify-content: space-between;
     gap: 10px;
     grid-area: pages;
-    align-self: self-start;
+    margin-top: auto;
 }
 
 .pageSelectText {
