@@ -3,5 +3,3 @@ node_modules
 dist
 dist-ssr
 *.local
-src/utility/apikey.js
-src/utility/firebaseConfigDetails.js
