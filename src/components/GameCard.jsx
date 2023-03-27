@@ -3,6 +3,10 @@ import {db, ref, remove, update, gameStateDB} from '../firebaseConfig'
 
 export default function GameCard(props) {
   const [isOnList, setIsOnList] = useState('')
+  const [userPlayedGameData, setUserPlayedGameData] = useState({
+    yearPlayed: '', comments: ''
+  })
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     if(props.onList === 'gamesToPlayList'){
@@ -12,12 +16,37 @@ export default function GameCard(props) {
     }
   }, [])
 
+  function handleChange(e){
+    const {name, value} = e.target
+    setUserPlayedGameData(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+
+  }
+
+  function handleShowModal(){
+    setShowModal(true)
+  }
+
+  function handleCloseModal(){
+    setShowModal(false)
+  }
+  
+  function handleSubmit(e, game){
+    e.preventDefault()
+    setShowModal(false)
+    const gameData = {...game, ...userPlayedGameData}
+    addGameToList(e, gameData)
+  }
+
   function addGameToList(e, game){
     const list = e.target.id
     const updates = {};
     updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
     update(gameStateDB, updates);
 }
+
 
   let buttonContainerElement = ''
   if(isOnList === ''){
@@ -31,10 +60,22 @@ export default function GameCard(props) {
         </button>
         <button
           id='gamesPlayedList'
-          className="resultButton green btn" onClick={(e) => addGameToList(e, props.result)}
+          className="resultButton green btn" onClick={handleShowModal}
         >
           I played it
         </button>
+        {showModal 
+          ? <div className="modalContainer">
+              <span className="closeModal" onClick={handleCloseModal}>&times;</span>
+              <form className='modalForm' id={'gamesPlayedList'} onSubmit={(e) => handleSubmit(e, props.result)}>
+                <input type="number" name="yearPlayed" id="yearPlayed" min={1900} max={3000} value={userPlayedGameData.yearPlayed} onChange={handleChange}/>
+                <input type="text" name="comments" id="comments" value={userPlayedGameData.comments} onChange={handleChange}/>
+                <button type="submit">Save</button>
+              </form>
+            </div>
+          : null  
+        }
+            
       </div>
   } else if (isOnList === 'gamesToPlayList'){
     buttonContainerElement = 
@@ -46,11 +87,22 @@ export default function GameCard(props) {
       Remove
     </button>
     <button
-      id='gamesPlayedList'
-      className="resultButton green btn" onClick={(e) => addGameToList(e, props.result)}
-    >
-      I played it
-    </button>
+          id='gamesPlayedList'
+          className="resultButton green btn" onClick={handleShowModal}
+        >
+          I played it
+        </button>
+        {showModal 
+          ? <div className="modalContainer">
+              <span className="closeModal" onClick={handleCloseModal}>&times;</span>
+              <form className='modalForm' id={'gamesPlayedList'} onSubmit={(e) => handleSubmit(e, props.result)}>
+                <input type="number" name="yearPlayed" id="yearPlayed" min={1900} max={3000} value={userPlayedGameData.yearPlayed} onChange={handleChange}/>
+                <input type="text" name="comments" id="comments" value={userPlayedGameData.comments} onChange={handleChange}/>
+                <button type="submit">Save</button>
+              </form>
+            </div>
+          : null  
+        }
   </div>
   } else if (isOnList === 'gamesPlayedList'){
     buttonContainerElement = 
