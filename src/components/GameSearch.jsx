@@ -40,7 +40,6 @@ export default function GameSearch(props) {
     <div className='gameSearchContainer'>
       <div className='resultsContainer'>
           {results.length > 0 ? renderFiveResults(results) : <WelcomeSplash />}
-      </div>
       {results.length > 0 
       ? <div className="pageSelectContainer">
             {num > 0 ? <p className='pageSelectText' onClick={()=>setNum(prevNum => prevNum -= 3)}>Previous Page</p> : null}
@@ -49,6 +48,7 @@ export default function GameSearch(props) {
         </div>
       : null
       }
+      </div>
       <form className='searchFormContainer' onSubmit={processSearch}>
                 <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
                 <button type='submit' className='searchBtn btn'>Search</button>
