@@ -131,7 +131,7 @@ input {
     margin: 0 auto;
 
     display: grid;
-    grid-template-rows: 1fr 80px 80px;
+    grid-template-rows: 1fr 40px 120px;
     grid-template-areas: 
     "results"
     "pages"
@@ -290,15 +290,12 @@ input {
     color: #146C94;
 }
 
-.searchForm {
+.searchFormContainer {
     width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
     grid-area: search;
-    margin-top: auto;
 }
 
 .searchBar {
@@ -306,6 +303,7 @@ input {
     text-size-adjust: 100%;
     font-size: 16px;
     text-align: center;
+    margin: 0;
 }
 
 .searchBar::placeholder {

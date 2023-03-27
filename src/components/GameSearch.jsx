@@ -49,7 +49,7 @@ export default function GameSearch(props) {
         </div>
       : null
       }
-      <form className='searchForm' onSubmit={processSearch}>
+      <form className='searchFormContainer' onSubmit={processSearch}>
                 <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
                 <button type='submit' className='searchBtn btn'>Search</button>
       </form>
