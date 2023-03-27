@@ -26,10 +26,6 @@ body {
     "header"
     "main"
     "footer";
-
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
 }
 
 .headerContainer {
@@ -368,7 +364,7 @@ input {
 
     .appContainer {
         margin: 0 auto;
-        height: 100dvh;
+        max-height: 100dvh;
         border: none;
         border-radius: 0;
     }
