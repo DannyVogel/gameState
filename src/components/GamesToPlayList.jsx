@@ -24,7 +24,7 @@ export default function GamesToPlayList(props) {
   }
   
   return (
-    <div className='gameSearchContainer'>
+    <div className='gameListContainer'>
       <h1>Games To Play</h1>
       {renderList(savedList)}
     </div>
