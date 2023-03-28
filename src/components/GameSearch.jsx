@@ -22,6 +22,7 @@ export default function GameSearch(props) {
         .then(data => {
             setResults(data.results.map(result => new Result(result)))
         })
+    setSearchTerm('')
     }
   
   function renderFiveResults(results){
