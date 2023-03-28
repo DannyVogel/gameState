@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import GamesPlayedCard from './GamesPlayedCard'
 import GameCard from './GameCard'
 import {db, ref, remove, onValue} from '../firebaseConfig'
 
@@ -14,10 +15,9 @@ export default function GamesPlayedList(props) {
 
   function renderList(list){
     return list.map((game) => {  
-            return <GameCard 
+            return <GamesPlayedCard 
                         key={game[0].id} 
                         result={game[0]}
-                        onList={'gamesPlayedList'}
                         userUID={props.userUID}
                     />
       })
