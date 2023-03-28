@@ -6,7 +6,9 @@ class Result {
     this.genres = result.genres
     this.released = result.released
     this.image = result.background_image
+    this.screenshots = result.short_screenshots.map((screenshot) => screenshot.image)
     this.stores = result.stores
+    this.platforms = result.parent_platforms.map((platform) => platform.platform.name)
   }
 }
 
