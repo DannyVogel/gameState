@@ -89,12 +89,12 @@ body {
     color: white;
 }
 
-label {
+.logInForm > label {
     margin-right: auto;
     margin-bottom: 5px;
 }
 
-input {
+.logInForm > input {
     width: 100%;
     height: 40px;
     margin-bottom: 15px;
@@ -275,8 +275,75 @@ input {
     position: absolute;
     width: 100%;
     height: 90%;
+    border-radius: 5px;
     background-color: #146C94;
+    opacity: 0.95;
     top: 10px;
+}
+
+.closeModal {
+    display: block;
+    font-size: 24px;
+    text-align: right;
+    color: rgb(172, 19, 19);
+    margin: 3px 3px 0 0;
+    line-height: 16px;
+}
+
+.modalForm {
+    height: 100%;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.datePlayed {
+    display: flex;
+    gap: 10px;
+}
+
+.datePlayed > span {
+    margin-right: 10px;
+}
+
+.datePlayed > input {
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.datePlayed > input::placeholder {
+    text-align: center;
+}
+
+.datePlayed > input:focus {
+    text-align: center;
+}
+
+
+.gameCommentsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.gameCommentsContainer > label {
+    margin-right: 30px;
+}
+
+.gameStatusContainer > span {
+    margin-right: 10px;
+}
+
+.modalForm > textarea {
+    resize: none;
+    border-radius: 5px;
+}
+
+.addToListBtn {
+    height: 30px;
+    padding: 0;
+    margin-top: 5px;
 }
 
 .pageSelectContainer {
@@ -317,11 +384,16 @@ input {
 }
 
 .searchBar {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    margin: 0;
+    text-align: center;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     font-size: 16px;
-    text-align: center;
-    margin: 0;
 }
 
 .searchBar::placeholder {
