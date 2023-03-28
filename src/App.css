@@ -315,6 +315,7 @@ input {
 }
 
 .datePlayed > input {
+    width: auto;
     border: none;
     border-radius: 5px;
     text-align: center;
