@@ -24,8 +24,8 @@ export default function GamesPlayedCard(props) {
           <div className="gamesPlayedDetails">
             <h4 className='gamesPlayedCardTitle'>{name}</h4>
             <div className='gamesPlayedCardDetailsContainer'>
-                <p>Played: {monthPlayed}-{yearPlayed}</p>
-                <p>Status: {status}</p>
+                <p>Played: {monthPlayed}{monthPlayed && yearPlayed ? '-' : null}{yearPlayed}</p>
+                <p>{status ? `Status: ${status}` : null}</p>
             </div>
           </div>
           <div className="btnContainer">
