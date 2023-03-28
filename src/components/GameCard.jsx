@@ -45,8 +45,13 @@ export default function GameCard(props) {
     const updates = {};
     updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
     update(gameStateDB, updates);
-}
-
+  }
+  
+  function removeFromList(e){
+    const gameID = e.target.id
+    const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
+    remove(gameRef)
+  }
 
   let buttonContainerElement = ''
   if(isOnList === ''){
@@ -112,6 +117,8 @@ export default function GameCard(props) {
               </div>
               <div className="gameStatusContainer">
                 <span>Game status:</span>
+                <input type="radio" name="status" id="playing" value="playing" checked={userPlayedGameData.status === 'playing'} onChange={handleChange}/>
+                <label htmlFor="playing">Playing</label>
                 <input type="radio" name="status" id="beat" value="beat" checked={userPlayedGameData.status === 'beat'} onChange={handleChange}/>
                 <label htmlFor="beat">Beat</label>
                 <input type="radio" name="status" id="dropped" value="dropped" checked={userPlayedGameData.status === 'dropped'} onChange={handleChange}/>
@@ -162,11 +169,6 @@ export default function GameCard(props) {
       </div>
   }
 
-  function removeFromList(e){
-    const gameID = e.target.id
-    const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
-    remove(gameRef)
-  }
     
   return (
     <div key={props.result.id} className="resultContainer">
