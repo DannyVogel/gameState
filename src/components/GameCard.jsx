@@ -102,6 +102,7 @@ export default function GameCard(props) {
                   value={userPlayedGameData.yearPlayed}
                   onChange={handleChange}
                   placeholder="YYYY"
+                  required
                 />
               </div>
               <div className="gameCommentsContainer">
