@@ -395,6 +395,7 @@ input {
 }
 
 .gamesPlayedCardContainer {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     border: 1px solid #146C94;
@@ -402,6 +403,7 @@ input {
 }
 
 .gamesPlayedDetails {
+    max-width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -420,18 +422,22 @@ input {
     font-family: 'Nunito', sans-serif;
 }
 
-.gamesPlayedDetails > h4 {
+.gamesPlayedCardTitle {
+    overflow: ellipsis;
+    white-space: nowrap;
     margin: 0;
     letter-spacing: 1px;
 }
 
 .btnContainer {
     align-self: center;
+    margin-top: 25px;
+    min-width: 78px;
 }
+
 .gamesPlayedCardBtn {
     width: auto;
-    margin: 0 0 0 auto;
-    height: 22px;;
+    height: 22px;
 }
 
 .fullGameCardContainer {
