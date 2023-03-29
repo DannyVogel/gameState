@@ -379,7 +379,6 @@ input {
 }
 
 .gameListContainer {
-    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -389,6 +388,8 @@ input {
 }
 
 .cardsContainer {
+    
+    position: relative;
     width: 95%;
     display: flex;
     flex-direction: column;
@@ -441,13 +442,15 @@ input {
 }
 
 .fullGameCardContainer {
-    position: absolute;
+    /* position: absolute; */
     width: 95%;
-    height: 90%;
+    height: auto;
+    margin: 2px auto;
+    padding-bottom: 5px;
     border-radius: 5px;
     background-color: #146C94;
-    opacity: 0.99;
-    top: 10px;
+    /* opacity: 0.99; */
+    /* top: 10px; */
     display: flex;
     flex-direction: column;
     align-items: center;
