@@ -21,15 +21,15 @@ export default function GamesPlayedCard(props) {
   return (
     <div className='cardsContainer'>
       <div className='gamesPlayedCardContainer'>
-          <div className="gamesPlayedDetails">
             <h4 className='gamesPlayedCardTitle'>{name}</h4>
+          <div className="gamesPlayedDetails">
             <div className='gamesPlayedCardDetailsContainer'>
                 <p>Played: {monthPlayed}{monthPlayed && yearPlayed ? '-' : null}{yearPlayed}</p>
                 <p>{status ? `Status: ${status}` : null}</p>
+            <div className="btnContainer">
+              <button className='gamesPlayedCardBtn btn' onClick={handleShowCardModal}>View card</button>
             </div>
-          </div>
-          <div className="btnContainer">
-            <button className='gamesPlayedCardBtn btn' onClick={handleShowCardModal}>View card</button>
+            </div>
           </div>
       </div>
 
