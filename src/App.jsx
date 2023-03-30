@@ -22,6 +22,8 @@ export default function App() {
         setUserUID(uid)
       } else {
         setLoggedIn(false)
+        setUser('')
+        setUserUID('')
         // User is signed out
       }
     });
