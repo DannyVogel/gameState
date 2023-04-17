@@ -441,15 +441,12 @@ input {
 }
 
 .fullGameCardContainer {
-    /* position: absolute; */
     width: 95%;
     height: auto;
     margin: 2px auto;
     padding-bottom: 5px;
     border-radius: 5px;
     background-color: #146C94;
-    /* opacity: 0.99; */
-    /* top: 10px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -564,8 +561,10 @@ input {
     border-radius: 50% 50% 0 0;
 }
 
+.searchBtn {
+    display: none;
+}
+
 /* @media screen and (max-width: 450px) {
-    .searchBtn {
-        display: none;
-    }
+
   } */
