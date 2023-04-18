@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
-import {db, ref, remove} from '../firebaseConfig'
+import {db, ref, remove, update, gameStateDB} from '../firebaseConfig'
 import ImageGallery from './ImageGallery'
 
 export default function GamesPlayedCard(props) {
-  const [showCardModal, setShowCardModal] = useState(false)
-  
   const {id, name, monthPlayed, yearPlayed, comments, status, image, released, slug, platforms, screenshots} = props.result
+  
+  const [showCardModal, setShowCardModal] = useState(false)
+  const [editItem, setEditItem] = useState(false)
+  const [editItemData, setEditItemData] = useState({
+    monthPlayed: monthPlayed, yearPlayed: yearPlayed, status: status, comments: comments})
+  
 
   function handleShowCardModal(){
     setShowCardModal(prev => !prev)
@@ -16,6 +20,25 @@ export default function GamesPlayedCard(props) {
     const gameID = e.target.id
     const gameRef = ref(db, `gameState/users/${props.userUID}/gamesPlayedList/${gameID}`)
     remove(gameRef)
+  }
+
+  function handleEdit(){
+    setEditItem(true)
+  }
+
+  function handleChange(e){
+    const {name, value} = e.target
+    setEditItemData(prev => ({...prev, [name]: value}))
+  }
+
+
+  function updateItem(e){
+    e.preventDefault()
+    setEditItem(false)
+    const gameData = {...props.result, ...editItemData}
+    const updates = {};
+    updates[`/users/${props.userUID}/gamesPlayedList/${id}`] = [gameData];
+    update(gameStateDB, updates);
   }
 
   return (
@@ -42,9 +65,60 @@ export default function GamesPlayedCard(props) {
             <div className="details">
               <p>Released: {released}</p>
               <p>Platforms: {platforms.join(', ')}</p>
-              <p>Played: {monthPlayed} - {yearPlayed}</p>
-              <p>Status: {status}</p>
-              <p>Comments: {comments}</p>
+              {editItem 
+                ? 
+                  <form className="editGameForm">
+                    <div className="datePlayed">
+                      <span>Date Played:</span> 
+                      <input
+                        type="number"
+                        name="monthPlayed"
+                        id="monthPlayed"
+                        min={1}
+                        max={12}
+                        value={editItemData.monthPlayed}
+                        onChange={handleChange}
+                        placeholder="MM"
+                      />-
+                      <input
+                        type="number"
+                        name="yearPlayed"
+                        id="yearPlayed"
+                        min={1900}
+                        max={3000}
+                        value={editItemData.yearPlayed}
+                        onChange={handleChange}
+                        placeholder="YYYY"
+                        required
+                      />
+                    </div>
+                    <div className="gameStatusContainer">
+                      <span>Game status:</span>
+                      <input type="radio" name="status" id="playing" value="playing" checked={editItemData.status === 'playing'} onChange={handleChange}/>
+                      <label htmlFor="playing">Playing</label>
+                      <input type="radio" name="status" id="beat" value="beat" checked={editItemData.status === 'beat'} onChange={handleChange}/>
+                      <label htmlFor="beat">Beat</label>
+                      <input type="radio" name="status" id="dropped" value="dropped" checked={editItemData.status === 'dropped'} onChange={handleChange}/>
+                      <label htmlFor="dropped">Dropped</label>
+                    </div>
+                    <div className="gameCommentsContainer">
+                      <label htmlFor="comments">Comments:</label>
+                      <textarea
+                        name="comments"
+                        id="comments"
+                        rows={2}
+                        cols={25}
+                        value={editItemData.comments}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </form>
+                : <>
+                    <p>Played: {monthPlayed} - {yearPlayed}</p>
+                    <p>Status: {status}</p>
+                    <p>Comments: {comments}</p>
+                  </>
+                }
             </div>
             <a
             href={`https://www.rawg.io/games/${slug}`}
@@ -54,57 +128,22 @@ export default function GamesPlayedCard(props) {
             More Info
             </a>
             <br />
-            <button
-              id={id}
-              className="resultButton red btn" onClick={removeFromList}
-            >
-              Remove
-            </button>
+            <div className="buttonContainer">
+              <button
+                id={id}
+                className={`resultButton ${editItem ? '' : 'green'} btn`} onClick={editItem ? updateItem : handleEdit}
+              >
+                {editItem ? "Save" : "Edit"}
+              </button>
+              <button
+                id={id}
+                className="resultButton red btn" onClick={removeFromList}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         : null}
-
-
-    {/* </div>
-         <div key={props.result.id} className="resultContainer">
-      <h3 className='resultHeader'>
-        <a
-          className="resultLink"
-          href={`https://www.rawg.io/games/${props.result.slug}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {props.result.name}{" "}
-        </a>
-      </h3>
-
-      <div className="midResultContainer">
-        <div className="resultImageContainer">
-          {props.result.image && (
-            <img
-              className="resultImage"
-              src={props.result.image}
-              alt={props.result.name}
-            />
-          )}
-        </div>
-        <div className="resultInfoContainer">
-          <p className="resultText">Released: {props.result.released}</p>
-          <p className="resultText">
-            Genres: {props.result.genres.map((genre) => genre.name).join(", ")}
-          </p>
-          <a
-            className="resultText"
-            href={`https://www.rawg.io/games/${props.result.slug}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            More Info
-          </a>
-        </div>
-      </div>
-
-      {/* {buttonContainerElement} */}
-
     </div>
   )
 }
