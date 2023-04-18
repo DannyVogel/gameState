@@ -50,6 +50,9 @@ export default function GamesPlayedList(props) {
     if(filters.status !== ''){
       list = list.filter((game) => game[0].status === filters.status)
     }
+    if(list){
+      return <p>No games found</p>
+    }
     const sortedDataByMonth = list.sort((a, b) => b[0].monthPlayed - a[0].monthPlayed)
     const sortedDataByYear = sortedDataByMonth.sort((a, b) => b[0].yearPlayed - a[0].yearPlayed)
     return sortedDataByYear.map((game) => {  
