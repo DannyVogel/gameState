@@ -1,10 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import GamesPlayedCard from './GamesPlayedCard'
-import GameCard from './GameCard'
 import {db, ref, onValue} from '../firebaseConfig'
 
 export default function GamesPlayedList(props) {
   const [savedList, setSavedList] = useState(()=>[])
+  const [filter, setFilter] = useState({
+    yearPlayed: '', status: ''})
+  const [filterInput, setFilterInput] = useState({
+    yearPlayed: '', status: ''})
+
+  function handleChange(e){
+    const {name, value} = e.target
+    setFilterInput(prevState => ({
+      ...prevState,
+      [name]: value
+    }))
+  }
+  
+  function applyFilters(e){
+    e.preventDefault()
+    setFilter(filterInput)
+  }
+
+  function clearFilters(e){
+    e.preventDefault()
+    setFilterInput({yearPlayed: '', status: ''})
+    setFilter({yearPlayed: '', status: ''})
+  }
 
   useEffect(() => {
     const gameRef = ref(db, `gameState/users/${props.userUID}/gamesPlayedList`)
@@ -14,7 +36,13 @@ export default function GamesPlayedList(props) {
     })
   }, []);
 
-  function renderList(list){
+  function renderList(list, filters){
+    if(filters.yearPlayed !== ''){
+      list = list.filter((game) => game[0].yearPlayed === filters.yearPlayed)
+    }
+    if(filters.status !== ''){
+      list = list.filter((game) => game[0].status === filters.status)
+    }
     const sortedDataByMonth = list.sort((a, b) => b[0].monthPlayed - a[0].monthPlayed)
     const sortedDataByYear = sortedDataByMonth.sort((a, b) => b[0].yearPlayed - a[0].yearPlayed)
     return sortedDataByYear.map((game) => {  
@@ -27,9 +55,30 @@ export default function GamesPlayedList(props) {
   }
   
   return (
-    <div className='gameListContainer'>
+    <div className="gameListContainer">
       <h1>Games Played</h1>
-      {renderList(savedList)}
+      <form className="filterContainer">
+        <p>Filter by:</p>
+        <input
+          type="number"
+          name="yearPlayed"
+          id="yearPlayed"
+          min={1900}
+          max={3000}
+          value={filterInput.yearPlayed}
+          onChange={handleChange}
+          placeholder="YYYY"
+        />
+        <select name="status" id="status" value={filterInput.status} onChange={handleChange}>
+          <option disabled defaultValue={'Game Status'}>Game Status</option>
+          <option value="playing">Playing</option>
+          <option value="beat">Beat</option>
+          <option value="dropped">Dropped</option>
+        </select>
+        <button className='blue' onClick={applyFilters}>Set</button>
+        <button className='blue' onClick={clearFilters}>Clear</button>
+      </form>
+      {renderList(savedList, filter)}
     </div>
-  )
+  );
 }

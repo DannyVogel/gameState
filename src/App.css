@@ -309,6 +309,10 @@ input {
     background-color: #eba24e;
 }
 
+.blue {
+    background-color: #19A7CE;
+}
+
 .modalContainer {
     position: absolute;
     width: 100%;
@@ -416,6 +420,35 @@ input {
     overflow-y: scroll;
     gap: 5px;
     padding-bottom: 25px;
+}
+
+.gameListContainer > h1 {
+    margin: 20px 0 15px 0;
+}
+
+.filterContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.filterContainer > input,select {
+    height: 25px;
+}
+
+.filterContainer > p {
+    margin-right: 10px;
+}
+
+.filterContainer > button {
+    width: 55px;
+    height: 25px;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Tilt Warp', cursive;
+    cursor: pointer;
 }
 
 .cardsContainer {
