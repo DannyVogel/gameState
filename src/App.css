@@ -234,6 +234,7 @@ input {
 .resultContainer {
     position: relative;
     width: 335px;
+    min-height: 180px;
     height: 180px;
     border-bottom: 1px solid gray;
     display: flex;
@@ -326,6 +327,19 @@ input {
     background-color: #146C94;
     opacity: 0.95;
     top: 10px;
+}
+
+.confirmationModalContainer {
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 0 10px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    background-color: #146C94;
+    opacity: 0.95;
+    top: 30%;
 }
 
 .closeModal {
