@@ -11,6 +11,8 @@ export default function ProfileModal(props) {
         signUpEmail: '', signUpPassword: ''
     })
 
+    const [errorMessage, setErrorMessage] = useState('')
+
     //capitalize first letter of string
     const userName = props.user.charAt(0).toUpperCase() + props.user.slice(1)
 
@@ -36,14 +38,17 @@ export default function ProfileModal(props) {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage)
+                setErrorMessage('Incorrect email or password');
+                setTimeout(() => {
+                    setErrorMessage('')
+                }, 3000)
 
             });
     }
 
     function processSignUpFormData(e){
         e.preventDefault()
+        setErrorMessage('')
         createUserWithEmailAndPassword(auth, signUpFormData.signUpEmail, signUpFormData.signUpPassword)
         .then((userCredential) => {
             // Signed in 
@@ -81,7 +86,6 @@ export default function ProfileModal(props) {
     <div className="profileModalContainer">
         {!props.loggedIn ?
             <div className='logInContainer'>
-            {/* separate component for sign in type? bit not DRY */}
                 {signInMethod
                 ?   <form onSubmit={processSignInFormData}>
                         <fieldset className='logInForm'>
@@ -90,6 +94,7 @@ export default function ProfileModal(props) {
                             <input type="email" name="signInEmail" id="signInEmail" value={signInFormData.signInEmail} onChange={handleChange}/>
                             <label htmlFor="signInPassword" className="">Password:</label>
                             <input type="password" name="signInPassword" id="signInPassword" value={signInFormData.signInPassword} onChange={handleChange}/>
+                            <p className='errorMessage'>{errorMessage ? errorMessage : '\u00A0'}</p>
                             <button className='logInBtn btn'>Sign In</button>
                         </fieldset>
                     </form>
