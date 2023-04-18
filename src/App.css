@@ -461,7 +461,8 @@ input {
 
 .details {
     width: 80%;
-    height: 220px;
+    height: auto;
+    margin-bottom: 10px;
 }
 
 .imageGalleryContainer {
