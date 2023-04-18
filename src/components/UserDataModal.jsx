@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function UserDataModal(props) {
-    const {handleShowModal, handleSubmit, handleChange, userPlayedGameData} = props
+    const {handleShowModal, handleSubmit, handleChange, userPlayedGameData, result} = props
 
   return (
     <div className="modalContainer">
@@ -11,7 +11,7 @@ export default function UserDataModal(props) {
       <form
         className="modalForm"
         id="gamesPlayedList"
-        onSubmit={(e) => handleSubmit(e, props.result)}
+        onSubmit={(e) => handleSubmit(e, result)}
       >
         <div className="datePlayed">
           <span>Date Played:</span>
