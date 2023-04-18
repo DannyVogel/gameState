@@ -67,6 +67,15 @@ input {
     cursor: pointer;
 }
 
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .profileModalContainer {
     position: absolute;
     width: 95%;
@@ -195,6 +204,11 @@ input {
     flex-direction: column;
     gap: 50px;
     align-items: center;
+}
+
+.welcomeIcon {
+    width: 35px;
+    cursor: pointer;
 }
 
 .listsContainer {

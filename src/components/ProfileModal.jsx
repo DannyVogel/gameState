@@ -80,42 +80,43 @@ export default function ProfileModal(props) {
     }
 
   return (
-    <div className="profileModalContainer">
-        {!props.loggedIn ?
-            <div className='logInContainer'>
-                {signInMethod
-                ?   <form onSubmit={processSignInFormData}>
-                        <fieldset className='logInForm'>
-                            <legend>Sign In</legend>
-                            <label htmlFor="signInEmail" className="">Email:</label>
-                            <input type="email" name="signInEmail" id="signInEmail" value={signInFormData.signInEmail} onChange={handleChange}/>
-                            <label htmlFor="signInPassword" className="">Password:</label>
-                            <input type="password" name="signInPassword" id="signInPassword" value={signInFormData.signInPassword} onChange={handleChange}/>
-                            <p className='errorMessage'>{errorMessage ? errorMessage : '\u00A0'}</p>
-                            <button className='logInBtn btn'>Sign In</button>
-                        </fieldset>
-                    </form>
-                :   <form onSubmit={processSignUpFormData}>
-                        <fieldset className='logInForm'>
-                            <legend>Sign Up</legend>
-                            <label htmlFor="signUpEmail" className="">Email:</label>
-                            <input type="email" name="signUpEmail" id="signUpEmail" value={signUpFormData.signUpEmail} onChange={handleChange}/>
-                            <label htmlFor="signUpPassword" className="">Password:</label>
-                            <input type="password" name="signUpPassword" id="signUpPassword" value={signUpFormData.signUpPassword} onChange={handleChange}/>
-                            <button className='logInBtn btn'>Sign up</button>
-                        </fieldset>
-                    </form>
-                }
-            
-                {signInMethod ? <p className='logInMethodTxt' onClick={switchSignInMethod}>New user? Sign up here</p> : <p className='logInMethodTxt' onClick={switchSignInMethod}>Already a user? Sign in here</p>}
+    <div className="modal-overlay" onClick={props.handleProfileClick}>
+        <div className="profileModalContainer" onClick={(event) => event.stopPropagation()}>
+            {!props.loggedIn ?
+                <div className='logInContainer'>
+                    {signInMethod
+                    ?   <form onSubmit={processSignInFormData}>
+                            <fieldset className='logInForm'>
+                                <legend>Sign In</legend>
+                                <label htmlFor="signInEmail" className="">Email:</label>
+                                <input type="email" name="signInEmail" id="signInEmail" value={signInFormData.signInEmail} onChange={handleChange}/>
+                                <label htmlFor="signInPassword" className="">Password:</label>
+                                <input type="password" name="signInPassword" id="signInPassword" value={signInFormData.signInPassword} onChange={handleChange}/>
+                                <p className='errorMessage'>{errorMessage ? errorMessage : '\u00A0'}</p>
+                                <button className='logInBtn btn'>Sign In</button>
+                            </fieldset>
+                        </form>
+                    :   <form onSubmit={processSignUpFormData}>
+                            <fieldset className='logInForm'>
+                                <legend>Sign Up</legend>
+                                <label htmlFor="signUpEmail" className="">Email:</label>
+                                <input type="email" name="signUpEmail" id="signUpEmail" value={signUpFormData.signUpEmail} onChange={handleChange}/>
+                                <label htmlFor="signUpPassword" className="">Password:</label>
+                                <input type="password" name="signUpPassword" id="signUpPassword" value={signUpFormData.signUpPassword} onChange={handleChange}/>
+                                <button className='logInBtn btn'>Sign up</button>
+                            </fieldset>
+                        </form>
+                    }
         
-            </div>
-
-        :   <div className="profileInfo">
-                <p>Hello {userName}</p>
-                <button className='btn' onClick={handleSignOut}>Sign Out</button>
-            </div>
-        }
+                    {signInMethod ? <p className='logInMethodTxt' onClick={switchSignInMethod}>New user? Sign up here</p> : <p className='logInMethodTxt' onClick={switchSignInMethod}>Already a user? Sign in here</p>}
+        
+                </div>
+            :   <div className="profileInfo">
+                    <p>Hello {userName}</p>
+                    <button className='btn' onClick={handleSignOut}>Sign Out</button>
+                </div>
+            }
+        </div>
     </div>
   )
 }
