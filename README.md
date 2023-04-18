@@ -9,7 +9,7 @@ Features included:
 
 Features being worked on: 
 - edit games in played games list (April update: added!)
+- filter for games played list (April update: added!)
 - desktop version
-- sorting, view options for lists
 
 Live at: https://dv-gamestate.netlify.app/ 
