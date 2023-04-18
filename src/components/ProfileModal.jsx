@@ -13,7 +13,6 @@ export default function ProfileModal(props) {
 
     const [errorMessage, setErrorMessage] = useState('')
 
-    //capitalize first letter of string
     const userName = props.user.charAt(0).toUpperCase() + props.user.slice(1)
 
     function handleChange(e){
@@ -31,17 +30,18 @@ export default function ProfileModal(props) {
         signInWithEmailAndPassword(auth, signInFormData.signInEmail, signInFormData.signInPassword)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
                 setTimeout(() => {
                     props.handleProfileClick()
                 }, 1500)
             })
             .catch((error) => {
-                const errorCode = error.code;
                 setErrorMessage('Incorrect email or password');
                 setTimeout(() => {
                     setErrorMessage('')
                 }, 3000)
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage)
 
             });
     }
@@ -51,8 +51,6 @@ export default function ProfileModal(props) {
         setErrorMessage('')
         createUserWithEmailAndPassword(auth, signUpFormData.signUpEmail, signUpFormData.signUpPassword)
         .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
             setTimeout(() => {
                 props.handleProfileClick()
             }, 1500)
@@ -71,7 +69,6 @@ export default function ProfileModal(props) {
 
     function handleSignOut(){
         signOut(auth).then(() => {
-            // Sign-out successful.
             setTimeout(() => {
                 props.handleProfileClick()
             }, 1000)
