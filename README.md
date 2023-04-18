@@ -8,8 +8,8 @@ Features included:
 - screenshots gallery for games saved in games played list
 
 Features being worked on: 
+- edit games in played games list (April update: added!)
 - desktop version
-- edit games in played games list
 - sorting, view options for lists
 
 Live at: https://dv-gamestate.netlify.app/ 
