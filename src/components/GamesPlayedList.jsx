@@ -3,12 +3,19 @@ import GamesPlayedCard from './GamesPlayedCard'
 import {db, ref, onValue} from '../firebaseConfig'
 
 export default function GamesPlayedList(props) {
+  const [showFilters, setShowFilters] = useState(false)
   const [savedList, setSavedList] = useState(()=>[])
   const [filter, setFilter] = useState({
     yearPlayed: '', status: ''})
   const [filterInput, setFilterInput] = useState({
     yearPlayed: '', status: ''})
+  
 
+  function handleShowFilters(e){
+    e.preventDefault()
+    setShowFilters(prev => !prev)
+  }
+  
   function handleChange(e){
     const {name, value} = e.target
     setFilterInput(prevState => ({
@@ -57,27 +64,34 @@ export default function GamesPlayedList(props) {
   return (
     <div className="gameListContainer">
       <h1>Games Played</h1>
-      <form className="filterContainer">
-        <p>Filter by:</p>
-        <input
-          type="number"
-          name="yearPlayed"
-          id="yearPlayed"
-          min={1900}
-          max={3000}
-          value={filterInput.yearPlayed}
-          onChange={handleChange}
-          placeholder="YYYY"
-        />
-        <select name="status" id="status" value={filterInput.status} onChange={handleChange}>
-          <option disabled defaultValue={'Game Status'}>Game Status</option>
-          <option value="playing">Playing</option>
-          <option value="beat">Beat</option>
-          <option value="dropped">Dropped</option>
-        </select>
-        <button className='blue' onClick={applyFilters}>Set</button>
-        <button className='blue' onClick={clearFilters}>Clear</button>
-      </form>
+        <form className="filterContainer">
+          <div className="filterIconContainer">
+            <i className="fa-solid fa-filter left" onClick={handleShowFilters}></i>
+          </div>
+          {showFilters
+            ?
+            <><p>Filter by:</p>
+            <input
+              type="number"
+              name="yearPlayed"
+              id="yearPlayed"
+              min={1900}
+              max={3000}
+              value={filterInput.yearPlayed}
+              onChange={handleChange}
+              placeholder="YYYY"
+            />
+            <select name="status" id="status" value={filterInput.status} onChange={handleChange}>
+              <option selected value=''>Status</option>
+              <option value="playing">Playing</option>
+              <option value="beat">Beat</option>
+              <option value="dropped">Dropped</option>
+            </select>
+            <button className='blue' onClick={applyFilters}>Set</button>
+            <button className='blue' onClick={clearFilters}>Clear</button></>
+          : null
+          }
+        </form>
       {renderList(savedList, filter)}
     </div>
   );

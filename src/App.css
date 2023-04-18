@@ -313,6 +313,11 @@ input {
     background-color: #19A7CE;
 }
 
+/* .left {
+    margin-left: 10px;
+    margin-right: 10px;
+} */
+
 .modalContainer {
     position: absolute;
     width: 100%;
@@ -423,15 +428,23 @@ input {
 }
 
 .gameListContainer > h1 {
-    margin: 20px 0 15px 0;
+    margin: 20px 0 10px 0;
 }
 
 .filterContainer {
     width: 100%;
+    padding: 2px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 2px;
+}
+
+.filterIconContainer {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .filterContainer > input,select {
@@ -439,7 +452,7 @@ input {
 }
 
 .filterContainer > p {
-    margin-right: 10px;
+    margin: 0 10px 0 0;
 }
 
 .filterContainer > button {
