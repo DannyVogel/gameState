@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import GamesPlayedCard from './GamesPlayedCard'
 import {db, ref, onValue} from '../firebaseConfig'
+import { Triangle } from  'react-loader-spinner'
 
 export default function GamesPlayedList(props) {
+  const [loading , setLoading] = useState(true)
   const [showFilters, setShowFilters] = useState(false)
   const [savedList, setSavedList] = useState(()=>[])
   const [filter, setFilter] = useState({
     yearPlayed: '', status: ''})
   const [filterInput, setFilterInput] = useState({
     yearPlayed: '', status: ''})
-  
 
   function handleShowFilters(e){
     e.preventDefault()
@@ -43,6 +44,12 @@ export default function GamesPlayedList(props) {
     })
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [savedList])
+
   function renderList(list, filters){
     if(filters.yearPlayed !== ''){
       list = list.filter((game) => game[0].yearPlayed === filters.yearPlayed)
@@ -67,13 +74,16 @@ export default function GamesPlayedList(props) {
   return (
     <div className="gameListContainer">
       <h1>Games Played</h1>
-        <form className="filterContainer">
-          <div className="filterIconContainer">
-            <i className="fa-solid fa-filter left" onClick={handleShowFilters}></i>
-          </div>
-          {showFilters
-            ?
-            <><p>Filter by:</p>
+      <form className="filterContainer">
+        <div className="filterIconContainer">
+          <i
+            className="fa-solid fa-filter left"
+            onClick={handleShowFilters}
+          ></i>
+        </div>
+        {showFilters ? (
+          <>
+            <p>Filter by:</p>
             <input
               type="number"
               name="yearPlayed"
@@ -84,18 +94,41 @@ export default function GamesPlayedList(props) {
               onChange={handleChange}
               placeholder="YYYY"
             />
-            <select name="status" id="status" value={filterInput.status} onChange={handleChange}>
-              <option selected value=''>Status</option>
+            <select
+              name="status"
+              id="status"
+              value={filterInput.status}
+              onChange={handleChange}
+            >
+              <option selected value="">
+                Status
+              </option>
               <option value="playing">Playing</option>
               <option value="beat">Beat</option>
               <option value="dropped">Dropped</option>
             </select>
-            <button className='blue' onClick={applyFilters}>Set</button>
-            <button className='blue' onClick={clearFilters}>Clear</button></>
-          : null
-          }
-        </form>
-      {renderList(savedList, filter)}
+            <button className="blue" onClick={applyFilters}>
+              Set
+            </button>
+            <button className="blue" onClick={clearFilters}>
+              Clear
+            </button>
+          </>
+        ) : null}
+      </form>
+      {loading ? (
+        <Triangle
+          height="80"
+          width="80"
+          color="#293264"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+        />
+      ) : (
+        renderList(savedList, filter)
+      )}
     </div>
   );
 }
