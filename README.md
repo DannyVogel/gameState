@@ -9,7 +9,7 @@ Features included:
 
 Features being worked on: 
 - edit games in played games list (April update: added!)
-- year and status filters for games played list (April update: added!). more filters to come!
-- desktop version
+- year and status filters for games played list (April update: added; more filters to come!)
+- desktop version (April update: updated; more to come!)
 
 Live at: https://dv-gamestate.netlify.app/ 
