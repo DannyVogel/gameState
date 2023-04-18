@@ -72,8 +72,9 @@ input {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
 }
 
 .profileModalContainer {
@@ -88,7 +89,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+    z-index: 3;
 }
 
 .logInContainer {
@@ -308,6 +309,15 @@ input {
     background-color: #eba24e;
 }
 
+.blue {
+    background-color: #19A7CE;
+}
+
+/* .left {
+    margin-left: 10px;
+    margin-right: 10px;
+} */
+
 .modalContainer {
     position: absolute;
     width: 100%;
@@ -415,6 +425,43 @@ input {
     overflow-y: scroll;
     gap: 5px;
     padding-bottom: 25px;
+}
+
+.gameListContainer > h1 {
+    margin: 20px 0 10px 0;
+}
+
+.filterContainer {
+    width: 100%;
+    padding: 2px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.filterIconContainer {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.filterContainer > input,select {
+    height: 25px;
+}
+
+.filterContainer > p {
+    margin: 0 10px 0 0;
+}
+
+.filterContainer > button {
+    width: 55px;
+    height: 25px;
+    color: white;
+    border-radius: 5px;
+    font-family: 'Tilt Warp', cursive;
+    cursor: pointer;
 }
 
 .cardsContainer {
