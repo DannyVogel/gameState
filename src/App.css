@@ -70,7 +70,7 @@ input {
 .profileModalContainer {
     position: absolute;
     width: 95%;
-    height: 300px;
+    height: auto;
     top: 60px;
     left: 10px;
     background-color: #146C94;
@@ -111,6 +111,13 @@ input {
     font-size: 16px;
 }
 
+.errorMessage {
+    font-size: 14px;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    color: red;
+}
+
 .btn {
     width: 100%;
     height: 40px;
@@ -125,6 +132,15 @@ input {
     text-decoration: underline;
     text-align: center;
     cursor: pointer;
+}
+
+
+.profileInfo {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
 }
 
 .introText {
@@ -270,11 +286,11 @@ input {
     height: 30px;
 }
 
-.red {
+.purple {
     background-color: #7b52ee;
 }
 
-.green {
+.orange {
     background-color: #eba24e;
 }
 

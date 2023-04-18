@@ -11,6 +11,10 @@ export default function ProfileModal(props) {
         signUpEmail: '', signUpPassword: ''
     })
 
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const userName = props.user.charAt(0).toUpperCase() + props.user.slice(1)
+
     function handleChange(e){
         const {name, value, id} = e.target
         const selectForm = id.slice(0,6)
@@ -26,12 +30,15 @@ export default function ProfileModal(props) {
         signInWithEmailAndPassword(auth, signInFormData.signInEmail, signInFormData.signInPassword)
             .then((userCredential) => {
                 // Signed in 
-                const user = userCredential.user;
                 setTimeout(() => {
                     props.handleProfileClick()
                 }, 1500)
             })
             .catch((error) => {
+                setErrorMessage('Incorrect email or password');
+                setTimeout(() => {
+                    setErrorMessage('')
+                }, 3000)
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage)
@@ -41,10 +48,9 @@ export default function ProfileModal(props) {
 
     function processSignUpFormData(e){
         e.preventDefault()
+        setErrorMessage('')
         createUserWithEmailAndPassword(auth, signUpFormData.signUpEmail, signUpFormData.signUpPassword)
         .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
             setTimeout(() => {
                 props.handleProfileClick()
             }, 1500)
@@ -63,7 +69,6 @@ export default function ProfileModal(props) {
 
     function handleSignOut(){
         signOut(auth).then(() => {
-            // Sign-out successful.
             setTimeout(() => {
                 props.handleProfileClick()
             }, 1000)
@@ -78,7 +83,6 @@ export default function ProfileModal(props) {
     <div className="profileModalContainer">
         {!props.loggedIn ?
             <div className='logInContainer'>
-            {/* separate component for sign in type? bit not DRY */}
                 {signInMethod
                 ?   <form onSubmit={processSignInFormData}>
                         <fieldset className='logInForm'>
@@ -87,6 +91,7 @@ export default function ProfileModal(props) {
                             <input type="email" name="signInEmail" id="signInEmail" value={signInFormData.signInEmail} onChange={handleChange}/>
                             <label htmlFor="signInPassword" className="">Password:</label>
                             <input type="password" name="signInPassword" id="signInPassword" value={signInFormData.signInPassword} onChange={handleChange}/>
+                            <p className='errorMessage'>{errorMessage ? errorMessage : '\u00A0'}</p>
                             <button className='logInBtn btn'>Sign In</button>
                         </fieldset>
                     </form>
@@ -107,9 +112,8 @@ export default function ProfileModal(props) {
             </div>
 
         :   <div className="profileInfo">
-                <p>Hello {props.user}</p>
-                <button onClick={handleSignOut}>Sign Out</button>
-                {/* add links for lists: games played/games to play */}
+                <p>Hello {userName}</p>
+                <button className='btn' onClick={handleSignOut}>Sign Out</button>
             </div>
         }
     </div>

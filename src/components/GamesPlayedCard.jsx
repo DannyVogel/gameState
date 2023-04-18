@@ -131,13 +131,13 @@ export default function GamesPlayedCard(props) {
             <div className="buttonContainer">
               <button
                 id={id}
-                className={`resultButton ${editItem ? '' : 'green'} btn`} onClick={editItem ? updateItem : handleEdit}
+                className={`resultButton ${editItem ? '' : 'orange'} btn`} onClick={editItem ? updateItem : handleEdit}
               >
                 {editItem ? "Save" : "Edit"}
               </button>
               <button
                 id={id}
-                className="resultButton red btn" onClick={removeFromList}
+                className="resultButton purple btn" onClick={removeFromList}
               >
                 Remove
               </button>

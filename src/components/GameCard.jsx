@@ -59,14 +59,14 @@ export default function GameCard(props) {
       <div className="endResultContainer">
         <button
           id="gamesToPlayList"
-          className="resultButton red btn"
+          className="resultButton purple btn"
           onClick={(e) => addGameToList(e, props.result)}
         >
           I want to play it
         </button>
         <button
           id="gamesPlayedList"
-          className="resultButton green btn"
+          className="resultButton orange btn"
           onClick={handleShowModal}
         >
           I played it
@@ -136,13 +136,13 @@ export default function GameCard(props) {
     <div className="endResultContainer">
     <button
       id={props.result.id}
-      className="resultButton red btn" onClick={removeFromList}
+      className="resultButton purple btn" onClick={removeFromList}
     >
       Remove
     </button>
     <button
           id='gamesPlayedList'
-          className="resultButton green btn" onClick={handleShowModal}
+          className="resultButton orange btn" onClick={handleShowModal}
         >
           I played it
         </button>
@@ -163,7 +163,7 @@ export default function GameCard(props) {
       <div className="endResultContainer">
         <button
           id={props.result.id}
-          className="resultButton red btn" onClick={removeFromList}
+          className="resultButton purple btn" onClick={removeFromList}
         >
           Remove
         </button>
