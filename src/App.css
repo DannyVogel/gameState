@@ -346,7 +346,7 @@ input {
     font-size: 14px;
 }
 
-.modalForm > textarea {
+.gameCommentsContainer > textarea {
     resize: none;
     border-radius: 5px;
 }
@@ -461,6 +461,7 @@ input {
 
 .details {
     width: 80%;
+    height: 200px;
 }
 
 .imageGalleryContainer {
@@ -499,6 +500,40 @@ input {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.editGameForm {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.gameCommentsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.gameCommentsContainer > label {
+    margin-right: 30px;
+}
+
+.gameStatusContainer > span {
+    margin-right: 10px;
+}
+
+.gameStatusContainer > label {
+    font-size: 14px;
+}
+
+.editGameForm > textarea {
+    resize: none;
+    border-radius: 5px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
 }
 
 .searchFormContainer {
