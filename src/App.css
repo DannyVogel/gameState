@@ -127,6 +127,14 @@ input {
     cursor: pointer;
 }
 
+.profileInfo {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
 .introText {
     text-align: center;
 }

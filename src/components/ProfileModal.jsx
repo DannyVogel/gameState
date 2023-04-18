@@ -11,6 +11,9 @@ export default function ProfileModal(props) {
         signUpEmail: '', signUpPassword: ''
     })
 
+    //capitalize first letter of string
+    const userName = props.user.charAt(0).toUpperCase() + props.user.slice(1)
+
     function handleChange(e){
         const {name, value, id} = e.target
         const selectForm = id.slice(0,6)
@@ -107,9 +110,8 @@ export default function ProfileModal(props) {
             </div>
 
         :   <div className="profileInfo">
-                <p>Hello {props.user}</p>
-                <button onClick={handleSignOut}>Sign Out</button>
-                {/* add links for lists: games played/games to play */}
+                <p>Hello {userName}</p>
+                <button className='btn' onClick={handleSignOut}>Sign Out</button>
             </div>
         }
     </div>
