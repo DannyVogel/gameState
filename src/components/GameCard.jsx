@@ -8,6 +8,8 @@ export default function GameCard(props) {
     monthPlayed: '', yearPlayed: '', comments: '', status: ''
   })
   const [showModal, setShowModal] = useState(false)
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+  const [confirmationText, setConfirmationText] = useState('')
 
   useEffect(() => {
     if(props.onList === 'gamesToPlayList'){
@@ -42,16 +44,27 @@ export default function GameCard(props) {
     const updates = {};
     updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
     update(gameStateDB, updates);
+    setShowConfirmationModal(true)
+    setConfirmationText('Game added to list')
+    setTimeout(() => {
+      setShowConfirmationModal(false)
+    }, 1500)
   }
   
   function removeFromList(e){
-    const gameID = e.target.id
-    const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
-    remove(gameRef)
+    setShowConfirmationModal(true)
+    setConfirmationText('Game removed from list')
+    setTimeout(() => {
+      setShowConfirmationModal(false)
+      const gameID = e.target.id
+      const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
+      remove(gameRef)
+    }, 1500)
   }
 
-  let buttonContainerElement = ''
-  if(isOnList === ''){
+  let buttonContainerElement = "";
+
+  if (isOnList === "") {
     buttonContainerElement = (
       <div className="endResultContainer">
         <button
@@ -69,7 +82,7 @@ export default function GameCard(props) {
           I played it
         </button>
         {showModal ? (
-          <UserDataModal 
+          <UserDataModal
             handleShowModal={handleShowModal}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
@@ -78,45 +91,47 @@ export default function GameCard(props) {
         ) : null}
       </div>
     );
-  } else if (isOnList === 'gamesToPlayList'){
-    buttonContainerElement = 
-    <div className="endResultContainer">
-    <button
-      id={props.result.id}
-      className="resultButton purple btn" onClick={removeFromList}
-    >
-      Remove
-    </button>
-    <button
-          id='gamesPlayedList'
-          className="resultButton orange btn" onClick={handleShowModal}
+  } else if (isOnList === "gamesToPlayList") {
+    buttonContainerElement = (
+      <div className="endResultContainer">
+        <button
+          id={props.result.id}
+          className="resultButton purple btn"
+          onClick={removeFromList}
+        >
+          Remove
+        </button>
+        <button
+          id="gamesPlayedList"
+          className="resultButton orange btn"
+          onClick={handleShowModal}
         >
           I played it
         </button>
-        {showModal 
-          ? (
-          <UserDataModal 
+        {showModal ? (
+          <UserDataModal
             handleShowModal={handleShowModal}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             userPlayedGameData={userPlayedGameData}
+            result={props.result}
           />
-        )
-          : null  
-        }
-  </div>
-  } else if (isOnList === 'gamesPlayedList'){
-    buttonContainerElement = 
+        ) : null}
+      </div>
+    );
+  } else if (isOnList === "gamesPlayedList") {
+    buttonContainerElement = (
       <div className="endResultContainer">
         <button
           id={props.result.id}
-          className="resultButton purple btn" onClick={removeFromList}
+          className="resultButton purple btn"
+          onClick={removeFromList}
         >
           Remove
         </button>
       </div>
+    );
   }
-
     
   return (
     <div key={props.result.id} className="resultContainer">
@@ -158,6 +173,12 @@ export default function GameCard(props) {
       </div>
 
       {buttonContainerElement}
+      {showConfirmationModal 
+        ? 
+        <div className="confirmationModalContainer">
+          <p>{confirmationText}</p>
+        </div>
+        : null }
 
     </div>
   );
