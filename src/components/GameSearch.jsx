@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import WelcomeSplash from './WelcomeSplash'
 import GameCard from './GameCard'
 import Result from '../utility/resultsConstructor'
 import apiKey from '../utility/apikey'
+import { Triangle } from  'react-loader-spinner'
 
 export default function GameSearch(props) {
+  const [loading, setLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [results, setResults] = useState([])
   const [num, setNum] = useState(0)
@@ -13,6 +15,13 @@ export default function GameSearch(props) {
     const {value} = e.target
     setSearchTerm(value)
   }
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [results])
 
   function processSearch(e){
     e.preventDefault()
@@ -37,22 +46,64 @@ export default function GameSearch(props) {
   }
 
   return (
-    <div className='gameSearchContainer'>
-      <div className='resultsContainer'>
-          {results.length > 0 ? renderFiveResults(results) : <WelcomeSplash />}
-      {results.length > 0 
-      ? <div className="pageSelectContainer">
-            {num > 0 ? <p className='pageSelectText' onClick={()=>setNum(prevNum => prevNum -= 3)}>Previous Page</p> : null}
-            {(num > 0 && num < results.length - 3) && <p className='pageSelectText'>-</p>}
-            {num < results.length - 3 && <p className='pageSelectText' onClick={()=>setNum(prevNum => prevNum += 3)}>Next Page</p>}
-        </div>
-      : null
-      }
+    <div className="gameSearchContainer">
+      <div className="resultsContainer">
+        {results.length > 0 ? (
+          loading ? (
+            <Triangle
+              height="80"
+              width="80"
+              color="#293264"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{ marginTop: "50px" }}
+              wrapperClassName=""
+              visible={true}
+            />
+          ) : (
+            renderFiveResults(results)
+          )
+        ) : (
+          <WelcomeSplash />
+        )}
+        {results.length > 0 ? (
+          <div className="pageSelectContainer">
+            {num > 0 ? (
+              <p
+                className="pageSelectText"
+                onClick={() => setNum((prevNum) => (prevNum -= 3))}
+              >
+                Previous Page
+              </p>
+            ) : null}
+            {num > 0 && num < results.length - 3 && (
+              <p className="pageSelectText">-</p>
+            )}
+            {num < results.length - 3 && (
+              <p
+                className="pageSelectText"
+                onClick={() => setNum((prevNum) => (prevNum += 3))}
+              >
+                Next Page
+              </p>
+            )}
+          </div>
+        ) : null}
       </div>
-      <form className='searchFormContainer' onSubmit={processSearch}>
-                <input className='searchBar' type="text" id='searchTerm' name='searchTerm' value={searchTerm} onChange={handleChange} placeholder='Find your game' autoComplete='off'/>
-                <button type='submit' className='searchBtn btn'>Search</button>
+      <form className="searchFormContainer" onSubmit={processSearch}>
+        <input
+          className="searchBar"
+          type="text"
+          id="searchTerm"
+          name="searchTerm"
+          value={searchTerm}
+          onChange={handleChange}
+          placeholder="Find your game"
+          autoComplete="off"
+        />
+        <button type="submit" className="searchBtn btn">
+          Search
+        </button>
       </form>
     </div>
-  )
+  );
 }
