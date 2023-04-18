@@ -692,6 +692,22 @@ input {
     display: none;
 }
 
-/* @media screen and (max-width: 450px) {
+@media screen and (min-width: 500px) {
+    .appContainer {
+        margin-top: 20px;
+        width: 600px;
+        height: 800px;
+        border-radius: 15px;
+    }
 
-  } */
+    body {
+        background-color: rgb(135, 132, 132);
+      }
+
+    .headerContainer {
+        border-radius: 15px 15px 0 0;
+    }
+    .footerContainer {
+        border-radius: 0 0 15px 15px;
+    }
+  }
