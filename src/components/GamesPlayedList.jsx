@@ -37,11 +37,15 @@ export default function GamesPlayedList(props) {
   }
 
   useEffect(() => {
-    const gameRef = ref(db, `gameState/users/${props.userUID}/gamesPlayedList`)
-    onValue(gameRef, (snapshot) => {
-      const data = Object.values(snapshot.val())
-      snapshot.exists() ? setSavedList(data) : setSavedList([])
-    })
+    if(props.userUID === ''){
+      setSavedList(localStorage.getItem('gamesPlayedList') ? JSON.parse(localStorage.getItem('gamesPlayedList')) : [])
+    } else {
+      const gameRef = ref(db, `gameState/users/${props.userUID}/gamesPlayedList`)
+      onValue(gameRef, (snapshot) => {
+        const data = Object.values(snapshot.val())
+        snapshot.exists() ? setSavedList(data) : setSavedList([])
+      })
+    }
   }, []);
 
   useEffect(() => {
@@ -51,6 +55,7 @@ export default function GamesPlayedList(props) {
   }, [savedList])
 
   function renderList(list, filters){
+    console.log(list)
     if(filters.yearPlayed !== ''){
       list = list.filter((game) => game[0].yearPlayed === filters.yearPlayed)
     }

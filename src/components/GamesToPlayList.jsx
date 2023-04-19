@@ -7,11 +7,18 @@ export default function GamesToPlayList(props) {
   const [loading , setLoading] = useState(true)
   const [savedList, setSavedList] = useState(()=>[])
 
-  useEffect(() => {
-    const gameRef = ref(db, `gameState/users/${props.userUID}/gamesToPlayList`)
-    onValue(gameRef, (snapshot) => {
-      snapshot.exists() ? setSavedList(Object.values(snapshot.val())) : setSavedList([])
-    })
+ useEffect(() => {
+    if(props.userUID === ''){
+      const list = localStorage.getItem('gamesToPlayList') ? JSON.parse(localStorage.getItem('gamesToPlayList')) : []
+      setSavedList(list)
+    } else {
+      const gameRef = ref(db, `gameState/users/${props.userUID}/gamesToPlayList`)
+      onValue(gameRef, (snapshot) => {
+        const data = Object.values(snapshot.val())
+        console.log(data)
+        snapshot.exists() ? setSavedList(data) : setSavedList([])
+      })
+    }
   }, []);
 
   useEffect(() => {
@@ -20,15 +27,31 @@ export default function GamesToPlayList(props) {
     }, 1000)
   }, [savedList])
   
-  function renderList(list){
-    return list.map((game) => {  
-            return <GameCard 
-                        key={game[0].id} 
-                        result={game[0]}
-                        onList={'gamesToPlayList'}
-                        userUID={props.userUID}                        
-                    />
-      })
+  function renderList(list) {
+    if (list.length === 0) return <p>No games found</p>;
+    if (props.userUID === "") {
+      return list.map((game) => {
+        return (
+          <GameCard
+            key={game.id}
+            result={game}
+            onList={"gamesToPlayList"}
+            userUID={props.userUID}
+          />
+        );
+      });
+    } else {
+      return list.map((game) => {
+        return (
+          <GameCard
+            key={game[0].id}
+            result={game[0]}
+            onList={"gamesToPlayList"}
+            userUID={props.userUID}
+          />
+        );
+      });
+    }
   }
   
   return (

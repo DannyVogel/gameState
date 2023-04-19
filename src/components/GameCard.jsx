@@ -40,10 +40,15 @@ export default function GameCard(props) {
   }
 
   function addGameToList(e, game){
-    const list = e.target.id
-    const updates = {};
-    updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
-    update(gameStateDB, updates);
+    if(props.userUID === ''){
+      const list = e.target.id
+      localStorage.setItem(list, JSON.stringify([...JSON.parse(localStorage.getItem(list)), game]))
+    } else {
+      const list = e.target.id
+      const updates = {};
+      updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
+      update(gameStateDB, updates);
+    }
     setShowConfirmationModal(true)
     setConfirmationText('Game added to list')
     setTimeout(() => {
@@ -56,10 +61,18 @@ export default function GameCard(props) {
     setConfirmationText('Game removed from list')
     setTimeout(() => {
       setShowConfirmationModal(false)
-      const gameID = e.target.id
-      if(gameID){
-        const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
-        remove(gameRef)
+      if(props.userUID === ''){
+        const gameID = e.target.id
+        console.log(gameID)
+        const updatedList = JSON.parse(localStorage.getItem(isOnList)).filter((game) => game.id != gameID)
+        console.log('updatedList', updatedList)
+        localStorage.setItem(isOnList, JSON.stringify(updatedList))
+      } else {
+        const gameID = e.target.id
+        if(gameID){
+          const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
+          remove(gameRef)
+        }
       }
     }, 1500)
   }
