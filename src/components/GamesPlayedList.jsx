@@ -58,6 +58,9 @@ export default function GamesPlayedList(props) {
       list = list.filter((game) => game[0].status === filters.status)
     }
     if(list.length < 1){
+      if(!props.userUID){
+        return <p>Please sign up or sign in to see list</p>
+      }
       return <p>No games found</p>
     }
     const sortedDataByMonth = list.sort((a, b) => b[0].monthPlayed - a[0].monthPlayed)

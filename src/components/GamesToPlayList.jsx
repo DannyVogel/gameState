@@ -21,6 +21,12 @@ export default function GamesToPlayList(props) {
   }, [savedList])
   
   function renderList(list){
+    if(list.length < 1){
+      if(!props.userUID){
+        return <p>Please sign up or sign in to see list</p>
+      }
+      return <p>No games found</p>
+    }
     return list.map((game) => {  
             return <GameCard 
                         key={game[0].id} 
