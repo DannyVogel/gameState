@@ -488,6 +488,14 @@ input {
 .gameCardContainer > h2 {
     width: 95%;
     margin: 5px 0 5px 0;
+    letter-spacing: 1px;
+    background: -webkit-linear-gradient(147deg,#792acb 5%, #ff0027 9%);
+    background: -moz-linear-gradient(147deg,#792acb 5%, #ff0027 9%);
+    background: linear-gradient(147deg,#792acb 5%, #ff0027 9%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 2px linear-gradient(147deg,#792acb 5%, #ff0027 9%);
 }
 
 .cardsContainer {
