@@ -192,7 +192,7 @@ input {
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 5px;
     grid-area: results;
@@ -319,11 +319,6 @@ input {
     background-color: #19A7CE;
 }
 
-/* .left {
-    margin-left: 10px;
-    margin-right: 10px;
-} */
-
 .modalContainer {
     position: absolute;
     width: 100%;
@@ -421,7 +416,6 @@ input {
     justify-content: space-between;
     gap: 10px;
     grid-area: pages;
-    margin-top: auto;
     margin-bottom: 20px;
     justify-self: start;
 }
