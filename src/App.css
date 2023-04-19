@@ -486,7 +486,8 @@ input {
 }
 
 .gameCardContainer > h2 {
-    margin: 5px auto 5px 20px;
+    width: 95%;
+    margin: 5px 0 5px 0;
 }
 
 .cardsContainer {
