@@ -57,8 +57,10 @@ export default function GameCard(props) {
     setTimeout(() => {
       setShowConfirmationModal(false)
       const gameID = e.target.id
-      const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
-      remove(gameRef)
+      if(gameID){
+        const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
+        remove(gameRef)
+      }
     }, 1500)
   }
 
