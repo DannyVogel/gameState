@@ -180,7 +180,7 @@ input {
     height: 120px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 5px;
 }
@@ -193,17 +193,23 @@ input {
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    justify-content: space-between;
     align-items: center;
+    gap: 5px;
     grid-area: results;
     overflow-y: hidden;
 }
 
+.center {
+    flex-direction: column;
+    justify-content: center;
+}
+
 .welcomeContainer {
-    height: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -692,11 +698,9 @@ input {
     display: none;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 850px) {
     .appContainer {
-        margin-top: 20px;
-        width: 600px;
-        height: 800px;
+        width: 850px;
         border-radius: 15px;
     }
 
