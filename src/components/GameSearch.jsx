@@ -65,7 +65,7 @@ export default function GameSearch(props) {
         ) : (
           <WelcomeSplash />
         )}
-        {results.length > 0 ? (
+        {results.length > 0 && !loading ? (
           <div className="pageSelectContainer">
             {num > 0 ? (
               <p
