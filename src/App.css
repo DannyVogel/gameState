@@ -477,6 +477,19 @@ input {
     cursor: pointer;
 }
 
+.gameCardContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.gameCardContainer > h2 {
+    width: 95%;
+    margin: 5px 0 5px 0;
+}
+
 .cardsContainer {
     position: relative;
     width: 95%;

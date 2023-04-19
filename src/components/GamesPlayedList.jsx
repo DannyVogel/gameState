@@ -62,15 +62,22 @@ export default function GamesPlayedList(props) {
     }
     const sortedDataByMonth = list.sort((a, b) => b[0].monthPlayed - a[0].monthPlayed)
     const sortedDataByYear = sortedDataByMonth.sort((a, b) => b[0].yearPlayed - a[0].yearPlayed)
-    return sortedDataByYear.map((game) => {  
-            return <GamesPlayedCard 
-                        key={game[0].id} 
-                        result={game[0]}
-                        userUID={props.userUID}
-                    />
-      })
+    const years = [...new Set(sortedDataByYear.map(item => item[0].yearPlayed))];
+    return years.map(year => (
+      <div className='gameCardContainer' key={year}>
+        <h2>{year}</h2>
+        {sortedDataByYear.filter(item => item[0].yearPlayed === year).map(item => (
+            <GamesPlayedCard
+              key={item[0].id}
+              result={item[0]}
+              userUID={props.userUID}
+            />
+        ))}
+      </div>
+    ))
   }
-  
+ 
+
   return (
     <div className="gameListContainer">
       <h1>Games Played</h1>
