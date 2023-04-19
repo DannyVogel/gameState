@@ -17,7 +17,7 @@ export default function ImageGallery(props) {
             <div id='left' className='imageSelect left' onClick={handleClick}> {'<'} </div>
             <img
                 className="image"
-                src={props.screenshots[num]}
+                src={props.screenshots && props.screenshots[num]}
             />
             <div id='right' className='imageSelect right' onClick={handleClick}> {'>'} </div>
         </div>
