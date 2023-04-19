@@ -194,7 +194,7 @@ input {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    gap: 5px;
+    gap: 2px;
     grid-area: results;
     overflow-y: hidden;
 }
@@ -416,7 +416,7 @@ input {
     justify-content: space-between;
     gap: 10px;
     grid-area: pages;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-self: start;
 }
 
