@@ -64,7 +64,7 @@ export default function GamesPlayedCard(props) {
             <ImageGallery screenshots={screenshots}/>
             <div className="details">
               <p>Released: {released}</p>
-              <p>Platforms: {platforms.join(', ')}</p>
+              <p>Platforms: {platforms && platforms.join(', ')}</p>
               {editItem 
                 ? 
                   <form className="editGameForm">
