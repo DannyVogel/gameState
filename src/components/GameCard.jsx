@@ -87,6 +87,7 @@ export default function GameCard(props) {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             userPlayedGameData={userPlayedGameData}
+            result={props.result}
           />
         ) : null}
       </div>
