@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import {db, ref, remove, update, gameStateDB} from '../firebaseConfig'
+import {db, remove, update, gameStateDB} from '../firebaseConfig'
 import ImageGallery from './ImageGallery'
+import { useClickOutside } from '@mantine/hooks';
 
 export default function GamesPlayedCard(props) {
   const {id, name, monthPlayed, yearPlayed, comments, status, image, released, slug, platforms, screenshots} = props.result
@@ -9,7 +10,12 @@ export default function GamesPlayedCard(props) {
   const [editItem, setEditItem] = useState(false)
   const [editItemData, setEditItemData] = useState({
     monthPlayed: monthPlayed, yearPlayed: yearPlayed, status: status, comments: comments})
-  
+
+    const ref = useClickOutside(() => {
+      setTimeout(() => {
+        setShowCardModal(false)
+      }, 100) 
+    })
 
   function handleShowCardModal(){
     setShowCardModal(prev => !prev)
@@ -43,7 +49,7 @@ export default function GamesPlayedCard(props) {
 
   return (
     <div className='cardsContainer'>
-      <div className='gamesPlayedCardContainer'>
+      <div className='gamesPlayedCardContainer'  style={{backgroundColor: showCardModal && '#19A7CE'}}>
             <h4 className='gamesPlayedCardTitle'>{name}</h4>
           <div className="gamesPlayedDetails">
             <div className='gamesPlayedCardDetailsContainer'>
@@ -58,7 +64,7 @@ export default function GamesPlayedCard(props) {
 
       {showCardModal 
         ? 
-          <div className='fullGameCardContainer'>
+          <div ref={ref} className='fullGameCardContainer'>
             <span className="closeModal" onClick={handleShowCardModal}>x</span>
             <h3>{name}</h3>
             <ImageGallery screenshots={screenshots}/>
