@@ -14,7 +14,7 @@ export default function GamesPlayedCard(props) {
     const ref = useClickOutside(() => {
       setTimeout(() => {
         setShowCardModal(false)
-      }, 50) 
+      }, 100) 
     })
 
   function handleShowCardModal(){
@@ -49,7 +49,7 @@ export default function GamesPlayedCard(props) {
 
   return (
     <div className='cardsContainer'>
-      <div className='gamesPlayedCardContainer'>
+      <div className='gamesPlayedCardContainer'  style={{backgroundColor: showCardModal && '#19A7CE'}}>
             <h4 className='gamesPlayedCardTitle'>{name}</h4>
           <div className="gamesPlayedDetails">
             <div className='gamesPlayedCardDetailsContainer'>
