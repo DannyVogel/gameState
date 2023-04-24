@@ -79,6 +79,7 @@ input {
 .profileModalContainer {
     position: absolute;
     width: 95%;
+    max-width: 800px;
     height: auto;
     top: 60px;
     left: 10px;
