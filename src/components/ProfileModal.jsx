@@ -79,6 +79,26 @@ export default function ProfileModal(props) {
         });
     }
 
+    function logInAsGuest(){
+        signInWithEmailAndPassword(auth, 'guest@guest.com', '123456')
+        .then((userCredential) => {
+            // Signed in 
+            setTimeout(() => {
+                props.handleProfileClick()
+            }, 1500)
+        })
+        .catch((error) => {
+            setErrorMessage('Incorrect email or password');
+            setTimeout(() => {
+                setErrorMessage('')
+            }, 3000)
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage)
+
+        });
+    }
+
   return (
     <div className="modal-overlay" onClick={props.handleProfileClick}>
         <div className="profileModalContainer" onClick={(event) => event.stopPropagation()}>
@@ -109,7 +129,7 @@ export default function ProfileModal(props) {
                     }
         
                     {signInMethod ? <p className='logInMethodTxt' onClick={switchSignInMethod}>New user? Sign up here</p> : <p className='logInMethodTxt' onClick={switchSignInMethod}>Already a user? Sign in here</p>}
-        
+                    {signInMethod && <p className='logInMethodTxt' onClick={logInAsGuest}>Log in as Guest</p>}
                 </div>
             :   <div className="profileInfo">
                     <p>Hello {userName}</p>
