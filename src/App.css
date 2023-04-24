@@ -20,7 +20,7 @@ input {
 .appContainer {
     position: relative;
     margin: 0 auto;
-    min-width: 300px;
+    min-width: 350px;
     max-width: 100%;
     min-height: 700px;
     height: 100vh;
@@ -83,7 +83,8 @@ input {
     max-width: 800px;
     height: auto;
     top: 60px;
-    left: 10px;
+    left: 50%; 
+    transform: translateX(-50%);
     background-color: #146C94;
     border-radius: 20px;
     padding: 10px 20px;
