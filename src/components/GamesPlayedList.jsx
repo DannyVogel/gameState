@@ -39,8 +39,8 @@ export default function GamesPlayedList(props) {
   useEffect(() => {
     const gameRef = ref(db, `gameState/users/${props.userUID}/gamesPlayedList`)
     onValue(gameRef, (snapshot) => {
-      const data = Object.values(snapshot.val())
-      snapshot.exists() ? setSavedList(data) : setSavedList([])
+      const data =  snapshot.exists() ? Object.values(snapshot.val()) : []
+      setSavedList(data)
     })
   }, []);
 
@@ -63,7 +63,7 @@ export default function GamesPlayedList(props) {
       }
       return <p>No games found</p>
     }
-    const sortedDataByMonth = list.sort((a, b) => b[0].monthPlayed - a[0].monthPlayed)
+    const sortedDataByMonth = list?.sort((a, b) => b[0].monthPlayed - a[0].monthPlayed)
     const sortedDataByYear = sortedDataByMonth.sort((a, b) => b[0].yearPlayed - a[0].yearPlayed)
     const years = [...new Set(sortedDataByYear.map(item => item[0].yearPlayed))];
     return years.map(year => (
@@ -110,7 +110,7 @@ export default function GamesPlayedList(props) {
               value={filterInput.status}
               onChange={handleChange}
             >
-              <option selected value="">
+              <option value="">
                 Status
               </option>
               <option value="playing">Playing</option>
