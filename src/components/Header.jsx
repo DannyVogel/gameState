@@ -1,21 +1,18 @@
-import React, {useState} from 'react'
-import ProfileModal from './ProfileModal'
-import { Zoom } from "react-awesome-reveal";
+import React, { useState } from "react";
+import ProfileModal from "./ProfileModal";
 
 export default function Header(props) {
-  const [profileClicked, setProfileClicked] = useState(false)
-  
-  function handleProfileClick(){
-    setProfileClicked(prev => !prev)
+  const [profileClicked, setProfileClicked] = useState(false);
+
+  function handleProfileClick() {
+    setProfileClicked((prev) => !prev);
   }
-  
+
   return (
     <div className="headerContainer">
-      <Zoom className="headerTitle">
-        <h1>
-          <span className="gameItalic">game</span>State
-        </h1>
-      </Zoom>
+      <h1 className="headerTitle">
+        <span className="gameItalic">game</span>State
+      </h1>
       {props.loggedIn ? (
         <img
           src="./loggedInUser.png"
