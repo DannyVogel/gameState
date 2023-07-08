@@ -8,8 +8,13 @@ Features included:
 - screenshots gallery for games saved in games played list
 
 Features being worked on: 
-- edit games in played games list (April update: added!)
-- year and status filters for games played list (April update: added; more filters to come!)
-- desktop version (April update: updated; more to come!)
+- edit games in played games list (April 2023 update: added!)
+- year and status filters for games played list (April 2023 update: added; more filters to come!)
+- desktop version (April 2023 update: updated; more to come!)
+
+v. 1.5.0 - July 2023 update!
+- add loading screen on visit
+- add welcome page for logged in users
+- update styles to a darker version
 
 Live at: https://dv-gamestate.netlify.app/ 
