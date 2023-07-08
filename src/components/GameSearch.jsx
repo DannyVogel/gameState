@@ -55,7 +55,7 @@ export default function GameSearch(props) {
             <Triangle
               height="80"
               width="80"
-              color="#293264"
+              color="#FFFFFF"
               ariaLabel="triangle-loading"
               wrapperStyle={{ marginTop: "50px" }}
               wrapperClassName=""

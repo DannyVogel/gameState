@@ -1,58 +1,62 @@
-import React, { useState, useEffect } from 'react'
-import GameCard from './GameCard'
-import {db, ref, remove, onValue} from '../firebaseConfig'
-import { Triangle } from  'react-loader-spinner'
+import React, { useState, useEffect } from "react";
+import GameCard from "./GameCard";
+import { db, ref, remove, onValue } from "../firebaseConfig";
+import { Triangle } from "react-loader-spinner";
 
 export default function GamesToPlayList(props) {
-  const [loading , setLoading] = useState(true)
-  const [savedList, setSavedList] = useState(()=>[])
+  const [loading, setLoading] = useState(true);
+  const [savedList, setSavedList] = useState(() => []);
 
   useEffect(() => {
-    const gameRef = ref(db, `gameState/users/${props.userUID}/gamesToPlayList`)
+    const gameRef = ref(db, `gameState/users/${props.userUID}/gamesToPlayList`);
     onValue(gameRef, (snapshot) => {
-      snapshot.exists() ? setSavedList(Object.values(snapshot.val())) : setSavedList([])
-    })
+      snapshot.exists()
+        ? setSavedList(Object.values(snapshot.val()))
+        : setSavedList([]);
+    });
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [savedList])
-  
-  function renderList(list){
-    if(list.length < 1){
-      if(!props.userUID){
-        return <p>Please sign up or sign in to see list</p>
+      setLoading(false);
+    }, 1000);
+  }, [savedList]);
+
+  function renderList(list) {
+    if (list.length < 1) {
+      if (!props.userUID) {
+        return <p>Please sign up or sign in to see list</p>;
       }
-      return <p>No games found</p>
+      return <p>No games found</p>;
     }
-    return list.map((game) => {  
-            return <GameCard 
-                        key={game[0].id} 
-                        result={game[0]}
-                        onList={'gamesToPlayList'}
-                        userUID={props.userUID}                        
-                    />
-      })
+    return list.map((game) => {
+      return (
+        <GameCard
+          key={game[0].id}
+          result={game[0]}
+          onList={"gamesToPlayList"}
+          userUID={props.userUID}
+        />
+      );
+    });
   }
-  
+
   return (
-    <div className='gameListContainer'>
+    <div className="gameListContainer">
       <h1>Games To Play</h1>
       {loading ? (
         <Triangle
           height="80"
           width="80"
-          color="#293264"
+          color="#FFFFFF"
           ariaLabel="triangle-loading"
           wrapperStyle={{}}
           wrapperClassName=""
           visible={true}
         />
       ) : (
-        renderList(savedList))}
+        renderList(savedList)
+      )}
     </div>
-  )
+  );
 }
-
