@@ -7,22 +7,6 @@ export default function WelcomeSplash(props) {
   if (userName == "Kelevrav") {
     userName = userName.slice(0, -1);
   }
-  const [gamesPlayedList, setGamesPlayedList] = useState(() => []);
-  const [gamesToPlayList, setGamesToPlayList] = useState(() => []);
-
-  useEffect(() => {
-    const gamesPlayedRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
-    onValue(gamesPlayedRef, (snapshot) => {
-      const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
-      setGamesPlayedList(data);
-    });
-    const gamesToPlayRef = ref(db, `gameState/users/${UID}/gamesToPlayList`);
-    onValue(gamesToPlayRef, (snapshot) => {
-      snapshot.exists()
-        ? setGamesToPlayList(Object.values(snapshot.val()))
-        : setGamesToPlayList([]);
-    });
-  }, []);
   return (
     <>
       {!UID ? (
@@ -80,7 +64,7 @@ export default function WelcomeSplash(props) {
               <p className="headerTitle">
                 Games <span>{<br />}</span> to play
               </p>
-              <p>{gamesToPlayList.length} games listed</p>
+              <p>{props.gamesToPlayList.length} games listed</p>
             </div>
             <div className="iconContainer">
               <img
@@ -91,7 +75,7 @@ export default function WelcomeSplash(props) {
               <p className="headerTitle">
                 Games <span>{<br />}</span> played
               </p>
-              <p>{gamesPlayedList.length} games listed</p>
+              <p>{props.gamesPlayedList.length} games listed</p>
             </div>
           </div>
         </div>

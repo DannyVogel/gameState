@@ -62,7 +62,12 @@ export default function GameSearch(props) {
             renderFiveResults(results)
           )
         ) : (
-          <WelcomeSplash userUID={props.userUID} user={props.user} />
+          <WelcomeSplash
+            userUID={props.userUID}
+            user={props.user}
+            gamesPlayedList={props.gamesPlayedList}
+            gamesToPlayList={props.gamesToPlayList}
+          />
         )}
         {results.length > 0 && !loading ? (
           <div className="pageSelectContainer">
