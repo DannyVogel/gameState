@@ -1,48 +1,47 @@
-import React, {useEffect, useState} from 'react'
-import WelcomeSplash from './WelcomeSplash'
-import GameCard from './GameCard'
-import Result from '../utility/resultsConstructor'
-import apiKey from '../utility/apikey'
-import { Triangle } from  'react-loader-spinner'
+import React, { useEffect, useState } from "react";
+import WelcomeSplash from "./WelcomeSplash";
+import GameCard from "./GameCard";
+import Result from "../utility/resultsConstructor";
+import apiKey from "../utility/apikey";
+import { Triangle } from "react-loader-spinner";
 
 export default function GameSearch(props) {
-  const [loading, setLoading] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [results, setResults] = useState([])
-  const [num, setNum] = useState(0)
-  
-  function handleChange(e){
-    const {value} = e.target
-    setSearchTerm(value)
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [results, setResults] = useState([]);
+  const [num, setNum] = useState(0);
+
+  function handleChange(e) {
+    const { value } = e.target;
+    setSearchTerm(value);
   }
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [results])
+      setLoading(false);
+    }, 1000);
+  }, [results]);
 
-  function processSearch(e){
-    e.preventDefault()
-    setNum(0)
+  function processSearch(e) {
+    e.preventDefault();
+    setNum(0);
     fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${searchTerm}`)
-        .then(response => response.json())
-        .then(data => {
-            setResults(data.results.map(result => new Result(result)))
-        })
-    setSearchTerm('')
-    }
-  
-  function renderFiveResults(results){
-    return results.map((result, index) => {  
-      if(index >= (num + 0) && index < (num + 3)){
-            return <GameCard 
-                        key={result.id} 
-                        result={result}
-                        userUID={props.userUID}
-                    />
-      }})
+      .then((response) => response.json())
+      .then((data) => {
+        setResults(data.results.map((result) => new Result(result)));
+      });
+    setSearchTerm("");
+  }
+
+  function renderFiveResults(results) {
+    return results.map((result, index) => {
+      if (index >= num + 0 && index < num + 3) {
+        return (
+          <GameCard key={result.id} result={result} userUID={props.userUID} />
+        );
+      }
+    });
   }
 
   return (
@@ -63,7 +62,7 @@ export default function GameSearch(props) {
             renderFiveResults(results)
           )
         ) : (
-          <WelcomeSplash />
+          <WelcomeSplash userUID={props.userUID} />
         )}
         {results.length > 0 && !loading ? (
           <div className="pageSelectContainer">
