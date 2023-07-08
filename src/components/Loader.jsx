@@ -1,3 +1,5 @@
+import gameConsole from "../assets/gameConsole.png";
+
 export default function Loader(props) {
   return (
     <div className={`${props.isUnmounting && ""} loader`}>
@@ -7,8 +9,8 @@ export default function Loader(props) {
         </h1>
         <img
           className="loader-image"
-          src="../../public/game-console.png"
-          alt="notebook icon enlarged image"
+          src={gameConsole}
+          alt="gameConsole enlarged image"
           width={150}
         />
         <h2 className="headerTitle">Loading...</h2>
