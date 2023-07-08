@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { db, ref, onValue } from "../firebaseConfig";
 
 export default function WelcomeSplash(props) {
   const UID = props.userUID;
