@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyDvZtRn9B9OgWOIVHnICiq0_eoNreJBUs0",
-    authDomain: "gamestate-327e2.firebaseapp.com",
-    databaseURL: "https://gamestate-327e2-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "gamestate-327e2",
-    storageBucket: "gamestate-327e2.appspot.com",
-    messagingSenderId: "168937433606",
-    appId: "1:168937433606:web:0919320d20ca2f94033187"
-  };
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASEURL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_FIREBASE_APPID,
+};
 
-  export default firebaseConfig
+export default firebaseConfig;

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import WelcomeSplash from "./WelcomeSplash";
 import GameCard from "./GameCard";
 import Result from "../utility/resultsConstructor";
-import apiKey from "../utility/apikey";
 import { Triangle } from "react-loader-spinner";
 
 export default function GameSearch(props) {
@@ -26,7 +25,11 @@ export default function GameSearch(props) {
   function processSearch(e) {
     e.preventDefault();
     setNum(0);
-    fetch(`https://api.rawg.io/api/games?key=${apiKey}&search=${searchTerm}`)
+    fetch(
+      `https://api.rawg.io/api/games?key=${
+        import.meta.env.VITE_RAWG_API_KEY
+      }&search=${searchTerm}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setResults(data.results.map((result) => new Result(result)));
