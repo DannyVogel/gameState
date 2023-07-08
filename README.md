@@ -1,4 +1,4 @@
-gameState is a work-in-progess app I created with React and Firebase to search for videogames and save them two one of two lists: games played and games to play. This was a great experience in managing state across multiple components and using both Firebase authentication and realtime storage, all with a mobile first design. 
+gameState is a an app I created with React and Firebase to search for videogames and save them two one of two lists: games played and games to play. This was a great experience in managing state across multiple components and using both Firebase authentication and realtime storage, all with a mobile first design. 
 
 Features included: 
 - search for games on all platforms (data provided by RAWG API)
