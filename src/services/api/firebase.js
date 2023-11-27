@@ -7,23 +7,29 @@ import {
 } from "@/config/firebase";
 
 export const signIn = async (email, password) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    if (userCredential) {
       console.log("usercredential", userCredential);
       return {
         success: true,
         user: userCredential.user,
       };
-    })
-    .catch((error) => {
-      console.log(error.code, error.message);
-      return {
-        success: false,
-        errorCode: errorCode,
-        errorMessage: errorMessage,
-      };
-    });
+    }
+  } catch (error) {
+    console.log(error.code, error.message);
+    return {
+      success: false,
+      errorCode: errorCode,
+      errorMessage: errorMessage,
+    };
+  }
 };
+
 function processSignUpFormData(e) {
   e.preventDefault();
   setErrorMessage("");
@@ -44,6 +50,7 @@ function processSignUpFormData(e) {
       // ..
     });
 }
+
 function handleSignOut() {
   signOut(auth)
     .then(() => {
