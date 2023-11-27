@@ -1,4 +1,4 @@
-import ProfileModal from "./ProfileModal";
+import AuthModal from "./AuthModal";
 
 export default function Header(props) {
   function handleProfileClick() {
@@ -27,7 +27,7 @@ export default function Header(props) {
       )}
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <ProfileModal
+          <AuthModal
             handleProfileClick={handleProfileClick}
             loggedIn={props.loggedIn}
             user={props.user}

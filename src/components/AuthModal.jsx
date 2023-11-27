@@ -7,10 +7,11 @@ import {
   signOut,
 } from "../config/firebase";
 import { signIn } from "../services/api/firebase";
+import useUserStore from "../stores/userStore";
+import { sliceEmail } from "../utils";
 
-export default function ProfileModal(props) {
+export default function AuthModal(props) {
   const [signInMethod, setSignInMethod] = useState(true);
-
   const [signInFormData, setSignInFormData] = useState({
     signInEmail: "",
     signInPassword: "",
@@ -19,8 +20,10 @@ export default function ProfileModal(props) {
     signUpEmail: "",
     signUpPassword: "",
   });
-
   const [errorMessage, setErrorMessage] = useState("");
+
+  const setUser = useUserStore((state) => state.setUser);
+  const setUID = useUserStore((state) => state.setUID);
 
   let userName;
   if (props.user) {
@@ -37,14 +40,17 @@ export default function ProfileModal(props) {
     }
   }
 
-  function processSignInFormData(e) {
-    console.log("processSignInFormData");
+  async function processSignInFormData(e) {
     e.preventDefault();
-    const res = signIn(
+    const res = await signIn(
       signInFormData.signInEmail,
       signInFormData.signInPassword
     );
+    console.log("too soon");
     if (res.success) {
+      console.log("res signin", res);
+      setUser(sliceEmail(res.user.email));
+      setUID(res.user.uid);
       setTimeout(() => {
         props.handleProfileClick();
       }, 1500);
