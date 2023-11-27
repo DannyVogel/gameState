@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GamesPlayedCard from "./GamesPlayedCard";
-import { db, ref, onValue } from "../firebaseConfig";
+import { db, ref, onValue } from "../config/firebase";
 import { Triangle } from "react-loader-spinner";
 
 export default function GamesPlayedList(props) {

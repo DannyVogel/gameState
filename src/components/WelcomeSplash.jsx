@@ -13,7 +13,7 @@ export default function WelcomeSplash(props) {
           <div className="iconContainer">
             <h1 className="headerTitle">Find Games!</h1>
             <img
-              className="welcomeIcon"
+              className="w-8 h-8"
               src="./search.png"
               alt="magnifying glass search icon"
             />
@@ -22,7 +22,7 @@ export default function WelcomeSplash(props) {
           <div className="listsContainer">
             <div className="iconContainer">
               <img
-                className="welcomeIcon"
+                className="w-8 h-8"
                 src="./gamesToPlay1.png"
                 alt="shopping bag with controller icon"
               />
@@ -32,7 +32,7 @@ export default function WelcomeSplash(props) {
             </div>
             <div className="iconContainer">
               <img
-                className="welcomeIcon"
+                className="w-8 h-8"
                 src="./gamesPlayed1.png"
                 alt="papers with controller icon"
               />
@@ -56,7 +56,7 @@ export default function WelcomeSplash(props) {
           <div className="listsContainer">
             <div className="iconContainer">
               <img
-                className="welcomeIcon"
+                className="w-8 h-8"
                 src="./gamesToPlay1.png"
                 alt="shopping bag with controller icon"
               />
@@ -67,7 +67,7 @@ export default function WelcomeSplash(props) {
             </div>
             <div className="iconContainer">
               <img
-                className="welcomeIcon"
+                className="w-8 h-8"
                 src="./gamesPlayed1.png"
                 alt="papers with controller icon"
               />

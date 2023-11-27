@@ -1,67 +1,72 @@
-import React, { useEffect, useState } from 'react'
-import {db, ref, remove, update, gameStateDB} from '../firebaseConfig'
-import UserDataModal from './UserDataModal'
+import React, { useEffect, useState } from "react";
+import { db, ref, remove, update, gameStateDB } from "../config/firebase";
+import UserDataModal from "./UserDataModal";
 
 export default function GameCard(props) {
-  const [isOnList, setIsOnList] = useState('')
+  const [isOnList, setIsOnList] = useState("");
   const [userPlayedGameData, setUserPlayedGameData] = useState({
-    monthPlayed: '', yearPlayed: '', comments: '', status: ''
-  })
-  const [showModal, setShowModal] = useState(false)
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
-  const [confirmationText, setConfirmationText] = useState('')
+    monthPlayed: "",
+    yearPlayed: "",
+    comments: "",
+    status: "",
+  });
+  const [showModal, setShowModal] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [confirmationText, setConfirmationText] = useState("");
 
   useEffect(() => {
-    if(props.onList === 'gamesToPlayList'){
-      setIsOnList('gamesToPlayList')
-    } else if(props.onList === 'gamesPlayedList'){
-      setIsOnList('gamesPlayedList')
+    if (props.onList === "gamesToPlayList") {
+      setIsOnList("gamesToPlayList");
+    } else if (props.onList === "gamesPlayedList") {
+      setIsOnList("gamesPlayedList");
     }
-  }, [])
+  }, []);
 
-  function handleChange(e){
-    const {name, value, type, checked} = e.target
-    setUserPlayedGameData(prevState => ({
+  function handleChange(e) {
+    const { name, value, type, checked } = e.target;
+    setUserPlayedGameData((prevState) => ({
       ...prevState,
-      [name]: type === "checkbox" ? checked : value
-    }))
-
-  }
-  
-  function handleSubmit(e, game){
-    e.preventDefault()
-    setShowModal(false)
-    const gameData = {...game, ...userPlayedGameData}
-    addGameToList(e, gameData)
+      [name]: type === "checkbox" ? checked : value,
+    }));
   }
 
-  function handleShowModal(){
-    setShowModal(prev => !prev)
+  function handleSubmit(e, game) {
+    e.preventDefault();
+    setShowModal(false);
+    const gameData = { ...game, ...userPlayedGameData };
+    addGameToList(e, gameData);
   }
 
-  function addGameToList(e, game){
-    const list = e.target.id
+  function handleShowModal() {
+    setShowModal((prev) => !prev);
+  }
+
+  function addGameToList(e, game) {
+    const list = e.target.id;
     const updates = {};
     updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
     update(gameStateDB, updates);
-    setShowConfirmationModal(true)
-    setConfirmationText('Game added to list')
+    setShowConfirmationModal(true);
+    setConfirmationText("Game added to list");
     setTimeout(() => {
-      setShowConfirmationModal(false)
-    }, 1500)
+      setShowConfirmationModal(false);
+    }, 1500);
   }
-  
-  function removeFromList(e){
-    setShowConfirmationModal(true)
-    setConfirmationText('Game removed from list')
+
+  function removeFromList(e) {
+    setShowConfirmationModal(true);
+    setConfirmationText("Game removed from list");
     setTimeout(() => {
-      setShowConfirmationModal(false)
-      const gameID = e.target.id
-      if(gameID){
-        const gameRef = ref(db, `gameState/users/${props.userUID}/${isOnList}/${gameID}`)
-        remove(gameRef)
+      setShowConfirmationModal(false);
+      const gameID = e.target.id;
+      if (gameID) {
+        const gameRef = ref(
+          db,
+          `gameState/users/${props.userUID}/${isOnList}/${gameID}`
+        );
+        remove(gameRef);
       }
-    }, 1500)
+    }, 1500);
   }
 
   let buttonContainerElement = "";
@@ -135,10 +140,10 @@ export default function GameCard(props) {
       </div>
     );
   }
-    
+
   return (
     <div key={props.result.id} className="resultContainer">
-      <h3 className='resultHeader'>
+      <h3 className="resultHeader">
         <a
           className="resultLink"
           href={`https://www.rawg.io/games/${props.result.slug}`}
@@ -176,13 +181,11 @@ export default function GameCard(props) {
       </div>
 
       {buttonContainerElement}
-      {showConfirmationModal 
-        ? 
+      {showConfirmationModal ? (
         <div className="confirmationModalContainer">
           <p>{confirmationText}</p>
         </div>
-        : null }
-
+      ) : null}
     </div>
   );
 }
