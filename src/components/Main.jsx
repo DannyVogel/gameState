@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Loader from "./components/Loader";
-import GameSearch from "./components/GameSearch";
-import GamesPlayedList from "./components/GamesPlayedList";
-import GamesToPlayList from "./components/GamesToPlayList";
-import Footer from "./components/Footer";
-import { auth, onAuthStateChanged, db, ref, onValue } from "./firebaseConfig";
+import Header from "./Header";
+import Loader from "./Loader";
+import GameSearch from "./GameSearch";
+import GamesPlayedList from "./GamesPlayedList";
+import GamesToPlayList from "./GamesToPlayList";
+import Footer from "./Footer";
+import { auth, onAuthStateChanged, db, ref, onValue } from "../config/firebase";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -73,7 +73,6 @@ export default function App() {
         <Loader isUnmounting={isUnmounting} />
       ) : (
         <div className={`appContainer ${isMounting && "fade-in"}`}>
-          <Header loggedIn={loggedIn} user={user} />
           {page === "search" ? (
             <GameSearch
               userUID={userUID}
@@ -88,8 +87,6 @@ export default function App() {
           {page === "gamesPlayed" ? (
             <GamesPlayedList userUID={userUID} />
           ) : null}
-
-          <Footer handlePageChange={(e) => handlePageChange(e)} />
         </div>
       )}
     </>
