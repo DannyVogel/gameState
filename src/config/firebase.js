@@ -1,62 +1,48 @@
+import { initializeApp } from "firebase/app";
 import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import {
+  getDatabase,
+  ref,
+  get,
+  child,
+  update,
+  remove,
+  onValue,
+} from "firebase/database";
+
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASEURL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_FIREBASE_APPID,
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const gameStateDB = ref(db, "gameState");
+
+export {
   auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from "@/config/firebase";
-
-export const signIn = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    if (userCredential) {
-      console.log("usercredential", userCredential);
-      return {
-        success: true,
-        user: userCredential.user,
-      };
-    }
-  } catch (error) {
-    console.log(error.code, error.message);
-
-  }
-      return {
-        success: false,
-        errorCode: errorCode,
-        errorMessage: errorMessage,
-      };
-    });
+  db,
+  gameStateDB,
+  ref,
+  get,
+  child,
+  update,
+  remove,
+  onValue,
 };
-function processSignUpFormData(e) {
-  e.preventDefault();
-  setErrorMessage("");
-  createUserWithEmailAndPassword(
-    auth,
-    signUpFormData.signUpEmail,
-    signUpFormData.signUpPassword
-  )
-    .then((userCredential) => {
-      setTimeout(() => {
-        props.handleProfileClick();
-      }, 1500);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      // ..
-    });
-}
-function handleSignOut() {
-  signOut(auth)
-    .then(() => {
-      setTimeout(() => {
-        props.handleProfileClick();
-      }, 1000);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    });
-}
