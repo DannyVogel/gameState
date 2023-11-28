@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import Layout from "./layout/main";
 import Home from "./routes/Home";
+import ToPlay from "./routes/ToPlay";
+import Played from "./routes/Played";
 import ErrorPage from "./error.page";
 import "./assets/globals.css";
 
@@ -16,6 +18,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
       <Route index element={<Home />} />
+      <Route path="games" errorElement={<ErrorPage />}>
+        <Route path="toplay" element={<ToPlay />} />
+        <Route path="played" element={<Played />} />
+      </Route>
       <Route path="*" element={<ErrorPage />} />
     </Route>
   )
