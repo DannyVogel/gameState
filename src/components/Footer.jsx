@@ -1,29 +1,35 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import played from "@/assets/icons/gamesPlayed.png";
+import toPlay from "@/assets/icons/gamesToPlay.png";
+import search from "@/assets/icons/search.png";
 
 export default function Footer(props) {
   return (
     <div className="flex justify-between">
-      <img
-        id="gamesToPlay"
-        className="w-8 h-8"
-        src="./gamesToPlay1.png"
-        alt="shopping bag with controller icon"
-        onClick={props.handlePageChange}
-      />
-      <img
-        id="search"
-        className="w-8 h-8 searchIcon"
-        src="./search.png"
-        alt="magnifying glass search icon"
-        onClick={props.handlePageChange}
-      />
-      <img
-        id="gamesPlayed"
-        className="w-8 h-8"
-        src="./gamesPlayed1.png"
-        alt="papers with controller icon"
-        onClick={props.handlePageChange}
-      />
+      <Link to="/games/toplay">
+        <img
+          id="gamesToPlay"
+          className="w-8 h-8"
+          src={toPlay}
+          alt="shopping bag with controller icon"
+        />
+      </Link>
+      <Link to="/">
+        <img
+          id="search"
+          className="w-8 h-8 searchIcon"
+          src={search}
+          alt="magnifying glass search icon"
+        />
+      </Link>
+      <Link to="/games/played">
+        <img
+          id="gamesPlayed"
+          className="w-8 h-8"
+          src={played}
+          alt="papers with controller icon"
+        />
+      </Link>
     </div>
   );
 }
