@@ -2,65 +2,89 @@ import {
   auth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
   signOut,
 } from "@/config/firebase";
 
-export const signIn = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    if (userCredential) {
-      console.log("usercredential", userCredential);
+export default class AuthController {
+  static async logIn(email, password) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential) {
+        console.log("usercredential", userCredential);
+        return {
+          success: true,
+          user: userCredential.user,
+        };
+      }
+    } catch (error) {
+      console.log(error.code, error.message);
+      return {
+        success: false,
+        errorCode: errorCode,
+        errorMessage: errorMessage,
+      };
+    }
+  }
+
+  static async register(email, password) {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       return {
         success: true,
         user: userCredential.user,
       };
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      return {
+        success: false,
+        errorCode: errorCode,
+        errorMessage: errorMessage,
+      };
     }
-  } catch (error) {
-    console.log(error.code, error.message);
-    return {
-      success: false,
-      errorCode: errorCode,
-      errorMessage: errorMessage,
-    };
   }
-};
 
-function processSignUpFormData(e) {
-  e.preventDefault();
-  setErrorMessage("");
-  createUserWithEmailAndPassword(
-    auth,
-    signUpFormData.signUpEmail,
-    signUpFormData.signUpPassword
-  )
-    .then((userCredential) => {
-      setTimeout(() => {
-        props.handleProfileClick();
-      }, 1500);
-    })
-    .catch((error) => {
+  static async logOut() {
+    try {
+      const res = await signOut(auth);
+      console.log("signout", res);
+    } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
-      // ..
-    });
-}
+    }
+  }
 
-function handleSignOut() {
-  signOut(auth)
-    .then(() => {
-      setTimeout(() => {
-        props.handleProfileClick();
-      }, 1000);
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-    });
+  static async guestLogIn() {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        "guest@guest.com",
+        "123456"
+      );
+      if (userCredential) {
+        console.log("usercredential", userCredential);
+        return {
+          success: true,
+          user: userCredential.user,
+        };
+      }
+    } catch (error) {
+      console.log(error.code, error.message);
+      return {
+        success: false,
+        errorCode: errorCode,
+        errorMessage: errorMessage,
+      };
+    }
+  }
 }
