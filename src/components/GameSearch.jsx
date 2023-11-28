@@ -3,8 +3,10 @@ import Index from "@/components/Home/Index";
 import GameCard from "./GameCard";
 import Result from "../utility/resultsConstructor";
 import { Triangle } from "react-loader-spinner";
+import useUserStore from "../stores/userStore";
 
-export default function GameSearch(props) {
+export default function GameSearch() {
+  const UID = useUserStore((state) => state.UID);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
@@ -40,9 +42,7 @@ export default function GameSearch(props) {
   function renderFiveResults(results) {
     return results.map((result, index) => {
       if (index >= num + 0 && index < num + 3) {
-        return (
-          <GameCard key={result.id} result={result} userUID={props.userUID} />
-        );
+        return <GameCard key={result.id} result={result} />;
       }
     });
   }
