@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import WelcomeSplash from "./WelcomeSplash";
+import Index from "@/components/Home/Index";
 import GameCard from "./GameCard";
 import Result from "../utility/resultsConstructor";
 import { Triangle } from "react-loader-spinner";
@@ -48,8 +48,8 @@ export default function GameSearch(props) {
   }
 
   return (
-    <div className="gameSearchContainer">
-      <div className="resultsContainer">
+    <div className="">
+      <div className="flex flex-col items-center">
         {results.length > 0 ? (
           loading ? (
             <Triangle
@@ -65,12 +65,7 @@ export default function GameSearch(props) {
             renderFiveResults(results)
           )
         ) : (
-          <WelcomeSplash
-            userUID={props.userUID}
-            user={props.user}
-            gamesPlayedList={props.gamesPlayedList}
-            gamesToPlayList={props.gamesToPlayList}
-          />
+          <Index />
         )}
         {results.length > 0 && !loading ? (
           <div className="pageSelectContainer">
@@ -96,20 +91,30 @@ export default function GameSearch(props) {
           </div>
         ) : null}
       </div>
-      <form className="searchFormContainer" onSubmit={processSearch}>
-        <input
-          className="searchBar"
-          type="text"
-          id="searchTerm"
-          name="searchTerm"
-          value={searchTerm}
-          onChange={handleChange}
-          placeholder="Find your game"
-          autoComplete="off"
-        />
-        <button type="submit" className="searchBtn btn">
-          Search
-        </button>
+      <form
+        className="mt-20 flex flex-col items-center"
+        onSubmit={processSearch}
+      >
+        <div className="join">
+          <input
+            className="input input-bordered border-r-0 input-primary join-item"
+            type="text"
+            id="searchTerm"
+            name="searchTerm"
+            value={searchTerm}
+            onChange={handleChange}
+            placeholder="Find your game"
+            autoComplete="off"
+          />
+          <div className="indicator">
+            <button
+              type="submit"
+              className="btn btn-outline btn-primary border-l-0 join-item"
+            >
+              Search
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
