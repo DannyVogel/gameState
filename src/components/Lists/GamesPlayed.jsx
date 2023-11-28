@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import GamesPlayedCard from "./GamesPlayedCard";
-import { db, ref, onValue } from "../config/firebase";
+import GamesPlayedCard from "../GamesPlayedCard";
+import { db, ref, onValue } from "../../config/firebase";
 import { Triangle } from "react-loader-spinner";
+import useUserStore from "../../stores/userStore";
 
-export default function GamesPlayedList(props) {
+export default function GamesPlayed() {
+  const UID = useUserStore((state) => state.UID);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [savedList, setSavedList] = useState(() => []);
@@ -41,7 +43,7 @@ export default function GamesPlayedList(props) {
   }
 
   useEffect(() => {
-    const gameRef = ref(db, `gameState/users/${props.userUID}/gamesPlayedList`);
+    const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
     onValue(gameRef, (snapshot) => {
       const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
       setSavedList(data);
@@ -62,7 +64,7 @@ export default function GamesPlayedList(props) {
       list = list.filter((game) => game[0].status === filters.status);
     }
     if (list.length < 1) {
-      if (!props.userUID) {
+      if (!UID) {
         return <p>Please sign up or sign in to see list</p>;
       }
       return <p>No games found</p>;
@@ -82,11 +84,7 @@ export default function GamesPlayedList(props) {
         {sortedDataByYear
           .filter((item) => item[0].yearPlayed === year)
           .map((item) => (
-            <GamesPlayedCard
-              key={item[0].id}
-              result={item[0]}
-              userUID={props.userUID}
-            />
+            <GamesPlayedCard key={item[0].id} result={item[0]} userUID={UID} />
           ))}
       </div>
     ));
