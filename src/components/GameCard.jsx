@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { db, ref, remove, update, gameStateDB } from "../config/firebase";
 import UserDataModal from "./UserDataModal";
+import useUserStore from "../stores/userStore";
 
 export default function GameCard(props) {
+  const UID = useUserStore((state) => state.UID);
   const [isOnList, setIsOnList] = useState("");
   const [userPlayedGameData, setUserPlayedGameData] = useState({
     monthPlayed: "",
@@ -44,7 +46,7 @@ export default function GameCard(props) {
   function addGameToList(e, game) {
     const list = e.target.id;
     const updates = {};
-    updates[`/users/${props.userUID}/${list}/${game.id}`] = [game];
+    updates[`/users/${UID}/${list}/${game.id}`] = [game];
     update(gameStateDB, updates);
     setShowConfirmationModal(true);
     setConfirmationText("Game added to list");
@@ -60,10 +62,7 @@ export default function GameCard(props) {
       setShowConfirmationModal(false);
       const gameID = e.target.id;
       if (gameID) {
-        const gameRef = ref(
-          db,
-          `gameState/users/${props.userUID}/${isOnList}/${gameID}`
-        );
+        const gameRef = ref(db, `gameState/users/${UID}/${isOnList}/${gameID}`);
         remove(gameRef);
       }
     }, 1500);
@@ -73,20 +72,48 @@ export default function GameCard(props) {
 
   if (isOnList === "") {
     buttonContainerElement = (
-      <div className="endResultContainer">
+      <div className="w-full flex justify-between">
         <button
           id="gamesToPlayList"
-          className="resultButton purple btn"
+          className="btn btn-outline btn-sm btn-secondary"
           onClick={(e) => addGameToList(e, props.result)}
         >
-          I want to play it
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
+          Want to play
         </button>
         <button
           id="gamesPlayedList"
-          className="resultButton orange btn"
+          className="btn btn-outline btn-sm btn-warning"
           onClick={handleShowModal}
         >
-          I played it
+          Played
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+            />
+          </svg>
         </button>
         {showModal ? (
           <UserDataModal
@@ -101,7 +128,7 @@ export default function GameCard(props) {
     );
   } else if (isOnList === "gamesToPlayList") {
     buttonContainerElement = (
-      <div className="endResultContainer">
+      <div className="w-full flex justify-between">
         <button
           id={props.result.id}
           className="resultButton purple btn"
@@ -129,7 +156,7 @@ export default function GameCard(props) {
     );
   } else if (isOnList === "gamesPlayedList") {
     buttonContainerElement = (
-      <div className="endResultContainer">
+      <div className="w-full flex justify-between">
         <button
           id={props.result.id}
           className="resultButton purple btn"
@@ -142,50 +169,58 @@ export default function GameCard(props) {
   }
 
   return (
-    <div key={props.result.id} className="resultContainer">
-      <h3 className="resultHeader">
-        <a
-          className="resultLink"
-          href={`https://www.rawg.io/games/${props.result.slug}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {props.result.name}{" "}
-        </a>
-      </h3>
-
-      <div className="midResultContainer">
-        <div className="resultImageContainer">
-          {props.result.image && (
-            <img
-              className="resultImage"
-              src={props.result.image}
-              alt={props.result.name}
-            />
-          )}
-        </div>
-        <div className="resultInfoContainer">
-          <p className="resultText">Released: {props.result.released}</p>
-          <p className="resultText">
-            Genres: {props.result.genres.map((genre) => genre.name).join(", ")}
-          </p>
+    <div
+      key={props.result.id}
+      className="card card-compact max-w-md glass my-4 mx-auto"
+    >
+      <figure>
+        {props.result.image ? (
+          <img src={props.result.image} alt={props.result.name} />
+        ) : (
+          <img
+            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            alt="placeholder image"
+          />
+        )}
+      </figure>
+      <div className="card-body">
+        <h2 className="card-title">
           <a
-            className="resultText"
+            className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent"
             href={`https://www.rawg.io/games/${props.result.slug}`}
             target="_blank"
             rel="noreferrer"
           >
-            More Info
+            {props.result.name}{" "}
           </a>
+        </h2>
+        <p className="flex justify-around">
+          {props.result.genres.map((genre, index, array) => (
+            <React.Fragment key={genre.id}>
+              <button className="btn btn-outline btn-xs cursor-default">
+                {genre.name}
+              </button>
+            </React.Fragment>
+          ))}
+        </p>
+        <p className="resultText">Released: {props.result.released}</p>
+        <a
+          className="link text-primary"
+          href={`https://www.rawg.io/games/${props.result.slug}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          More Info
+        </a>
+        <div className="card-actions justify-end">
+          {buttonContainerElement}
+          {showConfirmationModal ? (
+            <div className="confirmationModalContainer">
+              <p>{confirmationText}</p>
+            </div>
+          ) : null}
         </div>
       </div>
-
-      {buttonContainerElement}
-      {showConfirmationModal ? (
-        <div className="confirmationModalContainer">
-          <p>{confirmationText}</p>
-        </div>
-      ) : null}
     </div>
   );
 }

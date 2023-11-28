@@ -83,117 +83,125 @@ export default function GamesPlayedCard(props) {
       </div>
 
       {showCardModal ? (
-        <div className="fullGameCardContainer">
-          <span className="closeModal" onClick={handleShowCardModal}>
-            x
-          </span>
-          <h3>{name}</h3>
-          <ImageGallery screenshots={screenshots} />
-          <div className="details">
-            <p>Released: {released}</p>
-            <p>Platforms: {platforms && platforms.join(", ")}</p>
-            {editItem ? (
-              <form className="editGameForm">
-                <div className="datePlayed">
-                  <span>Date Played:</span>
-                  <input
-                    type="number"
-                    name="monthPlayed"
-                    id="monthPlayed"
-                    min={1}
-                    max={12}
-                    value={editItemData.monthPlayed}
-                    onChange={handleChange}
-                    placeholder="MM"
-                  />
-                  -
-                  <input
-                    type="number"
-                    name="yearPlayed"
-                    id="yearPlayed"
-                    min={1900}
-                    max={3000}
-                    value={editItemData.yearPlayed}
-                    onChange={handleChange}
-                    placeholder="YYYY"
-                    required
-                  />
-                </div>
-                <div className="gameStatusContainer">
-                  <span>Game status:</span>
-                  <input
-                    type="radio"
-                    name="status"
-                    id="playing"
-                    value="playing"
-                    checked={editItemData.status === "playing"}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="playing">Playing</label>
-                  <input
-                    type="radio"
-                    name="status"
-                    id="beat"
-                    value="beat"
-                    checked={editItemData.status === "beat"}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="beat">Beat</label>
-                  <input
-                    type="radio"
-                    name="status"
-                    id="dropped"
-                    value="dropped"
-                    checked={editItemData.status === "dropped"}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="dropped">Dropped</label>
-                </div>
-                <div className="gameCommentsContainer">
-                  <label htmlFor="comments">Comments:</label>
-                  <textarea
-                    name="comments"
-                    id="comments"
-                    rows={2}
-                    cols={25}
-                    value={editItemData.comments}
-                    onChange={handleChange}
-                  />
-                </div>
-              </form>
-            ) : (
-              <>
-                <p>
-                  Played: {monthPlayed} - {yearPlayed}
-                </p>
-                <p>Status: {status}</p>
-                <p>Comments: {comments}</p>
-              </>
-            )}
-          </div>
-          <a
-            href={`https://www.rawg.io/games/${slug}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            More Info
-          </a>
-          <br />
-          <div className="buttonContainer">
-            <button
-              id={id}
-              className={`resultButton ${editItem ? "" : "orange"} btn`}
-              onClick={editItem ? updateItem : handleEdit}
-            >
-              {editItem ? "Save" : "Edit"}
-            </button>
-            <button
-              id={id}
-              className="resultButton purple btn"
-              onClick={removeFromList}
-            >
-              Remove
-            </button>
+        <div className="flex flex-col items-center">
+          <div className="card card-compact glass w-96 bg-base-100 shadow-xl">
+            <figure>
+              <span
+                className="absolute top-0 right-5 text-white z-10  cursor-pointer"
+                onClick={handleShowCardModal}
+              >
+                x
+              </span>
+              <ImageGallery screenshots={screenshots} />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">{name}</h2>
+              <div className="details">
+                <p>Released: {released}</p>
+                <p>Platforms: {platforms && platforms.join(", ")}</p>
+                {editItem ? (
+                  <form className="editGameForm">
+                    <div className="datePlayed">
+                      <span>Date Played:</span>
+                      <input
+                        type="number"
+                        name="monthPlayed"
+                        id="monthPlayed"
+                        min={1}
+                        max={12}
+                        value={editItemData.monthPlayed}
+                        onChange={handleChange}
+                        placeholder="MM"
+                      />
+                      -
+                      <input
+                        type="number"
+                        name="yearPlayed"
+                        id="yearPlayed"
+                        min={1900}
+                        max={3000}
+                        value={editItemData.yearPlayed}
+                        onChange={handleChange}
+                        placeholder="YYYY"
+                        required
+                      />
+                    </div>
+                    <div className="gameStatusContainer">
+                      <span>Game status:</span>
+                      <input
+                        type="radio"
+                        name="status"
+                        id="playing"
+                        value="playing"
+                        checked={editItemData.status === "playing"}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="playing">Playing</label>
+                      <input
+                        type="radio"
+                        name="status"
+                        id="beat"
+                        value="beat"
+                        checked={editItemData.status === "beat"}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="beat">Beat</label>
+                      <input
+                        type="radio"
+                        name="status"
+                        id="dropped"
+                        value="dropped"
+                        checked={editItemData.status === "dropped"}
+                        onChange={handleChange}
+                      />
+                      <label htmlFor="dropped">Dropped</label>
+                    </div>
+                    <div className="gameCommentsContainer">
+                      <label htmlFor="comments">Comments:</label>
+                      <textarea
+                        name="comments"
+                        id="comments"
+                        rows={2}
+                        cols={25}
+                        value={editItemData.comments}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </form>
+                ) : (
+                  <>
+                    <p>
+                      Played: {monthPlayed} - {yearPlayed}
+                    </p>
+                    <p>Status: {status}</p>
+                    <p>Comments: {comments}</p>
+                  </>
+                )}
+              </div>
+              <a
+                href={`https://www.rawg.io/games/${slug}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                More Info
+              </a>
+              <div className="card-actions justify-around">
+                <button
+                  id={id}
+                  className={`resultButton ${editItem ? "" : "orange"} btn`}
+                  onClick={editItem ? updateItem : handleEdit}
+                >
+                  {editItem ? "Save" : "Edit"}
+                </button>
+                <button
+                  id={id}
+                  className="resultButton purple btn"
+                  onClick={removeFromList}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       ) : null}
