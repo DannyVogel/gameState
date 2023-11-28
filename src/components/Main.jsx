@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Loader from "./Loader";
 import GameSearch from "./GameSearch";
-import GamesPlayedList from "./GamesPlayedList";
+import GamesPlayed from "@/components/Lists/GamesPlayed";
 import GamesToPlayList from "./GamesToPlayList";
 import Footer from "./Footer";
 import { auth, onAuthStateChanged, db, ref, onValue } from "../config/firebase";
@@ -62,33 +62,15 @@ export default function App() {
     });
   }, []);
 
-  function handlePageChange(e) {
-    const { id } = e.target;
-    setPage(id);
-  }
-
   return (
-    <>
+    <div>
       {loading ? (
         <Loader isUnmounting={isUnmounting} />
       ) : (
         <div className={`appContainer ${isMounting && "fade-in"}`}>
-          {page === "search" ? (
-            <GameSearch
-              userUID={userUID}
-              user={user}
-              gamesPlayedList={gamesPlayedList}
-              gamesToPlayList={gamesToPlayList}
-            />
-          ) : null}
-          {page === "gamesToPlay" ? (
-            <GamesToPlayList userUID={userUID} />
-          ) : null}
-          {page === "gamesPlayed" ? (
-            <GamesPlayedList userUID={userUID} />
-          ) : null}
+          <GameSearch />
         </div>
       )}
-    </>
+    </div>
   );
 }
