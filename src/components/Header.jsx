@@ -14,7 +14,7 @@ export default function Header(props) {
   }
 
   return (
-    <div className="w-full h-10 flex items-center justify-center">
+    <div className="w-full h-10 flex items-center justify-center max-w-2xl mx-auto">
       <h1 className="py-1 font-bold text-4xl mx-auto bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
         <Link to="/">
           <span className="italic">game</span>State
@@ -23,7 +23,7 @@ export default function Header(props) {
       <img
         src={isLogged ? logged : notLogged}
         alt="profile icon"
-        className="w-8 h-8"
+        className="w-8 h-8 cursor-pointer"
         onClick={authOpen}
       />
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
