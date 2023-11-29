@@ -12,6 +12,7 @@ import Home from "./routes/Home";
 import ToPlay from "./routes/ToPlay";
 import Played from "./routes/Played";
 import ErrorPage from "./error.page";
+import NotFound from "./NotFound";
 import "./assets/globals.css";
 
 const router = createBrowserRouter(
@@ -22,7 +23,7 @@ const router = createBrowserRouter(
         <Route path="toplay" element={<ToPlay />} />
         <Route path="played" element={<Played />} />
       </Route>
-      <Route path="*" element={<ErrorPage />} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );
