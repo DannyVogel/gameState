@@ -1,9 +1,9 @@
 import { useState } from "react";
-import AuthController from "../../services/api/firebase";
-import { sliceEmail } from "../../utils";
-import useUserStore from "../../stores/userStore";
-import LogIn from "./LogIn";
-import Register from "./Register";
+import AuthController from "@/services/api/firebase";
+import { sliceEmail } from "@/utils";
+import useUserStore from "@/stores/userStore";
+import LogIn from "@/components/Auth/LogIn";
+import Register from "@/components/Auth/Register";
 
 export default function Modal(props) {
   const setUser = useUserStore((state) => state.setUser);
@@ -21,62 +21,61 @@ export default function Modal(props) {
   };
 
   const handleSignOut = async () => {
-    const res = await AuthController.logOut();
-    // .then(() => {
-    //   setTimeout(() => {
-    //     props.handleProfileClick();
-    //   }, 1000);
-    // })
-    // .catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   console.log(errorCode, errorMessage);
-    // });
+    await AuthController.logOut();
   };
 
   const guestLogIn = async () => {
-    const res = AuthController.guestLogIn();
+    const res = await AuthController.guestLogIn();
     if (res.success) {
-      handleAuthSuccess(res.user);
+      authSuccess(res.user);
     } else {
       setErrorMessage("Incorrect email or password");
     }
   };
 
-  const handleAuthSuccess = (user) => {
+  const authSuccess = (user) => {
     const { email, uid } = user;
     setUser(sliceEmail(email));
     setUID(uid);
     setLogged(true);
-    // setTimeout(() => {
-    //   props.handleProfileClick();
-    // }, 1500);
+    setTimeout(() => {
+      props.authClose();
+    }, 1500);
   };
 
   return (
-    <div className="modal-overlay" onClick={props.handleProfileClick}>
+    <div className="modal-overlay" onClick={props.authClose}>
       <div
         className="profileModalContainer"
         onClick={(event) => event.stopPropagation()}
       >
         {!isLogged ? (
-          <div className="">
+          <>
             {signInMethod ? <LogIn /> : <Register />}
 
-            <p className="logInMethodTxt" onClick={switchSignInMethod}>
-              {signInMethod
-                ? "New user? Sign up here"
-                : "Already a user? Sign in here"}
-            </p>
-
-            <p className="logInMethodTxt" onClick={guestLogIn}>
-              Log in as Guest
-            </p>
-          </div>
+            <div class="mt-10 flex flex-col items-center gap-4">
+              <p
+                className="cursor-pointer hover:text-primary"
+                onClick={switchSignInMethod}
+              >
+                {signInMethod
+                  ? "New user? Sign up here"
+                  : "Already a user? Sign in here"}
+              </p>
+              <button className="btn bg-orange-500" onClick={guestLogIn}>
+                Log in as Guest
+              </button>
+            </div>
+          </>
         ) : (
-          <div className="profileInfo">
-            <p>Hello {user}</p>
-            <button className="btn" onClick={handleSignOut}>
+          <div className="flex flex-col items-center gap-4">
+            <p className="font-bold text-xl">
+              Hello{" "}
+              <span class="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+                {user}
+              </span>
+            </p>
+            <button className="btn btn-error" onClick={handleSignOut}>
               Sign Out
             </button>
           </div>
