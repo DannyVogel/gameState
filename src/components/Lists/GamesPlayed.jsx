@@ -94,70 +94,76 @@ export default function GamesPlayed() {
   }
 
   return (
-    <div className="mt-5">
+    <div className="">
       <h1 className="text-center font-bold text-2xl">Games Played</h1>
-      <form className="flex flex-col items-start gap-y-4">
-        <div className="mt-4">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="m-1">
-              <i className="fa-solid fa-filter cursor-pointer"></i>
-            </div>
-            <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
-              <p className="w-max mb-1 font-bold">Filters:</p>
-              <div class="flex gap-2">
-                <input
-                  className="input input-primary input-sm"
-                  type="number"
-                  name="yearPlayed"
-                  id="yearPlayed"
-                  min={1900}
-                  max={3000}
-                  value={filterInput.yearPlayed}
-                  onChange={handleChange}
-                  placeholder="YYYY"
-                />
-                <select
-                  className="select select-primary select-sm"
-                  name="status"
-                  id="status"
-                  value={filterInput.status}
-                  onChange={handleChange}
-                >
-                  <option value="">Status</option>
-                  <option value="playing">Playing</option>
-                  <option value="beat">Beat</option>
-                  <option value="dropped">Dropped</option>
-                </select>
-                <button
-                  className="btn btn-primary btn-sm"
-                  onClick={applyFilters}
-                >
-                  Set
-                </button>
-                <button
-                  className="btn btn-primary btn-sm"
-                  onClick={clearFilters}
-                >
-                  Clear
-                </button>
-              </div>
-            </ul>
-          </div>
-        </div>
-        <div className="mx-auto flex gap-2"></div>
-      </form>
       {loading ? (
         <Triangle
           height="80"
           width="80"
           color="#FFFFFF"
           ariaLabel="triangle-loading"
-          wrapperStyle={{}}
+          wrapperStyle={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "50px",
+          }}
           wrapperClassName=""
           visible={true}
         />
       ) : (
-        renderList(savedList, filter)
+        <>
+          <form className="flex flex-col items-start gap-y-4">
+            <div className="mt-4">
+              <div className="dropdown">
+                <div tabIndex={0} role="button" className="m-1">
+                  <i className="fa-solid fa-filter cursor-pointer"></i>
+                </div>
+                <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
+                  <p className="w-max mb-1 font-bold">Filters:</p>
+                  <div class="flex gap-2">
+                    <input
+                      className="input input-primary input-sm"
+                      type="number"
+                      name="yearPlayed"
+                      id="yearPlayed"
+                      min={1900}
+                      max={3000}
+                      value={filterInput.yearPlayed}
+                      onChange={handleChange}
+                      placeholder="YYYY"
+                    />
+                    <select
+                      className="select select-primary select-sm"
+                      name="status"
+                      id="status"
+                      value={filterInput.status}
+                      onChange={handleChange}
+                    >
+                      <option value="">Status</option>
+                      <option value="playing">Playing</option>
+                      <option value="beat">Beat</option>
+                      <option value="dropped">Dropped</option>
+                    </select>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={applyFilters}
+                    >
+                      Set
+                    </button>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={clearFilters}
+                    >
+                      Clear
+                    </button>
+                  </div>
+                </ul>
+              </div>
+            </div>
+            <div className="mx-auto flex gap-2"></div>
+          </form>
+          {renderList(savedList, filter)}
+        </>
       )}
     </div>
   );
