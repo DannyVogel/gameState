@@ -1,6 +1,7 @@
 import { useState } from "react";
-import AuthController from "../../services/api/firebase";
-import useUserStore from "../../stores/userStore";
+import AuthController from "@/services/api/firebase";
+import useUserStore from "@/stores/userStore";
+import { sliceEmail } from "@/utils";
 
 const LogIn = () => {
   const setUser = useUserStore((state) => state.setUser);
@@ -33,15 +34,15 @@ const LogIn = () => {
     setUser(sliceEmail(email));
     setUID(uid);
     setLogged(true);
-    // setTimeout(() => {
-    //   props.handleProfileClick();
-    // }, 1500);
+    setTimeout(() => {
+      props.handleProfileClick();
+    }, 1000);
   };
 
   return (
     <form onSubmit={logIn}>
-      <fieldset className="flex flex-col gap-4">
-        <legend>Sign In</legend>
+      <fieldset className="flex flex-col">
+        <legend className="font-bold pl-1 underline">Log In</legend>
         <label htmlFor="email" className="label">
           Email:
         </label>
@@ -51,7 +52,7 @@ const LogIn = () => {
           id="email"
           value={logInForm.email}
           onChange={handleChange}
-          className="input"
+          className="input input-primary"
         />
         <label htmlFor="password" className="label">
           Password:
@@ -62,10 +63,10 @@ const LogIn = () => {
           id="password"
           value={logInForm.password}
           onChange={handleChange}
-          className="input"
+          className="input input-primary"
         />
         <p className="errorMessage">{errorMessage ? errorMessage : " "}</p>
-        <button className="btn btn-primary">Sign In</button>
+        <button className="btn btn-primary mt-4">Sign In</button>
       </fieldset>
     </form>
   );
