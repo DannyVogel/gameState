@@ -119,7 +119,7 @@ export default function GamesPlayedCard(props) {
               <form className="flex flex-col gap-1">
                 <div className="flex justify-between">
                   <span>Date Played:</span>
-                  <div class="">
+                  <div>
                     <input
                       type="number"
                       name="monthPlayed"
