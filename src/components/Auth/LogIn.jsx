@@ -3,7 +3,7 @@ import AuthController from "@/services/api/firebase";
 import useUserStore from "@/stores/userStore";
 import { sliceEmail } from "@/utils";
 
-const LogIn = () => {
+const LogIn = (props) => {
   const setUser = useUserStore((state) => state.setUser);
   const setUID = useUserStore((state) => state.setUID);
   const setLogged = useUserStore((state) => state.setLogged);
@@ -35,7 +35,7 @@ const LogIn = () => {
     setUID(uid);
     setLogged(true);
     setTimeout(() => {
-      props.handleProfileClick();
+      props.authClose();
     }, 1000);
   };
 

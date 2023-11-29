@@ -51,9 +51,13 @@ export default function Modal(props) {
       >
         {!isLogged ? (
           <>
-            {signInMethod ? <LogIn /> : <Register />}
+            {signInMethod ? (
+              <LogIn authClose={props.authClose} />
+            ) : (
+              <Register authClose={props.authClose} />
+            )}
 
-            <div class="mt-10 flex flex-col items-center gap-4">
+            <div class="mt-10 flex flex-col items-center gap-1">
               <p
                 className="cursor-pointer hover:text-primary"
                 onClick={switchSignInMethod}
@@ -62,9 +66,9 @@ export default function Modal(props) {
                   ? "New user? Sign up here"
                   : "Already a user? Sign in here"}
               </p>
-              <button className="btn bg-orange-500" onClick={guestLogIn}>
+              <p className="text-sm underline" onClick={guestLogIn}>
                 Log in as Guest
-              </button>
+              </p>
             </div>
           </>
         ) : (
