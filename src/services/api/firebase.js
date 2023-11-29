@@ -14,7 +14,6 @@ export default class AuthController {
         password
       );
       if (userCredential) {
-        console.log("usercredential", userCredential);
         return {
           success: true,
           user: userCredential.user,
@@ -56,7 +55,6 @@ export default class AuthController {
   static async logOut() {
     try {
       const res = await signOut(auth);
-      console.log("signout", res);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -72,7 +70,6 @@ export default class AuthController {
         "123456"
       );
       if (userCredential) {
-        console.log("usercredential", userCredential);
         return {
           success: true,
           user: userCredential.user,
