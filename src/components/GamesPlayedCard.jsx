@@ -97,13 +97,6 @@ export default function GamesPlayedCard(props) {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box flex flex-col gap-2">
-          <div
-            id="closeModal"
-            className="absolute -top-1 right-5 text-red-400 z-100  cursor-pointer font-bold text-xl"
-            onClick={() => document.getElementById(`my_modal_${id}`).close()}
-          >
-            x
-          </div>
           <ImageGallery screenshots={screenshots} />
           <div className="flex justify-between items-center px-5">
             <h2 className="text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
@@ -192,19 +185,26 @@ export default function GamesPlayedCard(props) {
           <div className="card-actions justify-around -mb-8">
             <button
               id={id}
+              className="btn btn-outline btn-error btn-sm"
+              onClick={removeFromList}
+            >
+              Remove
+            </button>
+            <div
+              id="closeModal"
+              className="btn btn-outline btn-error btn-sm"
+              onClick={() => document.getElementById(`my_modal_${id}`).close()}
+            >
+              Close
+            </div>
+            <button
+              id={id}
               className={`resultButton ${
                 editItem ? "btn bg-green-500" : "btn-primary"
               } btn btn-sm`}
               onClick={editItem ? updateItem : handleEdit}
             >
               {editItem ? "Save" : "Edit"}
-            </button>
-            <button
-              id={id}
-              className="btn btn-outline btn-error btn-sm"
-              onClick={removeFromList}
-            >
-              Remove
             </button>
           </div>
           <div className="modal-action">
