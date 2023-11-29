@@ -34,6 +34,7 @@ export default function GamesPlayed() {
   function applyFilters(e) {
     e.preventDefault();
     setFilter(filterInput);
+    setShowFilters(false);
   }
 
   function clearFilters(e) {
@@ -80,7 +81,9 @@ export default function GamesPlayed() {
     ];
     return years.map((year) => (
       <div className="gameCardContainer" key={year}>
-        <h2>{year}</h2>
+        <h2 className="w-fit font-bold text-xl bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+          {year}
+        </h2>
         {sortedDataByYear
           .filter((item) => item[0].yearPlayed === year)
           .map((item) => (
@@ -91,47 +94,57 @@ export default function GamesPlayed() {
   }
 
   return (
-    <div className="gameListContainer">
-      <h1>Games Played</h1>
-      <form className="filterContainer">
-        <div className="filterIconContainer">
-          <i
-            className="fa-solid fa-filter left"
-            onClick={handleShowFilters}
-          ></i>
+    <div className="mt-5">
+      <h1 className="text-center font-bold text-2xl">Games Played</h1>
+      <form className="flex flex-col items-start gap-y-4">
+        <div className="mt-4">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="m-1">
+              <i className="fa-solid fa-filter cursor-pointer"></i>
+            </div>
+            <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
+              <p className="w-max mb-1 font-bold">Filters:</p>
+              <div class="flex gap-2">
+                <input
+                  className="input input-primary input-sm"
+                  type="number"
+                  name="yearPlayed"
+                  id="yearPlayed"
+                  min={1900}
+                  max={3000}
+                  value={filterInput.yearPlayed}
+                  onChange={handleChange}
+                  placeholder="YYYY"
+                />
+                <select
+                  className="select select-primary select-sm"
+                  name="status"
+                  id="status"
+                  value={filterInput.status}
+                  onChange={handleChange}
+                >
+                  <option value="">Status</option>
+                  <option value="playing">Playing</option>
+                  <option value="beat">Beat</option>
+                  <option value="dropped">Dropped</option>
+                </select>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={applyFilters}
+                >
+                  Set
+                </button>
+                <button
+                  className="btn btn-primary btn-sm"
+                  onClick={clearFilters}
+                >
+                  Clear
+                </button>
+              </div>
+            </ul>
+          </div>
         </div>
-        {showFilters ? (
-          <>
-            <p>Filter by:</p>
-            <input
-              type="number"
-              name="yearPlayed"
-              id="yearPlayed"
-              min={1900}
-              max={3000}
-              value={filterInput.yearPlayed}
-              onChange={handleChange}
-              placeholder="YYYY"
-            />
-            <select
-              name="status"
-              id="status"
-              value={filterInput.status}
-              onChange={handleChange}
-            >
-              <option value="">Status</option>
-              <option value="playing">Playing</option>
-              <option value="beat">Beat</option>
-              <option value="dropped">Dropped</option>
-            </select>
-            <button className="blue" onClick={applyFilters}>
-              Set
-            </button>
-            <button className="blue" onClick={clearFilters}>
-              Clear
-            </button>
-          </>
-        ) : null}
+        <div className="mx-auto flex gap-2"></div>
       </form>
       {loading ? (
         <Triangle
