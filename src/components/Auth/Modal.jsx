@@ -71,7 +71,7 @@ export default function Modal(props) {
           <div className="flex flex-col items-center gap-4">
             <p className="font-bold text-xl">
               Hello{" "}
-              <span class="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
                 {user}
               </span>
             </p>
