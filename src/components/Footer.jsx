@@ -5,7 +5,7 @@ import search from "@/assets/icons/search.png";
 
 export default function Footer(props) {
   return (
-    <div className="flex justify-between">
+    <div className="fixed bottom-0 left-0 right-0 px-5 py-2 rounded-t-lg w-full flex justify-between bg-blue-900">
       <Link to="/games/toplay">
         <img
           id="gamesToPlay"
