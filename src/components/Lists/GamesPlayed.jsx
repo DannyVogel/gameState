@@ -94,7 +94,7 @@ export default function GamesPlayed() {
   }
 
   return (
-    <div className="">
+    <div className="max-w-2xl mx-auto">
       <h1 className="text-center font-bold text-2xl">Games Played</h1>
       {loading ? (
         <Triangle

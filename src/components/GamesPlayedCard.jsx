@@ -59,7 +59,7 @@ export default function GamesPlayedCard(props) {
   }
 
   return (
-    <div className="cardsContainer">
+    <>
       <div className="card card-side card-compact bg-base-100 shadow-xl">
         <figure>
           {/* <img
@@ -71,16 +71,20 @@ export default function GamesPlayedCard(props) {
           <h4 className="w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             {name}
           </h4>
-          <div className="flex items-center">
-            <p>
-              Played: {monthPlayed}
-              {monthPlayed && yearPlayed ? "-" : null}
-              {yearPlayed}
-            </p>
-            <p>{status ? `Status: ${status}` : null}</p>
+          <div className="flex items-center justify-between">
+            <div className="flex gap-5">
+              <p>
+                Played: {monthPlayed}
+                {monthPlayed && yearPlayed ? "-" : null}
+                {yearPlayed}
+              </p>
+              <p>{status ? `Status: ${status}` : null}</p>
+            </div>
             <button
               className="gamesPlayedCardBtn btn btn-outline btn-xs"
-              onClick={() => document.getElementById("my_modal_1").showModal()}
+              onClick={() =>
+                document.getElementById(`my_modal_${id}`).showModal()
+              }
             >
               View card
             </button>
@@ -88,8 +92,18 @@ export default function GamesPlayedCard(props) {
           <div className="card-actions justify-end"></div>
         </div>
       </div>
-      <dialog id="my_modal_1" className="modal modal-bottom sm:modal-middle">
+      <dialog
+        id={`my_modal_${id}`}
+        className="modal modal-bottom sm:modal-middle"
+      >
         <div className="modal-box flex flex-col gap-2">
+          <div
+            id="closeModal"
+            className="absolute -top-1 right-5 text-red-400 z-100  cursor-pointer font-bold text-xl"
+            onClick={() => document.getElementById(`my_modal_${id}`).close()}
+          >
+            x
+          </div>
           <ImageGallery screenshots={screenshots} />
           <div className="flex justify-between items-center px-5">
             <h2 className="text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
@@ -105,75 +119,63 @@ export default function GamesPlayedCard(props) {
               {status}
             </button>
           </div>
-          <div className="details px-5">
+          <div className="flex flex-col gap-1 px-5">
             <p>Released: {released}</p>
             <p>Platforms: {platforms && platforms.join(", ")}</p>
             {editItem ? (
-              <form className="editGameForm">
-                <div className="datePlayed">
+              <form className="flex flex-col gap-1">
+                <div className="flex justify-between">
                   <span>Date Played:</span>
-                  <input
-                    type="number"
-                    name="monthPlayed"
-                    id="monthPlayed"
-                    min={1}
-                    max={12}
-                    value={editItemData.monthPlayed}
-                    onChange={handleChange}
-                    placeholder="MM"
-                  />
-                  -
-                  <input
-                    type="number"
-                    name="yearPlayed"
-                    id="yearPlayed"
-                    min={1900}
-                    max={3000}
-                    value={editItemData.yearPlayed}
-                    onChange={handleChange}
-                    placeholder="YYYY"
-                    required
-                  />
+                  <div class="">
+                    <input
+                      type="number"
+                      name="monthPlayed"
+                      id="monthPlayed"
+                      min={1}
+                      max={12}
+                      value={editItemData.monthPlayed}
+                      onChange={handleChange}
+                      placeholder="MM"
+                      className="input input-primary input-sm"
+                    />
+                    -
+                    <input
+                      type="number"
+                      name="yearPlayed"
+                      id="yearPlayed"
+                      min={1900}
+                      max={3000}
+                      value={editItemData.yearPlayed}
+                      onChange={handleChange}
+                      placeholder="YYYY"
+                      required
+                      className="input input-primary input-sm"
+                    />
+                  </div>
                 </div>
-                <div className="gameStatusContainer">
-                  <span>Game status:</span>
-                  <input
-                    type="radio"
+                <div className="flex justify-between">
+                  <span>Status:</span>
+                  <select
                     name="status"
-                    id="playing"
-                    value="playing"
-                    checked={editItemData.status === "playing"}
+                    value={editItemData.status}
                     onChange={handleChange}
-                  />
-                  <label htmlFor="playing">Playing</label>
-                  <input
-                    type="radio"
-                    name="status"
-                    id="beat"
-                    value="beat"
-                    checked={editItemData.status === "beat"}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="beat">Beat</label>
-                  <input
-                    type="radio"
-                    name="status"
-                    id="dropped"
-                    value="dropped"
-                    checked={editItemData.status === "dropped"}
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="dropped">Dropped</label>
+                    className="select select-primary select-sm"
+                  >
+                    <option value="playing">Playing</option>
+                    <option value="beat">Beat</option>
+                    <option value="dropped">Dropped</option>
+                  </select>
                 </div>
-                <div className="gameCommentsContainer">
+                <div className="flex justify-between">
                   <label htmlFor="comments">Comments:</label>
                   <textarea
                     name="comments"
                     id="comments"
-                    rows={2}
+                    rows={1}
                     cols={25}
                     value={editItemData.comments}
                     onChange={handleChange}
+                    className="textarea textarea-primary textarea-bordered textarea-sm"
                   />
                 </div>
               </form>
@@ -187,17 +189,19 @@ export default function GamesPlayedCard(props) {
             )}
           </div>
 
-          <div className="card-actions justify-around">
+          <div className="card-actions justify-around -mb-8">
             <button
               id={id}
-              className={`resultButton ${editItem ? "" : "orange"} btn`}
+              className={`resultButton ${
+                editItem ? "btn bg-green-500" : "btn-primary"
+              } btn btn-sm`}
               onClick={editItem ? updateItem : handleEdit}
             >
               {editItem ? "Save" : "Edit"}
             </button>
             <button
               id={id}
-              className="resultButton purple btn"
+              className="btn btn-outline btn-error btn-sm"
               onClick={removeFromList}
             >
               Remove
@@ -206,134 +210,10 @@ export default function GamesPlayedCard(props) {
           <div className="modal-action">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
             </form>
           </div>
         </div>
       </dialog>
-      {showCardModal ? (
-        <div className="flex flex-col items-center">
-          <div className="card card-compact glass w-96 bg-base-100 shadow-xl">
-            <figure>
-              <span
-                className="absolute top-0 right-5 text-white z-10  cursor-pointer"
-                onClick={handleShowCardModal}
-              >
-                x
-              </span>
-              <ImageGallery screenshots={screenshots} />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{name}</h2>
-              <div className="details">
-                <p>Released: {released}</p>
-                <p>Platforms: {platforms && platforms.join(", ")}</p>
-                {editItem ? (
-                  <form className="editGameForm">
-                    <div className="datePlayed">
-                      <span>Date Played:</span>
-                      <input
-                        type="number"
-                        name="monthPlayed"
-                        id="monthPlayed"
-                        min={1}
-                        max={12}
-                        value={editItemData.monthPlayed}
-                        onChange={handleChange}
-                        placeholder="MM"
-                      />
-                      -
-                      <input
-                        type="number"
-                        name="yearPlayed"
-                        id="yearPlayed"
-                        min={1900}
-                        max={3000}
-                        value={editItemData.yearPlayed}
-                        onChange={handleChange}
-                        placeholder="YYYY"
-                        required
-                      />
-                    </div>
-                    <div className="gameStatusContainer">
-                      <span>Game status:</span>
-                      <input
-                        type="radio"
-                        name="status"
-                        id="playing"
-                        value="playing"
-                        checked={editItemData.status === "playing"}
-                        onChange={handleChange}
-                      />
-                      <label htmlFor="playing">Playing</label>
-                      <input
-                        type="radio"
-                        name="status"
-                        id="beat"
-                        value="beat"
-                        checked={editItemData.status === "beat"}
-                        onChange={handleChange}
-                      />
-                      <label htmlFor="beat">Beat</label>
-                      <input
-                        type="radio"
-                        name="status"
-                        id="dropped"
-                        value="dropped"
-                        checked={editItemData.status === "dropped"}
-                        onChange={handleChange}
-                      />
-                      <label htmlFor="dropped">Dropped</label>
-                    </div>
-                    <div className="gameCommentsContainer">
-                      <label htmlFor="comments">Comments:</label>
-                      <textarea
-                        name="comments"
-                        id="comments"
-                        rows={2}
-                        cols={25}
-                        value={editItemData.comments}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </form>
-                ) : (
-                  <>
-                    <p>
-                      Played: {monthPlayed} - {yearPlayed}
-                    </p>
-                    <p>Status: {status}</p>
-                    <p>Comments: {comments}</p>
-                  </>
-                )}
-              </div>
-              <a
-                href={`https://www.rawg.io/games/${slug}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                More Info
-              </a>
-              <div className="card-actions justify-around">
-                <button
-                  id={id}
-                  className={`resultButton ${editItem ? "" : "orange"} btn`}
-                  onClick={editItem ? updateItem : handleEdit}
-                >
-                  {editItem ? "Save" : "Edit"}
-                </button>
-                <button
-                  id={id}
-                  className="resultButton purple btn"
-                  onClick={removeFromList}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
-    </div>
+    </>
   );
 }
