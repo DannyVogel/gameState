@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { db, ref, remove, update, gameStateDB } from "../config/firebase";
-import UserDataModal from "./UserDataModal";
-import useUserStore from "../stores/userStore";
+import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
+import UserDataModal from "@/components/UserDataModal";
+import useUserStore from "@/stores/userStore";
 
 export default function GameCard(props) {
   const UID = useUserStore((state) => state.UID);

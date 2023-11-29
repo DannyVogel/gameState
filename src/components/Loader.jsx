@@ -1,4 +1,4 @@
-import gameConsole from "../assets/gameConsole.png";
+import gameConsole from "@/assets/gameConsole.png";
 
 export default function Loader(props) {
   return (

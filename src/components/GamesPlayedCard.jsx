@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { db, ref, remove, update, gameStateDB } from "../config/firebase";
-import ImageGallery from "./ImageGallery";
+import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
+import ImageGallery from "@/components/ImageGallery";
 
 export default function GamesPlayedCard(props) {
   const {
@@ -71,7 +71,7 @@ export default function GamesPlayedCard(props) {
           <h4 className="w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             {name}
           </h4>
-          <div class="flex items-center">
+          <div className="flex items-center">
             <p>
               Played: {monthPlayed}
               {monthPlayed && yearPlayed ? "-" : null}
@@ -91,7 +91,7 @@ export default function GamesPlayedCard(props) {
       <dialog id="my_modal_1" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box flex flex-col gap-2">
           <ImageGallery screenshots={screenshots} />
-          <div class="flex justify-between items-center px-5">
+          <div className="flex justify-between items-center px-5">
             <h2 className="text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
               <a
                 href={`https://www.rawg.io/games/${slug}`}

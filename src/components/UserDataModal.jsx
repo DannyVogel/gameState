@@ -1,7 +1,13 @@
 import React from "react";
 
 export default function UserDataModal(props) {
-    const {handleShowModal, handleSubmit, handleChange, userPlayedGameData, result} = props
+  const {
+    handleShowModal,
+    handleSubmit,
+    handleChange,
+    userPlayedGameData,
+    result,
+  } = props;
 
   return (
     <div className="modalContainer">

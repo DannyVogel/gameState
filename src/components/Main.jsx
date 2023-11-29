@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Loader from "./Loader";
-import GameSearch from "./GameSearch";
-import GamesPlayed from "@/components/Lists/GamesPlayed";
-import GamesToPlay from "@/components/Lists/GamesToPlay";
-import Footer from "./Footer";
-import { auth, onAuthStateChanged, db, ref, onValue } from "../config/firebase";
+import Loader from "@/components/Loader";
+import GameSearch from "@/components/GameSearch";
+import { auth, onAuthStateChanged, db, ref, onValue } from "@/config/firebase";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);

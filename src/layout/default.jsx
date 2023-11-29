@@ -15,7 +15,6 @@ const Layout = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email } = user;
-        console.log("auth state changed", user.uid, user.email);
         setLogged(true);
         setUID(uid);
         setUser(sliceEmail(email));

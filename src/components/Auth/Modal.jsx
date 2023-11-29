@@ -57,7 +57,7 @@ export default function Modal(props) {
               <Register authClose={props.authClose} />
             )}
 
-            <div class="mt-10 flex flex-col items-center gap-1">
+            <div className="mt-10 flex flex-col items-center gap-1">
               <p
                 className="cursor-pointer hover:text-primary"
                 onClick={switchSignInMethod}

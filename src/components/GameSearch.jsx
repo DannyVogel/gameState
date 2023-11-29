@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Index from "@/components/Home/Index";
-import GameCard from "./GameCard";
-import Result from "../utility/resultsConstructor";
+import GameCard from "@/components/GameCard";
+import Result from "@/utility/resultsConstructor";
 import { Triangle } from "react-loader-spinner";
-import useUserStore from "../stores/userStore";
+import useUserStore from "@/stores/userStore";
 
 export default function GameSearch() {
   const UID = useUserStore((state) => state.UID);
@@ -68,21 +68,27 @@ export default function GameSearch() {
           <Index />
         )}
         {results.length > 0 && !loading ? (
-          <div className="pageSelectContainer">
+          <div className="flex justify-around">
             {num > 0 ? (
               <p
-                className="pageSelectText"
+                className={`btn btn-outline btn-sm ${
+                  num < results.length - 3 && "rounded-r-none"
+                }`}
                 onClick={() => setNum((prevNum) => (prevNum -= 3))}
               >
                 Previous Page
               </p>
             ) : null}
             {num > 0 && num < results.length - 3 && (
-              <p className="pageSelectText">-</p>
+              <p className="btn no-animation btn-outline btn-sm btm-nav-label rounded-none cursor-default">
+                - {num} -
+              </p>
             )}
             {num < results.length - 3 && (
               <p
-                className="pageSelectText"
+                className={`btn btn-outline btn-sm ${
+                  num > 0 && "rounded-l-none"
+                }`}
                 onClick={() => setNum((prevNum) => (prevNum += 3))}
               >
                 Next Page

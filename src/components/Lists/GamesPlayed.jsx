@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import GamesPlayedCard from "../GamesPlayedCard";
-import { db, ref, onValue } from "../../config/firebase";
+import GamesPlayedCard from "@/components/GamesPlayedCard";
+import { db, ref, onValue } from "@/config/firebase";
 import { Triangle } from "react-loader-spinner";
-import useUserStore from "../../stores/userStore";
+import useUserStore from "@/stores/userStore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
@@ -120,7 +120,7 @@ export default function GamesPlayed() {
                 </div>
                 <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
                   <p className="w-max mb-1 font-bold">Filters:</p>
-                  <div class="flex gap-2">
+                  <div className="flex gap-2">
                     <input
                       className="input input-primary input-sm"
                       type="number"
