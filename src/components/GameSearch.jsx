@@ -81,7 +81,7 @@ export default function GameSearch() {
             ) : null}
             {num > 0 && num < results.length - 3 && (
               <p className="btn no-animation btn-outline btn-sm btm-nav-label rounded-none cursor-default">
-                - {num} -
+                - {num / 3 + 1} -
               </p>
             )}
             {num < results.length - 3 && (
