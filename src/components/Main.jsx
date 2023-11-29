@@ -67,7 +67,11 @@ export default function App() {
       {loading ? (
         <Loader isUnmounting={isUnmounting} />
       ) : (
-        <div className={`appContainer ${isMounting && "fade-in"}`}>
+        <div
+          className={`appContainer ${
+            isMounting && "fade-in"
+          } flex-grow flex flex-col justify-around items-center`}
+        >
           <GameSearch />
         </div>
       )}
