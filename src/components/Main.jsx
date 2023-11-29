@@ -3,7 +3,7 @@ import Header from "./Header";
 import Loader from "./Loader";
 import GameSearch from "./GameSearch";
 import GamesPlayed from "@/components/Lists/GamesPlayed";
-import GamesToPlayList from "./GamesToPlayList";
+import GamesToPlay from "@/components/Lists/GamesToPlay";
 import Footer from "./Footer";
 import { auth, onAuthStateChanged, db, ref, onValue } from "../config/firebase";
 
@@ -63,7 +63,7 @@ export default function App() {
   }, []);
 
   return (
-    <div>
+    <>
       {loading ? (
         <Loader isUnmounting={isUnmounting} />
       ) : (
@@ -71,6 +71,6 @@ export default function App() {
           <GameSearch />
         </div>
       )}
-    </div>
+    </>
   );
 }

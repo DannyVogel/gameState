@@ -1,7 +1,7 @@
-import React from "react";
+import GamesToPlay from "@/components/Lists/GamesToPlay";
 
 const ToPlay = () => {
-  return <div>ToPlay</div>;
+  return <GamesToPlay />;
 };
 
 export default ToPlay;
