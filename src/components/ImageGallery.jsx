@@ -18,30 +18,34 @@ export default function ImageGallery(props) {
 
   return (
     <div className="relative rounded-t-lg">
-      <div
-        id="left"
-        className="rounded-t-lg absolute top-0 left-0 font-bold text-lg bg-gray-500/30 min-h-full flex items-center cursor-pointer"
-        onClick={handleClick}
-      >
-        <p id="left" onClick={handleClick}>
-          {" "}
-          {"<"}{" "}
-        </p>
-      </div>
+      {props.screenshots && props.screenshots.length > 1 && (
+        <div
+          id="left"
+          className="rounded-t-lg absolute top-0 left-0 font-extrabold text-xl min-h-full flex items-center cursor-pointer"
+          onClick={handleClick}
+        >
+          <p id="left" onClick={handleClick}>
+            {" "}
+            {"<"}{" "}
+          </p>
+        </div>
+      )}
       <img
         className="image rounded-t-lg"
         src={props.screenshots && props.screenshots[num]}
       />
-      <div
-        id="right"
-        className="rounded-t-lg absolute top-0 right-0 font-bold text-lg bg-gray-500/30 min-h-full flex items-center cursor-pointer"
-        onClick={handleClick}
-      >
-        <p id="right" onClick={handleClick}>
-          {" "}
-          {">"}{" "}
-        </p>
-      </div>
+      {props.screenshots && props.screenshots.length > 1 && (
+        <div
+          id="right"
+          className="rounded-t-lg absolute top-0 right-0 font-extrabold text-xl min-h-full flex items-center cursor-pointer"
+          onClick={handleClick}
+        >
+          <p id="right" onClick={handleClick}>
+            {" "}
+            {">"}{" "}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
