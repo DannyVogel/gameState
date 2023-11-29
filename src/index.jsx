@@ -7,7 +7,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import Layout from "./layout/main";
+import Layout from "./layout/default";
 import Home from "./routes/Home";
 import ToPlay from "./routes/ToPlay";
 import Played from "./routes/Played";
