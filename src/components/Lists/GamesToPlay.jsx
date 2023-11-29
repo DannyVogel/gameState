@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import GameCard from "./GameCard";
-import { db, ref, remove, onValue } from "../config/firebase";
+import GameCard from "../GameCard";
+import { db, ref, onValue } from "../../config/firebase";
 import { Triangle } from "react-loader-spinner";
+import useUserStore from "../../stores/userStore";
 
-export default function GamesToPlayList(props) {
+export default function GamesToPlay() {
+  const UID = useUserStore((state) => state.UID);
   const [loading, setLoading] = useState(true);
   const [savedList, setSavedList] = useState(() => []);
 
   useEffect(() => {
-    const gameRef = ref(db, `gameState/users/${props.userUID}/gamesToPlayList`);
+    const gameRef = ref(db, `gameState/users/${UID}/gamesToPlayList`);
     onValue(gameRef, (snapshot) => {
       snapshot.exists()
         ? setSavedList(Object.values(snapshot.val()))
@@ -24,7 +26,7 @@ export default function GamesToPlayList(props) {
 
   function renderList(list) {
     if (list.length < 1) {
-      if (!props.userUID) {
+      if (!UID) {
         return <p>Please sign up or sign in to see list</p>;
       }
       return <p>No games found</p>;
@@ -35,7 +37,7 @@ export default function GamesToPlayList(props) {
           key={game[0].id}
           result={game[0]}
           onList={"gamesToPlayList"}
-          userUID={props.userUID}
+          userUID={UID}
         />
       );
     });
@@ -43,14 +45,18 @@ export default function GamesToPlayList(props) {
 
   return (
     <div className="gameListContainer">
-      <h1>Games To Play</h1>
+      <h1 className="text-center font-bold text-2xl">Games To Play</h1>
       {loading ? (
         <Triangle
           height="80"
           width="80"
           color="#FFFFFF"
           ariaLabel="triangle-loading"
-          wrapperStyle={{}}
+          wrapperStyle={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "50px",
+          }}
           wrapperClassName=""
           visible={true}
         />
