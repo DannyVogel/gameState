@@ -1,6 +1,7 @@
 import { useState } from "react";
-import AuthController from "../../services/api/firebase";
-import useUserStore from "../../stores/userStore";
+import AuthController from "@/services/api/firebase";
+import useUserStore from "@/stores/userStore";
+import { sliceEmail } from "@/utils";
 
 const Register = () => {
   const setUser = useUserStore((state) => state.setUser);
@@ -40,14 +41,14 @@ const Register = () => {
     setLogged(true);
     setTimeout(() => {
       props.handleProfileClick();
-    }, 1500);
+    }, 1000);
   };
 
   return (
     <form onSubmit={register}>
-      <fieldset className="logInForm">
-        <legend>Sign Up</legend>
-        <label htmlFor="signUpEmail" className="">
+      <fieldset className="flex flex-col">
+        <legend className="font-bold pl-1 underline">Register</legend>
+        <label htmlFor="signUpEmail" className="label">
           Email:
         </label>
         <input
@@ -56,8 +57,9 @@ const Register = () => {
           id="signUpEmail"
           value={registerForm.email}
           onChange={handleChange}
+          className="input input-primary"
         />
-        <label htmlFor="signUpPassword" className="">
+        <label htmlFor="signUpPassword" className="label">
           Password:
         </label>
         <input
@@ -66,8 +68,9 @@ const Register = () => {
           id="signUpPassword"
           value={registerForm.password}
           onChange={handleChange}
+          className="input input-primary"
         />
-        <button className="logInBtn btn">Sign up</button>
+        <button className="btn btn-primary mt-4">Sign up</button>
       </fieldset>
     </form>
   );
