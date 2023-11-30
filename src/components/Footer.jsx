@@ -7,7 +7,7 @@ export default function Footer(props) {
   return (
     <div className="fixed bottom-0 left-0 right-0 px-10 py-5 rounded-t-lg w-full flex justify-between bg-slate-800">
       <div className="w-full flex justify-between max-w-2xl mx-auto px-5">
-        <Link to="/games/toplay">
+        <Link to="/toplay">
           <img
             id="gamesToPlay"
             className="w-8 h-8"
@@ -23,7 +23,7 @@ export default function Footer(props) {
             alt="magnifying glass search icon"
           />
         </Link>
-        <Link to="/games/played">
+        <Link to="/played">
           <img
             id="gamesPlayed"
             className="w-8 h-8"
