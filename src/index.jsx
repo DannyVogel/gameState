@@ -19,10 +19,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />} errorElement={<ErrorPage />}>
       <Route index element={<Home />} />
-      <Route path="games" errorElement={<ErrorPage />}>
-        <Route path="toplay" element={<ToPlay />} />
-        <Route path="played" element={<Played />} />
-      </Route>
+      <Route path="toplay" element={<ToPlay />} />
+      <Route path="played" element={<Played />} />
       <Route path="*" element={<NotFound />} />
     </Route>
   )
