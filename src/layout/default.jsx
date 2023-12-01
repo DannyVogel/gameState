@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { auth, onAuthStateChanged, db, ref } from "../config/firebase";
 import { sliceEmail } from "../utils";
 import Header from "../components/Header";
-// import Footer from "../components/Footer";
+import Footer from "../components/Footer";
 import useUserStore from "../stores/userStore";
 
 const Layout = () => {
@@ -36,7 +36,7 @@ const Layout = () => {
       <div className="flex-grow mt-5 mb-8">
         <Outlet />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
