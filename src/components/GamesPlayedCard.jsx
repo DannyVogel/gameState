@@ -17,7 +17,6 @@ export default function GamesPlayedCard(props) {
     screenshots,
   } = props.result;
 
-  const [showCardModal, setShowCardModal] = useState(false);
   const [editItem, setEditItem] = useState(false);
   const [editItemData, setEditItemData] = useState({
     monthPlayed: monthPlayed,
@@ -26,12 +25,7 @@ export default function GamesPlayedCard(props) {
     comments: comments,
   });
 
-  function handleShowCardModal() {
-    setShowCardModal((prev) => !prev);
-  }
-
   function removeFromList(e) {
-    setShowCardModal((prev) => !prev);
     const gameID = e.target.id;
     const gameRef = ref(
       db,
@@ -80,36 +74,39 @@ export default function GamesPlayedCard(props) {
               </p>
               <p>{status ? `Status: ${status}` : null}</p>
             </div>
-            <label
-              htmlFor={`my_modal_${id}`}
+            <button
               className="gamesPlayedCardBtn btn btn-outline btn-xs"
+              onClick={() =>
+                document.getElementById(`my_modal_${id}`).showModal()
+              }
             >
               View card
-            </label>
-          </div>
-          <div className="card-actions justify-end"></div>
-        </div>
-      </div>
-      <input type="checkbox" id={`my_modal_${id}`} className="modal-toggle" />
-      <div className="modal " role="dialog">
-        <div className="modal-box overflow-hidden flex flex-col gap-2 w-full">
-          <ImageGallery screenshots={screenshots} />
-          <div className="flex justify-between items-center px-5">
-            <h2 className="text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
-              <a
-                href={`https://www.rawg.io/games/${slug}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {name}
-              </a>
-            </h2>
-            <button className="btn btn-outline btn-sm cursor-default">
-              {status}
             </button>
           </div>
+        </div>
+      </div>
+      <dialog
+        id={`my_modal_${id}`}
+        className="modal modal-bottom sm:modal-middle"
+      >
+        <div className="modal-box flex flex-col gap-2">
+          <ImageGallery screenshots={screenshots} />
+          <h2 className="px-5 text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+            <a
+              href={`https://www.rawg.io/games/${slug}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {name}
+            </a>
+          </h2>
           <div className="flex flex-col gap-1 px-5">
-            <p>Released: {released}</p>
+            <div class="flex justify-between items-center">
+              <p>Released: {released}</p>
+              <button className="btn btn-outline btn-sm cursor-default">
+                {status}
+              </button>
+            </div>
             <p>Platforms: {platforms && platforms.join(", ")}</p>
             {editItem ? (
               <form className="flex flex-col gap-1">
@@ -178,7 +175,7 @@ export default function GamesPlayedCard(props) {
             )}
           </div>
 
-          <div className="card-actions justify-around">
+          <div className="flex justify-around my-2">
             <button
               id={id}
               className="btn btn-outline btn-error btn-sm"
@@ -186,6 +183,13 @@ export default function GamesPlayedCard(props) {
             >
               Remove
             </button>
+            <div
+              id="closeModal"
+              className="btn btn-outline btn-error btn-sm"
+              onClick={() => document.getElementById(`my_modal_${id}`).close()}
+            >
+              Close
+            </div>
             <button
               id={id}
               className={`resultButton ${
@@ -197,10 +201,7 @@ export default function GamesPlayedCard(props) {
             </button>
           </div>
         </div>
-        <label className="modal-backdrop" htmlFor={`my_modal_${id}`}>
-          Close
-        </label>
-      </div>
+      </dialog>
     </>
   );
 }
