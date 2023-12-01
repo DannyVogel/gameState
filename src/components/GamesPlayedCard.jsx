@@ -185,20 +185,24 @@ export default function GamesPlayedCard(props) {
                 )}
               </div>
               <div className="flex justify-around mt-2 mb-5">
-                <button
-                  id={id}
-                  className="btn btn-outline btn-error btn-sm"
-                  onClick={removeFromList}
-                >
-                  Remove
-                </button>
-                <div
-                  id="closeModal"
-                  className="btn btn-outline btn-error btn-sm"
-                  onClick={() => setShowModal(false)}
-                >
-                  Close
-                </div>
+                {!editItem && (
+                  <>
+                    <button
+                      id={id}
+                      className="btn btn-outline btn-error btn-sm"
+                      onClick={removeFromList}
+                    >
+                      Remove
+                    </button>
+                    <div
+                      id="closeModal"
+                      className="btn btn-outline btn-error btn-sm"
+                      onClick={() => setShowModal(false)}
+                    >
+                      Close
+                    </div>
+                  </>
+                )}
                 <button
                   id={id}
                   className={`resultButton ${
