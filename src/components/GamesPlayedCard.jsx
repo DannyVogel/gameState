@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
 import ImageGallery from "@/components/ImageGallery";
 
@@ -53,6 +53,14 @@ export default function GamesPlayedCard(props) {
     update(gameStateDB, updates);
   }
 
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [showModal]);
+
   return (
     <>
       <div className="card card-side card-compact bg-base-100 shadow-xl">
@@ -87,10 +95,10 @@ export default function GamesPlayedCard(props) {
       {showModal && (
         <>
           <div
-            className="absolute top-0 right-0 h-screen w-screen bg-black opacity-50 z-10"
+            className="fixed top-0 right-0 h-full w-full bg-black opacity-50 z-10"
             onClick={() => setShowModal(false)}
           ></div>
-          <div className="absolute bottom-0 sm:bottom-1/2 sm:translate-y-1/2 right-1/2 translate-x-1/2 w-full bg-slate-800 z-20 rounded-t-lg sm:rounded-lg max-w-xl">
+          <div className="fixed bottom-0 sm:bottom-1/2 sm:translate-y-1/2 right-1/2 translate-x-1/2 w-full bg-slate-800 z-20 rounded-t-lg sm:rounded-lg max-w-xl">
             <div className="flex flex-col gap-2">
               <ImageGallery screenshots={screenshots} />
               <h2 className="px-5 text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
