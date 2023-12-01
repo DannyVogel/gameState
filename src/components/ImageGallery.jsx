@@ -17,11 +17,11 @@ export default function ImageGallery(props) {
   }
 
   return (
-    <div className="relative rounded-t-lg">
+    <div className="relative rounded-lg">
       {props.screenshots && props.screenshots.length > 1 && (
         <div
           id="left"
-          className="rounded-t-lg absolute top-0 left-0 font-extrabold text-xl min-h-full flex items-center cursor-pointer"
+          className="rounded-lg absolute top-0 left-0 font-extrabold text-xl min-h-full flex items-center cursor-pointer"
           onClick={handleClick}
         >
           <p id="left" onClick={handleClick}>
@@ -31,13 +31,13 @@ export default function ImageGallery(props) {
         </div>
       )}
       <img
-        className="image rounded-t-lg"
+        className="image rounded-lg"
         src={props.screenshots && props.screenshots[num]}
       />
       {props.screenshots && props.screenshots.length > 1 && (
         <div
           id="right"
-          className="rounded-t-lg absolute top-0 right-0 font-extrabold text-xl min-h-full flex items-center cursor-pointer"
+          className="rounded-lg absolute top-0 right-0 font-extrabold text-xl min-h-full flex items-center cursor-pointer"
           onClick={handleClick}
         >
           <p id="right" onClick={handleClick}>
