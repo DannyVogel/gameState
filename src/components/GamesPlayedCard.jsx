@@ -111,7 +111,7 @@ export default function GamesPlayedCard(props) {
                 </a>
               </h2>
               <div className="flex flex-col gap-1 px-5">
-                <div class="flex justify-between items-center">
+                <div className="flex justify-between items-center">
                   <p>Released: {released}</p>
                   <button className="btn btn-outline btn-sm cursor-default">
                     {status}
