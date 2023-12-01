@@ -80,23 +80,19 @@ export default function GamesPlayedCard(props) {
               </p>
               <p>{status ? `Status: ${status}` : null}</p>
             </div>
-            {/* <button
+            <label
+              htmlFor={`my_modal_${id}`}
               className="gamesPlayedCardBtn btn btn-outline btn-xs"
-              onClick={() =>
-                document.getElementById(`my_modal_${id}`).showModal()
-              }
             >
               View card
-            </button> */}
+            </label>
           </div>
           <div className="card-actions justify-end"></div>
         </div>
       </div>
-      {/* <dialog
-        id={`my_modal_${id}`}
-        className="modal modal-bottom sm:modal-middle"
-      >
-        <div className="modal-box flex flex-col gap-2">
+      <input type="checkbox" id={`my_modal_${id}`} className="modal-toggle" />
+      <div className="modal " role="dialog">
+        <div className="modal-box overflow-hidden flex flex-col gap-2 w-full">
           <ImageGallery screenshots={screenshots} />
           <div className="flex justify-between items-center px-5">
             <h2 className="text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
@@ -182,7 +178,7 @@ export default function GamesPlayedCard(props) {
             )}
           </div>
 
-          <div className="card-actions justify-around -mb-8">
+          <div className="card-actions justify-around">
             <button
               id={id}
               className="btn btn-outline btn-error btn-sm"
@@ -190,13 +186,6 @@ export default function GamesPlayedCard(props) {
             >
               Remove
             </button>
-            <div
-              id="closeModal"
-              className="btn btn-outline btn-error btn-sm"
-              onClick={() => document.getElementById(`my_modal_${id}`).close()}
-            >
-              Close
-            </div>
             <button
               id={id}
               className={`resultButton ${
@@ -207,13 +196,11 @@ export default function GamesPlayedCard(props) {
               {editItem ? "Save" : "Edit"}
             </button>
           </div>
-          <div className="modal-action">
-            <form method="dialog">
-              if there is a button in form, it will close the modal
-            </form>
-          </div>
         </div>
-      </dialog> */}
+        <label className="modal-backdrop" htmlFor={`my_modal_${id}`}>
+          Close
+        </label>
+      </div>
     </>
   );
 }
