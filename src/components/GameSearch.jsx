@@ -44,7 +44,7 @@ export default function GameSearch() {
   }
 
   return (
-    <div className="">
+    <div className="mb-14">
       <div className="flex flex-col items-center">
         {loading ? (
           <TriangleLoader />
@@ -80,7 +80,7 @@ export default function GameSearch() {
             </div>
             <button
               onClick={() => setResults(0)}
-              className="mt-2 btn btn-secondary btn-sm"
+              className="mt-4 btn btn-secondary btn-sm"
             >
               New Search
             </button>
