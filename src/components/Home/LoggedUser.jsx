@@ -21,22 +21,26 @@ const LoggedUser = () => {
       </div>
       <div className="mt-20 px-14 max-w-md w-full flex justify-between">
         <div className="flex flex-col items-center gap-2">
-          <img
-            className="w-8 h-8"
-            src={toPlay}
-            alt="shopping bag with controller icon"
-          />
+          <Link to="/played">
+            <img
+              className="w-8 h-8"
+              src={toPlay}
+              alt="shopping bag with controller icon"
+            />
+          </Link>
           <p className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             Games <span>{<br />}</span> to play
           </p>
           {/* <p>{props.gamesToPlayList.length} games listed</p> */}
         </div>
         <div className="flex flex-col items-center gap-2">
-          <img
-            className="w-8 h-8"
-            src={played}
-            alt="papers with controller icon"
-          />
+          <Link to="/played">
+            <img
+              className="w-8 h-8"
+              src={played}
+              alt="papers with controller icon"
+            />
+          </Link>
           <p className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             Games <span>{<br />}</span> played
           </p>
