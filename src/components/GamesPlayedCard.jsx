@@ -17,6 +17,7 @@ export default function GamesPlayedCard(props) {
     screenshots,
   } = props.result;
 
+  const [showModal, setShowModal] = useState(false);
   const [editItem, setEditItem] = useState(false);
   const [editItemData, setEditItemData] = useState({
     monthPlayed: monthPlayed,
@@ -76,132 +77,134 @@ export default function GamesPlayedCard(props) {
             </div>
             <button
               className="gamesPlayedCardBtn btn btn-outline btn-xs"
-              onClick={() =>
-                document.getElementById(`my_modal_${id}`).showModal()
-              }
+              onClick={() => setShowModal(true)}
             >
               View card
             </button>
           </div>
         </div>
       </div>
-      <dialog
-        id={`my_modal_${id}`}
-        className="modal modal-bottom sm:modal-middle"
-      >
-        <div className="modal-box flex flex-col gap-2">
-          <ImageGallery screenshots={screenshots} />
-          <h2 className="px-5 text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
-            <a
-              href={`https://www.rawg.io/games/${slug}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {name}
-            </a>
-          </h2>
-          <div className="flex flex-col gap-1 px-5">
-            <div class="flex justify-between items-center">
-              <p>Released: {released}</p>
-              <button className="btn btn-outline btn-sm cursor-default">
-                {status}
-              </button>
+      {showModal && (
+        <>
+          <div
+            className="absolute top-0 right-0 h-screen w-screen bg-black opacity-50 z-10"
+            onClick={() => setShowModal(false)}
+          ></div>
+          <div className="absolute bottom-0 sm:bottom-1/2 sm:translate-y-1/2 right-1/2 translate-x-1/2 w-full bg-slate-800 z-20 rounded-t-lg sm:rounded-lg max-w-xl">
+            <div className="flex flex-col gap-2">
+              <ImageGallery screenshots={screenshots} />
+              <h2 className="px-5 text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+                <a
+                  href={`https://www.rawg.io/games/${slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {name}
+                </a>
+              </h2>
+              <div className="flex flex-col gap-1 px-5">
+                <div class="flex justify-between items-center">
+                  <p>Released: {released}</p>
+                  <button className="btn btn-outline btn-sm cursor-default">
+                    {status}
+                  </button>
+                </div>
+                <p>Platforms: {platforms && platforms.join(", ")}</p>
+                {editItem ? (
+                  <form className="flex flex-col gap-1">
+                    <div className="flex justify-between">
+                      <span>Date Played:</span>
+                      <div>
+                        <input
+                          type="number"
+                          name="monthPlayed"
+                          id="monthPlayed"
+                          min={1}
+                          max={12}
+                          value={editItemData.monthPlayed}
+                          onChange={handleChange}
+                          placeholder="MM"
+                          className="input input-primary input-sm"
+                        />
+                        -
+                        <input
+                          type="number"
+                          name="yearPlayed"
+                          id="yearPlayed"
+                          min={1900}
+                          max={3000}
+                          value={editItemData.yearPlayed}
+                          onChange={handleChange}
+                          placeholder="YYYY"
+                          required
+                          className="input input-primary input-sm"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Status:</span>
+                      <select
+                        name="status"
+                        value={editItemData.status}
+                        onChange={handleChange}
+                        className="select select-primary select-sm"
+                      >
+                        <option value="playing">Playing</option>
+                        <option value="beat">Beat</option>
+                        <option value="dropped">Dropped</option>
+                      </select>
+                    </div>
+                    <div className="flex justify-between">
+                      <label htmlFor="comments">Comments:</label>
+                      <textarea
+                        name="comments"
+                        id="comments"
+                        rows={1}
+                        cols={25}
+                        value={editItemData.comments}
+                        onChange={handleChange}
+                        className="textarea textarea-primary textarea-bordered textarea-sm"
+                      />
+                    </div>
+                  </form>
+                ) : (
+                  <>
+                    <p>
+                      Played: {monthPlayed} - {yearPlayed}
+                    </p>
+                    <p>Comments: {comments}</p>
+                  </>
+                )}
+              </div>
+              <div className="flex justify-around mt-2 mb-5">
+                <button
+                  id={id}
+                  className="btn btn-outline btn-error btn-sm"
+                  onClick={removeFromList}
+                >
+                  Remove
+                </button>
+                <div
+                  id="closeModal"
+                  className="btn btn-outline btn-error btn-sm"
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </div>
+                <button
+                  id={id}
+                  className={`resultButton ${
+                    editItem ? "btn bg-green-500" : "btn-primary"
+                  } btn btn-sm`}
+                  onClick={editItem ? updateItem : handleEdit}
+                >
+                  {editItem ? "Save" : "Edit"}
+                </button>
+              </div>
             </div>
-            <p>Platforms: {platforms && platforms.join(", ")}</p>
-            {editItem ? (
-              <form className="flex flex-col gap-1">
-                <div className="flex justify-between">
-                  <span>Date Played:</span>
-                  <div>
-                    <input
-                      type="number"
-                      name="monthPlayed"
-                      id="monthPlayed"
-                      min={1}
-                      max={12}
-                      value={editItemData.monthPlayed}
-                      onChange={handleChange}
-                      placeholder="MM"
-                      className="input input-primary input-sm"
-                    />
-                    -
-                    <input
-                      type="number"
-                      name="yearPlayed"
-                      id="yearPlayed"
-                      min={1900}
-                      max={3000}
-                      value={editItemData.yearPlayed}
-                      onChange={handleChange}
-                      placeholder="YYYY"
-                      required
-                      className="input input-primary input-sm"
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <span>Status:</span>
-                  <select
-                    name="status"
-                    value={editItemData.status}
-                    onChange={handleChange}
-                    className="select select-primary select-sm"
-                  >
-                    <option value="playing">Playing</option>
-                    <option value="beat">Beat</option>
-                    <option value="dropped">Dropped</option>
-                  </select>
-                </div>
-                <div className="flex justify-between">
-                  <label htmlFor="comments">Comments:</label>
-                  <textarea
-                    name="comments"
-                    id="comments"
-                    rows={1}
-                    cols={25}
-                    value={editItemData.comments}
-                    onChange={handleChange}
-                    className="textarea textarea-primary textarea-bordered textarea-sm"
-                  />
-                </div>
-              </form>
-            ) : (
-              <>
-                <p>
-                  Played: {monthPlayed} - {yearPlayed}
-                </p>
-                <p>Comments: {comments}</p>
-              </>
-            )}
           </div>
-
-          <div className="flex justify-around my-2">
-            <button
-              id={id}
-              className="btn btn-outline btn-error btn-sm"
-              onClick={removeFromList}
-            >
-              Remove
-            </button>
-            <div
-              id="closeModal"
-              className="btn btn-outline btn-error btn-sm"
-              onClick={() => document.getElementById(`my_modal_${id}`).close()}
-            >
-              Close
-            </div>
-            <button
-              id={id}
-              className={`resultButton ${
-                editItem ? "btn bg-green-500" : "btn-primary"
-              } btn btn-sm`}
-              onClick={editItem ? updateItem : handleEdit}
-            >
-              {editItem ? "Save" : "Edit"}
-            </button>
-          </div>
-        </div>
-      </dialog>
+        </>
+      )}
     </>
   );
 }
