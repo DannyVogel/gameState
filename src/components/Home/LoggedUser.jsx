@@ -1,6 +1,7 @@
 import useUserStore from "@/stores/userStore";
 import played from "@/assets/icons/gamesPlayed.png";
 import toPlay from "@/assets/icons/gamesToPlay.png";
+import { Link } from "react-router-dom";
 
 const LoggedUser = () => {
   const user = useUserStore((state) => state.user);
