@@ -80,19 +80,19 @@ export default function GamesPlayedCard(props) {
               </p>
               <p>{status ? `Status: ${status}` : null}</p>
             </div>
-            <button
+            {/* <button
               className="gamesPlayedCardBtn btn btn-outline btn-xs"
               onClick={() =>
                 document.getElementById(`my_modal_${id}`).showModal()
               }
             >
               View card
-            </button>
+            </button> */}
           </div>
           <div className="card-actions justify-end"></div>
         </div>
       </div>
-      <dialog
+      {/* <dialog
         id={`my_modal_${id}`}
         className="modal modal-bottom sm:modal-middle"
       >
@@ -209,11 +209,11 @@ export default function GamesPlayedCard(props) {
           </div>
           <div className="modal-action">
             <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
+              if there is a button in form, it will close the modal
             </form>
           </div>
         </div>
-      </dialog>
+      </dialog> */}
     </>
   );
 }
