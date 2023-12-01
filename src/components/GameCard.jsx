@@ -26,10 +26,7 @@ export default function GameCard(props) {
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
-    setUserPlayedGameData((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    setUserPlayedGameData((prev) => ({ ...prev, [name]: value }));
   }
 
   function handleSubmit(e, game) {
@@ -174,8 +171,13 @@ export default function GameCard(props) {
       className="card card-compact max-w-md glass my-4 mx-auto"
     >
       <figure>
-        {props.result.image && (
+        {props.result.image ? (
           <img src={props.result.image} alt={props.result.name} />
+        ) : (
+          <img
+            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            alt="Game"
+          />
         )}
       </figure>
       <div className="card-body">
@@ -207,10 +209,10 @@ export default function GameCard(props) {
         >
           More Info
         </a>
-        <div className="card-actions justify-end">
+        <div className="card-actions">
           {buttonContainerElement}
           {showConfirmationModal ? (
-            <div className="confirmationModalContainer">
+            <div className="font-bold text-lg px-5 py-5 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-green-700 z-20 rounded-lg max-w-lg shadow-lg shadow-black">
               <p>{confirmationText}</p>
             </div>
           ) : null}
