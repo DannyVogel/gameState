@@ -70,8 +70,8 @@ export default function GamesPlayedCard(props) {
             alt="Movie"
           /> */}
         </figure>
-        <div className="card-body my-1 border border-primary rounded-lg">
-          <h4 className="w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+        <div className="max-w-full card-body my-1 border border-primary rounded-lg">
+          <h4 className="font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
             {name}
           </h4>
           <div className="flex items-center justify-between">
