@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/Loader";
-import GameSearch from "@/components/GameSearch";
+import Index from "@/components//Home/Index";
 import { auth, onAuthStateChanged, db, ref, onValue } from "@/config/firebase";
 
 export default function App() {
@@ -68,7 +68,7 @@ export default function App() {
             isMounting && "fade-in"
           } flex-grow flex flex-col justify-around items-center`}
         >
-          <GameSearch />
+          <Index />
         </div>
       )}
     </>
