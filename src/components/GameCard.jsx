@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
 import UserDataModal from "@/components/UserDataModal";
 import useUserStore from "@/stores/userStore";
+import notFound from "@/assets/notFound.png";
 
 export default function GameCard(props) {
   const UID = useUserStore((state) => state.UID);
@@ -168,16 +169,13 @@ export default function GameCard(props) {
   return (
     <div
       key={props.result.id}
-      className="card card-compact max-w-md glass my-4 mx-auto"
+      className="card card-compact max-w-md  glass my-4 mx-auto"
     >
       <figure>
         {props.result.image ? (
           <img src={props.result.image} alt={props.result.name} />
         ) : (
-          <img
-            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Game"
-          />
+          <img src={notFound} alt="image not found placeholder" />
         )}
       </figure>
       <div className="card-body">
