@@ -63,18 +63,13 @@ export default function GamesPlayedCard(props) {
 
   return (
     <>
-      <div className="card card-side card-compact bg-base-100 shadow-xl">
-        <figure>
-          {/* <img
-            src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg"
-            alt="Movie"
-          /> */}
-        </figure>
-        <div className="max-w-full card-body my-1 border border-primary rounded-lg">
-          <h4 className="font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
+      <div className="relative my-1 card glass card-side card-compact bg-base-100 shadow-xl border border-primary rounded-lg">
+        <figure></figure>
+        <div className="max-w-full card-body">
+          <h4 className="font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
             {name}
           </h4>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between font-bold">
             <div className="flex gap-5">
               <p>
                 Played: {monthPlayed}
