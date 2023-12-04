@@ -6,12 +6,20 @@ import useUserStore from "@/stores/userStore";
 
 export default function GamesToPlay() {
   const UID = useUserStore((state) => state.UID);
+  const gameList = useUserStore((state) => state.gameList);
   const [loading, setLoading] = useState(true);
   const [savedList, setSavedList] = useState(() => []);
 
   useEffect(() => {
-    const gameRef = ref(db, `gameState/users/${UID}/gamesToPlayList`);
-    onValue(gameRef, (snapshot) => {
+    // const gameRef = ref(db, `gameState/users/${UID}/gamesToPlayList`);
+    // onValue(gameRef, (snapshot) => {
+    //   snapshot.exists()
+    //     ? setSavedList(Object.values(snapshot.val()))
+    //     : setSavedList([]);
+    // });
+    const listRef = ref(db, `gameState/users/${UID}/gameList`);
+    onValue(listRef, (snapshot) => {
+      console.log("snap", snapshot.exists() && Object.values(snapshot.val()));
       snapshot.exists()
         ? setSavedList(Object.values(snapshot.val()))
         : setSavedList([]);
@@ -32,14 +40,8 @@ export default function GamesToPlay() {
       return <p>No games found</p>;
     }
     return list.map((game) => {
-      return (
-        <GamesToPlayCard
-          key={game[0].id}
-          result={game[0]}
-          onList={"gamesToPlayList"}
-          userUID={UID}
-        />
-      );
+      if (game.status === "toPlay")
+        return <GamesToPlayCard key={game.id} result={game} />;
     });
   }
 
