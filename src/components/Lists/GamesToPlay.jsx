@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import GameCard from "../GameCard";
-import { db, ref, onValue } from "../../config/firebase";
+import GamesToPlayCard from "@/components/GamesToPlayCard";
+import { db, ref, onValue } from "@/config/firebase";
 import { Triangle } from "react-loader-spinner";
-import useUserStore from "../../stores/userStore";
+import useUserStore from "@/stores/userStore";
 
 export default function GamesToPlay() {
   const UID = useUserStore((state) => state.UID);
@@ -33,7 +33,7 @@ export default function GamesToPlay() {
     }
     return list.map((game) => {
       return (
-        <GameCard
+        <GamesToPlayCard
           key={game[0].id}
           result={game[0]}
           onList={"gamesToPlayList"}
@@ -44,8 +44,8 @@ export default function GamesToPlay() {
   }
 
   return (
-    <div className="gameListContainer">
-      <h1 className="text-center font-bold text-2xl">Games To Play</h1>
+    <div className="gameListContainer mb-14">
+      <h1 className="text-center font-bold text-2xl mb-10">Games To Play</h1>
       {loading ? (
         <Triangle
           height="80"
