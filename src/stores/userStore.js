@@ -4,15 +4,11 @@ const useUserStore = create((set) => ({
   isLogged: false,
   UID: "",
   user: "",
+  gameList: [],
   setUser: (user) => set((state) => ({ user: user })),
   setUID: (id) => set((state) => ({ UID: id })),
   setLogged: (bool) => set((state) => ({ isLogged: bool })),
+  setGameList: (list) => set((state) => ({ gameList: list })),
 }));
-
-// const useBearStore = create((set) => ({
-//   bears: 0,
-//   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-//   removeAllBears: () => set({ bears: 0 }),
-// }))
 
 export default useUserStore;
