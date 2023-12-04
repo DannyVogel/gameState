@@ -183,7 +183,7 @@ export default function GameCard(props) {
         <div className="card-actions">
           {buttonContainerElement}
           {showConfirmationModal ? (
-            <div className="font-bold text-lg px-5 py-5 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-green-700 z-20 rounded-lg max-w-lg shadow-lg shadow-black">
+            <div className="font-bold text-lg px-5 py-5 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-green-700 z-20 rounded-lg max-w-xl shadow-lg shadow-black">
               <p>{confirmationText}</p>
             </div>
           ) : null}
