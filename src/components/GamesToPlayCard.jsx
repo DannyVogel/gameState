@@ -3,6 +3,7 @@ import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
 import ImageGallery from "@/components/ImageGallery";
 import UserDataModal from "@/components/UserDataModal";
 import useUserStore from "@/stores/userStore";
+import { FireStoreController } from "@/services/api/firestore";
 
 export default function GamesPlayedCard(props) {
   const { id, name, released, slug, platforms, image } = props.result;
@@ -35,8 +36,9 @@ export default function GamesPlayedCard(props) {
   }
 
   function addGameToList(e, game) {
+    FireStoreController.addToList(UID, game);
+    // remove once setup finished
     const updates = {};
-    // add to played list
     updates[`/users/${UID}/gamesPlayedList/${game.id}`] = [game];
     update(gameStateDB, updates);
     // remove from toplay list
@@ -45,6 +47,7 @@ export default function GamesPlayedCard(props) {
       `gameState/users/${UID}/gamesToPlayList/${game.id}`
     );
     remove(gameRef);
+    //
     setShowConfirmationModal(true);
     setConfirmationText("Added to list");
     setTimeout(() => {
@@ -59,11 +62,12 @@ export default function GamesPlayedCard(props) {
       setShowConfirmationModal(false);
       const gameID = e.target.id;
       if (gameID) {
-        const gameRef = ref(
-          db,
-          `gameState/users/${UID}/gamesToPlayList/${gameID}`
-        );
-        remove(gameRef);
+        FireStoreController.removeFromList(UID, e.target.id);
+        //   const gameRef = ref(
+        //     db,
+        //     `gameState/users/${UID}/gamesToPlayList/${gameID}`
+        //   );
+        //   remove(gameRef);
       }
     }, 1500);
   }
