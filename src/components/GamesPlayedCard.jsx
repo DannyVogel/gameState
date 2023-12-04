@@ -66,11 +66,11 @@ export default function GamesPlayedCard(props) {
       <div className="relative my-1 card glass card-side card-compact bg-base-100 shadow-xl border border-primary rounded-lg">
         <figure></figure>
         <div className="max-w-full card-body">
-          <h4 className="font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
+          <h4 className="text-lg font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
             {name}
           </h4>
           <div className="flex items-center justify-between font-bold">
-            <div className="flex gap-5">
+            <div className="flex gap-3">
               <p>
                 Played: {monthPlayed}
                 {monthPlayed && yearPlayed ? "-" : null}
