@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
+import { FireStoreController } from "@/services/api/firestore";
 import UserDataModal from "@/components/UserDataModal";
 import useUserStore from "@/stores/userStore";
 import notFound from "@/assets/notFound.png";
@@ -47,8 +48,9 @@ export default function GameCard(props) {
     const updates = {};
     updates[`/users/${UID}/${list}/${game.id}`] = [game];
     update(gameStateDB, updates);
+    FireStoreController.addToList(UID, game);
     setShowConfirmationModal(true);
-    setConfirmationText("Game added to list");
+    setConfirmationText("Added to list");
     setTimeout(() => {
       setShowConfirmationModal(false);
     }, 1500);
@@ -56,7 +58,7 @@ export default function GameCard(props) {
 
   function removeFromList(e) {
     setShowConfirmationModal(true);
-    setConfirmationText("Game removed from list");
+    setConfirmationText("Removed from list");
     setTimeout(() => {
       setShowConfirmationModal(false);
       const gameID = e.target.id;
