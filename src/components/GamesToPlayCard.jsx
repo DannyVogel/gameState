@@ -46,7 +46,7 @@ export default function GamesPlayedCard(props) {
     );
     remove(gameRef);
     setShowConfirmationModal(true);
-    setConfirmationText("Game added to list");
+    setConfirmationText("Added to list");
     setTimeout(() => {
       setShowConfirmationModal(false);
     }, 1500);
@@ -54,7 +54,7 @@ export default function GamesPlayedCard(props) {
 
   function removeFromList(e) {
     setShowConfirmationModal(true);
-    setConfirmationText("Game removed from list");
+    setConfirmationText("Removed from list");
     setTimeout(() => {
       setShowConfirmationModal(false);
       const gameID = e.target.id;
@@ -81,7 +81,7 @@ export default function GamesPlayedCard(props) {
       <div className="relative my-1 card glass card-side card-compact bg-base-100 shadow-xl border border-primary rounded-lg">
         <figure></figure>
         <div className="max-w-full card-body">
-          <h4 className="font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
+          <h4 className="text-lg font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
             {name}
           </h4>
           <div className="flex items-center justify-between font-bold">
@@ -150,7 +150,7 @@ export default function GamesPlayedCard(props) {
                   />
                 ) : null}
                 {showConfirmationModal ? (
-                  <div className="font-bold text-lg px-5 py-5 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-green-700 z-20 rounded-lg max-w-lg shadow-lg shadow-black">
+                  <div className="font-bold text-lg px-5 py-5 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-green-700 z-20 rounded-lg max-w-xl shadow-lg shadow-black">
                     <p>{confirmationText}</p>
                   </div>
                 ) : null}
