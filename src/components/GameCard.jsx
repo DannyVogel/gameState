@@ -9,9 +9,9 @@ export default function GameCard(props) {
   const [isOnList, setIsOnList] = useState("");
   const [userPlayedGameData, setUserPlayedGameData] = useState({
     monthPlayed: "",
-    yearPlayed: "",
+    yearPlayed: new Date().getFullYear().toString(),
     comments: "",
-    status: "",
+    status: "playing",
     // played: false,
   });
   const [showModal, setShowModal] = useState(false);
