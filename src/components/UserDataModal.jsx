@@ -8,7 +8,6 @@ export default function UserDataModal(props) {
     userPlayedGameData,
     result,
   } = props;
-
   return (
     <div className="fixed p-5 bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-slate-800 z-50 rounded-lg max-w-xl">
       <p
@@ -42,7 +41,7 @@ export default function UserDataModal(props) {
               name="yearPlayed"
               id="yearPlayed"
               min={1900}
-              max={3000}
+              max={new Date().getFullYear()}
               value={userPlayedGameData.yearPlayed}
               onChange={handleChange}
               placeholder="YYYY"
