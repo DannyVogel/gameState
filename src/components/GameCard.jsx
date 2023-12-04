@@ -12,6 +12,7 @@ export default function GameCard(props) {
     yearPlayed: "",
     comments: "",
     status: "",
+    // played: false,
   });
   const [showModal, setShowModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -26,7 +27,7 @@ export default function GameCard(props) {
   }, []);
 
   function handleChange(e) {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setUserPlayedGameData((prev) => ({ ...prev, [name]: value }));
   }
 
@@ -112,34 +113,6 @@ export default function GameCard(props) {
               d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
-        </button>
-        {showModal ? (
-          <UserDataModal
-            handleShowModal={handleShowModal}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            userPlayedGameData={userPlayedGameData}
-            result={props.result}
-          />
-        ) : null}
-      </div>
-    );
-  } else if (isOnList === "gamesToPlayList") {
-    buttonContainerElement = (
-      <div className="w-full flex justify-between">
-        <button
-          id={props.result.id}
-          className="resultButton purple btn"
-          onClick={removeFromList}
-        >
-          Remove
-        </button>
-        <button
-          id="gamesPlayedList"
-          className="resultButton orange btn"
-          onClick={handleShowModal}
-        >
-          I played it
         </button>
         {showModal ? (
           <UserDataModal
