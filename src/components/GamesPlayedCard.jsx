@@ -20,8 +20,8 @@ export default function GamesPlayedCard(props) {
   const [showModal, setShowModal] = useState(false);
   const [editItem, setEditItem] = useState(false);
   const [editItemData, setEditItemData] = useState({
-    monthPlayed: monthPlayed,
-    yearPlayed: yearPlayed,
+    monthPlayed: monthPlayed || (new Date().getUTCMonth() + 1).toString(),
+    yearPlayed: yearPlayed || new Date().getFullYear().toString(),
     status: status,
     comments: comments,
   });
@@ -30,7 +30,7 @@ export default function GamesPlayedCard(props) {
     const gameID = e.target.id;
     const gameRef = ref(
       db,
-      `gameState/users/${props.userUID}/gamesPlayedList/${gameID}`
+      `gameState/users/${props.userUID}/gameList/${gameID}`
     );
     remove(gameRef);
   }
@@ -49,7 +49,7 @@ export default function GamesPlayedCard(props) {
     setEditItem(false);
     const gameData = { ...props.result, ...editItemData };
     const updates = {};
-    updates[`/users/${props.userUID}/gamesPlayedList/${id}`] = [gameData];
+    updates[`/users/${props.userUID}/gameList/${id}`] = gameData;
     update(gameStateDB, updates);
   }
 
