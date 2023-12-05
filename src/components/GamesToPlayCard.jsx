@@ -14,8 +14,8 @@ export default function GamesPlayedCard(props) {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [confirmationText, setConfirmationText] = useState("");
   const [userPlayedGameData, setUserPlayedGameData] = useState({
-    monthPlayed: "",
-    yearPlayed: "",
+    monthPlayed: (new Date().getUTCMonth() + 1).toString(),
+    yearPlayed: new Date().getFullYear().toString(),
     comments: "",
     status: "playing",
   });
