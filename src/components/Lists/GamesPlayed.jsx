@@ -3,6 +3,7 @@ import GamesPlayedCard from "@/components/GamesPlayedCard";
 import { db, ref, onValue } from "@/config/firebase";
 import { Triangle } from "react-loader-spinner";
 import useUserStore from "@/stores/userStore";
+import { FireStoreController } from "@/services/api/firestore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
@@ -45,8 +46,13 @@ export default function GamesPlayed() {
 
   useEffect(() => {
     try {
-      const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
-      onValue(gameRef, (snapshot) => {
+      // const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
+      // onValue(gameRef, (snapshot) => {
+      //   const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
+      //   setSavedList(data);
+      // });
+      const listRef = ref(db, `gameState/users/${UID}/gameList`);
+      onValue(listRef, (snapshot) => {
         const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
         setSavedList(data);
       });
@@ -59,6 +65,26 @@ export default function GamesPlayed() {
     }
   }, []);
 
+  function migrate() {
+    let oldData;
+    const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
+    onValue(gameRef, (snapshot) => {
+      oldData = snapshot.exists() ? Object.values(snapshot.val()) : [];
+    });
+
+    console.log("oldData", oldData.flat());
+
+    // let newData;
+    // const listRef = ref(db, `gameState/users/${UID}/gameList`);
+    // onValue(listRef, (snapshot) => {
+    //   newData = snapshot.exists() ? Object.values(snapshot.val()) : [];
+    // });
+
+    // console.log("newData", newData);
+    oldData.flat().forEach((game) => {
+      FireStoreController.addToList(UID, game);
+    });
+  }
   // useEffect(() => {
   //   setTimeout(() => {
   //     setLoading(false);
@@ -66,27 +92,32 @@ export default function GamesPlayed() {
   // }, [savedList]);
 
   function renderList(list, filters) {
+    let filteredList = list.filter((game) => game.status !== "toPlay");
     try {
       if (filters.yearPlayed !== "") {
-        list = list.filter((game) => game[0].yearPlayed === filters.yearPlayed);
+        filteredList = filteredList.filter(
+          (game) => game.yearPlayed === filters.yearPlayed
+        );
       }
       if (filters.status !== "") {
-        list = list.filter((game) => game[0].status === filters.status);
+        filteredList = filteredList.filter(
+          (game) => game.status === filters.status
+        );
       }
-      if (list.length < 1) {
+      if (filteredList.length < 1) {
         if (!UID) {
           return <p>Please sign up or sign in to see list</p>;
         }
         return <p>No games found</p>;
       }
-      const sortedDataByMonth = list?.sort(
-        (a, b) => b[0].monthPlayed - a[0].monthPlayed
+      const sortedDataByMonth = filteredList?.sort(
+        (a, b) => b.monthPlayed - a.monthPlayed
       );
       const sortedDataByYear = sortedDataByMonth.sort(
-        (a, b) => b[0].yearPlayed - a[0].yearPlayed
+        (a, b) => b.yearPlayed - a.yearPlayed
       );
       const years = [
-        ...new Set(sortedDataByYear.map((item) => item[0].yearPlayed)),
+        ...new Set(sortedDataByYear.map((item) => item.yearPlayed)),
       ];
       return years.map((year) => (
         <div className="gameCardContainer" key={year}>
@@ -94,13 +125,9 @@ export default function GamesPlayed() {
             {year}
           </h2>
           {sortedDataByYear
-            .filter((item) => item[0].yearPlayed === year)
+            .filter((item) => item.yearPlayed === year)
             .map((item) => (
-              <GamesPlayedCard
-                key={item[0].id}
-                result={item[0]}
-                userUID={UID}
-              />
+              <GamesPlayedCard key={item.id} result={item} userUID={UID} />
             ))}
         </div>
       ));
@@ -112,6 +139,9 @@ export default function GamesPlayed() {
   return (
     <div className="max-w-2xl mx-auto mb-14">
       <h1 className="text-center font-bold text-2xl">Games Played</h1>
+      {/* <button className="btn btn-primary" onClick={migrate}>
+        Migrate
+      </button> */}
       {loading ? (
         <Triangle
           height="80"
