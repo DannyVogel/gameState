@@ -48,11 +48,6 @@ export default function GameCard(props) {
       game.status = "toPlay";
     }
     FireStoreController.addToList(UID, game);
-    // remove once setup finished
-    // const updates = {};
-    // updates[`/users/${UID}/${list}/${game.id}`] = [game];
-    // update(gameStateDB, updates);
-    //
     setShowConfirmationModal(true);
     setConfirmationText("Added to list");
     setTimeout(() => {

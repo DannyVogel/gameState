@@ -26,6 +26,7 @@ export default function GamesPlayed() {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    console.log(name, value);
     setFilterInput((prevState) => ({
       ...prevState,
       [name]: value,
@@ -35,7 +36,6 @@ export default function GamesPlayed() {
   function applyFilters(e) {
     e.preventDefault();
     setFilter(filterInput);
-    // setShowFilters(false);
   }
 
   function clearFilters(e) {
@@ -46,11 +46,6 @@ export default function GamesPlayed() {
 
   useEffect(() => {
     try {
-      // const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
-      // onValue(gameRef, (snapshot) => {
-      //   const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
-      //   setSavedList(data);
-      // });
       const listRef = ref(db, `gameState/users/${UID}/gameList`);
       onValue(listRef, (snapshot) => {
         const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
@@ -73,23 +68,10 @@ export default function GamesPlayed() {
     });
 
     console.log("oldData", oldData.flat());
-
-    // let newData;
-    // const listRef = ref(db, `gameState/users/${UID}/gameList`);
-    // onValue(listRef, (snapshot) => {
-    //   newData = snapshot.exists() ? Object.values(snapshot.val()) : [];
-    // });
-
-    // console.log("newData", newData);
     oldData.flat().forEach((game) => {
       FireStoreController.addToList(UID, game);
     });
   }
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, [savedList]);
 
   function renderList(list, filters) {
     let filteredList = list.filter((game) => game.status !== "toPlay");
@@ -121,7 +103,7 @@ export default function GamesPlayed() {
       ];
       return years.map((year) => (
         <div className="gameCardContainer" key={year}>
-          <h2 className="w-fit font-bold text-xl bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+          <h2 className="w-fit font-bold text-xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             {year}
           </h2>
           {sortedDataByYear

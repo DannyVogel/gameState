@@ -19,35 +19,25 @@ export default function GamesPlayedCard(props) {
     comments: "",
     status: "playing",
   });
-  function handleChange(e) {
+
+  function onChange(e) {
     const { name, value } = e.target;
     setUserPlayedGameData((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e, game) {
+  function onSubmit(e, game) {
     e.preventDefault();
     setShowModal(false);
     const gameData = { ...game, ...userPlayedGameData };
-    addGameToList(e, gameData);
+    addToList(e, gameData);
   }
 
-  function handleShowUserDataModal() {
+  function toggleShowUserDataModal() {
     setShowUserDataModal((prev) => !prev);
   }
 
-  function addGameToList(e, game) {
+  function addToList(e, game) {
     FireStoreController.addToList(UID, game);
-    // remove once setup finished
-    const updates = {};
-    updates[`/users/${UID}/gamesPlayedList/${game.id}`] = [game];
-    update(gameStateDB, updates);
-    // remove from toplay list
-    const gameRef = ref(
-      db,
-      `gameState/users/${UID}/gamesToPlayList/${game.id}`
-    );
-    remove(gameRef);
-    //
     setShowConfirmationModal(true);
     setConfirmationText("Added to list");
     setTimeout(() => {
@@ -60,14 +50,8 @@ export default function GamesPlayedCard(props) {
     setConfirmationText("Removed from list");
     setTimeout(() => {
       setShowConfirmationModal(false);
-      const gameID = e.target.id;
-      if (gameID) {
+      if (e.target.id) {
         FireStoreController.removeFromList(UID, e.target.id);
-        //   const gameRef = ref(
-        //     db,
-        //     `gameState/users/${UID}/gamesToPlayList/${gameID}`
-        //   );
-        //   remove(gameRef);
       }
     }, 1500);
   }
@@ -140,15 +124,15 @@ export default function GamesPlayedCard(props) {
                 <button
                   id="closeModal"
                   className="btn btn-outline btn-success btn-sm"
-                  onClick={handleShowUserDataModal}
+                  onClick={toggleShowUserDataModal}
                 >
                   I played it
                 </button>
                 {showUserDataModal ? (
                   <UserDataModal
-                    handleShowModal={handleShowUserDataModal}
-                    handleSubmit={handleSubmit}
-                    handleChange={handleChange}
+                    handleShowModal={toggleShowUserDataModal}
+                    handleSubmit={onSubmit}
+                    handleChange={onChange}
                     userPlayedGameData={userPlayedGameData}
                     result={props.result}
                   />

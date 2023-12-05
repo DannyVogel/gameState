@@ -11,15 +11,8 @@ export default function GamesToPlay() {
   const [savedList, setSavedList] = useState(() => []);
 
   useEffect(() => {
-    // const gameRef = ref(db, `gameState/users/${UID}/gamesToPlayList`);
-    // onValue(gameRef, (snapshot) => {
-    //   snapshot.exists()
-    //     ? setSavedList(Object.values(snapshot.val()))
-    //     : setSavedList([]);
-    // });
     const listRef = ref(db, `gameState/users/${UID}/gameList`);
     onValue(listRef, (snapshot) => {
-      console.log("snap", snapshot.exists() && Object.values(snapshot.val()));
       snapshot.exists()
         ? setSavedList(Object.values(snapshot.val()))
         : setSavedList([]);
