@@ -9,11 +9,10 @@ export default function GameCard(props) {
   const UID = useUserStore((state) => state.UID);
   const [isOnList, setIsOnList] = useState("");
   const [userPlayedGameData, setUserPlayedGameData] = useState({
-    monthPlayed: "",
+    monthPlayed: (new Date().getUTCMonth() + 1).toString(),
     yearPlayed: new Date().getFullYear().toString(),
     comments: "",
     status: "playing",
-    // played: false,
   });
   const [showModal, setShowModal] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -50,9 +49,9 @@ export default function GameCard(props) {
     }
     FireStoreController.addToList(UID, game);
     // remove once setup finished
-    const updates = {};
-    updates[`/users/${UID}/${list}/${game.id}`] = [game];
-    update(gameStateDB, updates);
+    // const updates = {};
+    // updates[`/users/${UID}/${list}/${game.id}`] = [game];
+    // update(gameStateDB, updates);
     //
     setShowConfirmationModal(true);
     setConfirmationText("Added to list");
@@ -68,7 +67,7 @@ export default function GameCard(props) {
       setShowConfirmationModal(false);
       const gameID = e.target.id;
       if (gameID) {
-        const gameRef = ref(db, `gameState/users/${UID}/${isOnList}/${gameID}`);
+        const gameRef = ref(db, `gameState/users/${UID}/gameList/${gameID}`);
         remove(gameRef);
       }
     }, 1500);
