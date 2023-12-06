@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AuthController from "@/services/api/firebase";
 import { sliceEmail } from "@/utils";
+import AuthController from "@/services/api/firebase";
 import useUserStore from "@/stores/userStore";
 import LogIn from "@/components/Auth/LogIn";
 import Register from "@/components/Auth/Register";
@@ -9,6 +9,7 @@ export default function Modal(props) {
   const setUser = useUserStore((state) => state.setUser);
   const setUID = useUserStore((state) => state.setUID);
   const setLogged = useUserStore((state) => state.setLogged);
+  const setGameList = useUserStore((state) => state.setGameList);
   const user = useUserStore((state) => state.user);
   const isLogged = useUserStore((state) => state.isLogged);
 
@@ -21,6 +22,10 @@ export default function Modal(props) {
   };
 
   const handleSignOut = async () => {
+    setUser("");
+    setUID("");
+    setLogged(false);
+    setGameList([]);
     await AuthController.logOut();
   };
 
