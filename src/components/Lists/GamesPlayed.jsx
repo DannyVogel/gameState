@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import GamesPlayedCard from "@/components/GamesPlayedCard";
-// import { db, ref, onValue } from "@/config/firebase";
 import { Triangle } from "react-loader-spinner";
 import useUserStore from "@/stores/userStore";
-// import FireStoreController from "@/services/api/firestore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
@@ -61,19 +59,6 @@ export default function GamesPlayed() {
   //   }
   // }, []);
 
-  // function migrate() {
-  //   let oldData;
-  //   const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
-  //   onValue(gameRef, (snapshot) => {
-  //     oldData = snapshot.exists() ? Object.values(snapshot.val()) : [];
-  //   });
-
-  //   console.log("oldData", oldData.flat());
-  //   oldData.flat().forEach((game) => {
-  //     FireStoreController.addToList(UID, game);
-  //   });
-  // }
-
   function renderList(list, filters) {
     let filteredList = list.filter((game) => game.status !== "toPlay");
     try {
@@ -122,9 +107,6 @@ export default function GamesPlayed() {
   return (
     <div className="max-w-2xl mx-auto mb-14">
       <h1 className="text-center font-bold text-2xl">Games Played</h1>
-      {/* <button className="btn btn-primary" onClick={migrate}>
-        Migrate
-      </button> */}
       {loading ? (
         <Triangle
           height="80"

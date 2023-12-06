@@ -31,17 +31,30 @@ export default class FireStoreController {
   }
 }
 
-// function addGameToList(e, game) {
-//   const list = e.target.id;
-//   const updates = {};
-//   updates[`/users/${UID}/${list}/${game.id}`] = [game];
-//   update(gameStateDB, updates);
-// }
+// Use this with admin account to migrate data from old to new DB structure
+// function migrate() {
+//   let oldPlayedData;
+//   let xUID = ""; // Add UID here if migration is needed
+//   const gamesPlayedRef = ref(db, `gameState/users/${xUID}/gamesPlayedList`);
+//   onValue(gamesPlayedRef, (snapshot) => {
+//     oldPlayedData = snapshot.exists() ? Object.values(snapshot.val()) : [];
+//   });
 
-// function removeFromList(e) {
-//   const gameID = e.target.id;
-//   if (gameID) {
-//     const gameRef = ref(db, `gameState/users/${UID}/${isOnList}/${gameID}`);
-//     remove(gameRef);
+//   let oldToPlayData;
+//   const gamesToPlayRef = ref(db, `gameState/users/${xUID}/gamesToPlayList`);
+//   onValue(gamesToPlayRef, (snapshot) => {
+//     oldToPlayData = snapshot.exists() ? Object.values(snapshot.val()) : [];
+//   });
+
+//   if (oldPlayedData) {
+//     oldPlayedData.flat().forEach((game) => {
+//       FireStoreController.addToList(xUID, game);
+//     });
+//   }
+//   if (oldToPlayData) {
+//     oldToPlayData.flat().forEach((game) => {
+//       game.status = "toPlay";
+//       FireStoreController.addToList(xUID, game);
+//     });
 //   }
 // }
