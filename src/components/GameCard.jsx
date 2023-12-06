@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FireStoreController from "@/services/api/firestore";
 import UserDataModal from "@/components/UserDataModal";
 import useUserStore from "@/stores/userStore";
