@@ -5,7 +5,7 @@ import search from "@/assets/icons/search.png";
 const Default = () => {
   return (
     <div className="flex-grow flex flex-col justify-center items-center">
-      <div className="font-bold flex-grow flex flex-col items-center gap-10 text-xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+      <div className="font-bold flex-grow flex flex-col items-center gap-10 text-xl ">
         <h1 className="headerTitle">Find Games!</h1>
         <img
           className="w-8 h-8"
@@ -20,7 +20,7 @@ const Default = () => {
               src={toPlay}
               alt="shopping bag with controller icon"
             />
-            <p className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+            <p className="">
               Games <span>{<br />}</span> to play
             </p>
             {/* <p>{props.gamesToPlayList.length} games listed</p> */}
@@ -31,7 +31,7 @@ const Default = () => {
               src={played}
               alt="papers with controller icon"
             />
-            <p className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
+            <p className="">
               Games <span>{<br />}</span> played
             </p>
             {/* <p>{props.gamesPlayedList.length} games listed</p> */}
