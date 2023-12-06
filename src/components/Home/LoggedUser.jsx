@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const LoggedUser = () => {
   const user = useUserStore((state) => state.user);
   const UID = useUserStore((state) => state.UID);
+  const gameList = useUserStore((state) => state.gameList);
   let userName = user.charAt(0).toUpperCase() + user.slice(1);
   if (userName == "Kelevrav") {
     userName = userName.slice(0, -1);
@@ -21,27 +22,37 @@ const LoggedUser = () => {
         </h1>
       </div>
       <div className="mt-20 px-14 max-w-md w-full flex justify-between">
-        <Link to="/toPlay" className="flex flex-col items-center gap-2">
+        <Link
+          to="/toPlay"
+          className="flex flex-col items-center gap-2 text-white font-bold"
+        >
           <img
             className="w-8 h-8"
             src={toPlay}
             alt="shopping bag with controller icon"
           />
-          <p className="text-white font-bold">
-            Games <span>{<br />}</span> to play
-          </p>
-          {/* <p>{props.gamesToPlayList.length} games listed</p> */}
+          <div className="flex flex-col items-center">
+            <p>{gameList.filter((game) => game.status === "toPlay").length}</p>
+            <p>
+              Games <span>{<br />}</span> to play
+            </p>
+          </div>
         </Link>
-        <Link to="/played" className="flex flex-col items-center gap-2">
+        <Link
+          to="/played"
+          className="flex flex-col items-center gap-2 text-white font-bold"
+        >
           <img
             className="w-8 h-8"
             src={played}
             alt="papers with controller icon"
           />
-          <p className="text-white font-bold">
-            Games <span>{<br />}</span> played
-          </p>
-          {/* <p>{props.gamesPlayedList.length} games listed</p> */}
+          <div className="flex flex-col items-center">
+            <p>{gameList.filter((game) => game.status !== "toPlay").length}</p>
+            <p className="">
+              Games <span>{<br />}</span> played
+            </p>
+          </div>
         </Link>
       </div>
     </div>
