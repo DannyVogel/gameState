@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
+import { useState, useEffect } from "react";
 import ImageGallery from "@/components/ImageGallery";
+import FireStoreController from "@/services/api/firestore";
 
 export default function GamesPlayedCard(props) {
   const {
@@ -27,12 +27,7 @@ export default function GamesPlayedCard(props) {
   });
 
   function removeFromList(e) {
-    const gameID = e.target.id;
-    const gameRef = ref(
-      db,
-      `gameState/users/${props.userUID}/gameList/${gameID}`
-    );
-    remove(gameRef);
+    FireStoreController.removeFromList(props.userUID, e.target.id);
   }
 
   function handleEdit() {
@@ -48,9 +43,7 @@ export default function GamesPlayedCard(props) {
     e.preventDefault();
     setEditItem(false);
     const gameData = { ...props.result, ...editItemData };
-    const updates = {};
-    updates[`/users/${props.userUID}/gameList/${id}`] = gameData;
-    update(gameStateDB, updates);
+    FireStoreController.addToList(props.userUID, gameData);
   }
 
   useEffect(() => {

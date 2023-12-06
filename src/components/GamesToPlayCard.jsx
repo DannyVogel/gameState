@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
 import ImageGallery from "@/components/ImageGallery";
 import UserDataModal from "@/components/UserDataModal";
 import useUserStore from "@/stores/userStore";
-import { FireStoreController } from "@/services/api/firestore";
+import FireStoreController from "@/services/api/firestore";
+import notFound from "@/assets/notFound.png";
 
 export default function GamesPlayedCard(props) {
-  const { id, name, released, slug, platforms, image } = props.result;
+  const { id, name, released, slug, platforms, image, screenshots } =
+    props.result;
   const UID = useUserStore((state) => state.UID);
 
   const [showModal, setShowModal] = useState(false);
@@ -93,11 +94,7 @@ export default function GamesPlayedCard(props) {
           ></div>
           <div className="fixed bottom-0 sm:bottom-1/2 sm:translate-y-1/2 right-1/2 translate-x-1/2 w-full bg-slate-800 z-20 rounded-t-lg sm:rounded-lg max-w-xl">
             <div className="flex flex-col gap-2">
-              {image ? (
-                <img src={image} alt={name} />
-              ) : (
-                <img src={notFound} alt="image not found placeholder" />
-              )}
+              <ImageGallery screenshots={screenshots || image || notFound} />
               <h2 className="px-5 text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
                 <a
                   href={`https://www.rawg.io/games/${slug}`}

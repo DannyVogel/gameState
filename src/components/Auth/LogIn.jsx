@@ -1,12 +1,14 @@
 import { useState } from "react";
-import AuthController from "@/services/api/firebase";
-import useUserStore from "@/stores/userStore";
 import { sliceEmail } from "@/utils";
+import AuthController from "@/services/api/firebase";
+import FireStoreController from "@/services/api/firestore";
+import useUserStore from "@/stores/userStore";
 
 const LogIn = (props) => {
   const setUser = useUserStore((state) => state.setUser);
   const setUID = useUserStore((state) => state.setUID);
   const setLogged = useUserStore((state) => state.setLogged);
+  const setGameList = useUserStore((state) => state.setGameList);
   const [errorMessage, setErrorMessage] = useState("");
   const [logInForm, setLogInForm] = useState({
     email: "",
@@ -29,11 +31,13 @@ const LogIn = (props) => {
     }
   };
 
-  const handleAuthSuccess = (user) => {
+  const handleAuthSuccess = async (user) => {
     const { email, uid } = user;
     setUser(sliceEmail(email));
     setUID(uid);
     setLogged(true);
+    const gameList = await FireStoreController.getGameList(uid);
+    setGameList(gameList);
     setTimeout(() => {
       props.authClose();
     }, 1000);

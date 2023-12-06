@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import GamesPlayedCard from "@/components/GamesPlayedCard";
-import { db, ref, onValue } from "@/config/firebase";
+// import { db, ref, onValue } from "@/config/firebase";
 import { Triangle } from "react-loader-spinner";
 import useUserStore from "@/stores/userStore";
-import { FireStoreController } from "@/services/api/firestore";
+// import FireStoreController from "@/services/api/firestore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
-  const [loading, setLoading] = useState(true);
+  const gameList = useUserStore((state) => state.gameList);
+  const [loading, setLoading] = useState(false);
   // const [showFilters, setShowFilters] = useState(false);
-  const [savedList, setSavedList] = useState(() => []);
+  // const [savedList, setSavedList] = useState(() => []);
   const [filter, setFilter] = useState({
     yearPlayed: "",
     status: "",
@@ -44,34 +45,34 @@ export default function GamesPlayed() {
     setFilter({ yearPlayed: "", status: "" });
   }
 
-  useEffect(() => {
-    try {
-      const listRef = ref(db, `gameState/users/${UID}/gameList`);
-      onValue(listRef, (snapshot) => {
-        const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
-        setSavedList(data);
-      });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     const listRef = ref(db, `gameState/users/${UID}/gameList`);
+  //     onValue(listRef, (snapshot) => {
+  //       const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
+  //       setSavedList(data);
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1000);
+  //   }
+  // }, []);
 
-  function migrate() {
-    let oldData;
-    const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
-    onValue(gameRef, (snapshot) => {
-      oldData = snapshot.exists() ? Object.values(snapshot.val()) : [];
-    });
+  // function migrate() {
+  //   let oldData;
+  //   const gameRef = ref(db, `gameState/users/${UID}/gamesPlayedList`);
+  //   onValue(gameRef, (snapshot) => {
+  //     oldData = snapshot.exists() ? Object.values(snapshot.val()) : [];
+  //   });
 
-    console.log("oldData", oldData.flat());
-    oldData.flat().forEach((game) => {
-      FireStoreController.addToList(UID, game);
-    });
-  }
+  //   console.log("oldData", oldData.flat());
+  //   oldData.flat().forEach((game) => {
+  //     FireStoreController.addToList(UID, game);
+  //   });
+  // }
 
   function renderList(list, filters) {
     let filteredList = list.filter((game) => game.status !== "toPlay");
@@ -190,7 +191,7 @@ export default function GamesPlayed() {
             </div>
             <div className="mx-auto flex gap-2"></div>
           </form>
-          {renderList(savedList, filter)}
+          {renderList(gameList, filter)}
         </>
       )}
     </div>

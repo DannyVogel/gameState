@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from "react";
 import GamesToPlayCard from "@/components/GamesToPlayCard";
-import { db, ref, onValue } from "@/config/firebase";
 import { Triangle } from "react-loader-spinner";
 import useUserStore from "@/stores/userStore";
 
 export default function GamesToPlay() {
   const UID = useUserStore((state) => state.UID);
   const gameList = useUserStore((state) => state.gameList);
-  const [loading, setLoading] = useState(true);
-  const [savedList, setSavedList] = useState(() => []);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const listRef = ref(db, `gameState/users/${UID}/gameList`);
-    onValue(listRef, (snapshot) => {
-      snapshot.exists()
-        ? setSavedList(Object.values(snapshot.val()))
-        : setSavedList([]);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const listRef = ref(db, `gameState/users/${UID}/gameList`);
+  //   onValue(listRef, (snapshot) => {
+  //     snapshot.exists()
+  //       ? setSavedList(Object.values(snapshot.val()))
+  //       : setSavedList([]);
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [savedList]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  // }, [savedList]);
 
-  function renderList(list) {
-    if (list.length < 1) {
+  function renderList() {
+    if (gameList.length < 1) {
       if (!UID) {
         return <p>Please sign up or sign in to see list</p>;
       }
       return <p>No games found</p>;
     }
-    return list.map((game) => {
+    return gameList.map((game) => {
       if (game.status === "toPlay")
         return <GamesToPlayCard key={game.id} result={game} />;
     });
@@ -56,7 +54,7 @@ export default function GamesToPlay() {
           visible={true}
         />
       ) : (
-        renderList(savedList)
+        renderList()
       )}
     </div>
   );

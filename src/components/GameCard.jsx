@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { db, ref, remove, update, gameStateDB } from "@/config/firebase";
-import { FireStoreController } from "@/services/api/firestore";
+import { useEffect, useState } from "react";
+import FireStoreController from "@/services/api/firestore";
 import UserDataModal from "@/components/UserDataModal";
 import useUserStore from "@/stores/userStore";
 import notFound from "@/assets/notFound.png";
@@ -60,10 +59,8 @@ export default function GameCard(props) {
     setConfirmationText("Removed from list");
     setTimeout(() => {
       setShowConfirmationModal(false);
-      const gameID = e.target.id;
-      if (gameID) {
-        const gameRef = ref(db, `gameState/users/${UID}/gameList/${gameID}`);
-        remove(gameRef);
+      if (e.target.id) {
+        FireStoreController.removeFromList(UID, e.target.id);
       }
     }, 1500);
   }
