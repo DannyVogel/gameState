@@ -6,7 +6,6 @@ import TriangleLoader from "@/components/TriangleLoader";
 import SearchInput from "@/components/Home/SearchInput";
 
 export async function loader({ request, params }) {
-  console.log(params);
   return defer({
     results: RAWGController.searchGames(params.searchTerm),
   });
