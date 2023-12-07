@@ -12,18 +12,28 @@ const LoggedUser = () => {
     userName = userName.slice(0, -1);
   }
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="mt-14 flex-grow">
-        <h1 className="font-bold text-center text-4xl text-white py-2">
-          Welcome back
+    <div className="flex-grow flex flex-col gap-20">
+      <div className="h-[132px] mt-14">
+        <h1
+          className={`font-bold text-center ${
+            UID ? "text-4xl" : "text-3xl"
+          } text-white py-2`}
+        >
+          {UID ? "Welcome back" : "Find Games!"}
         </h1>
-        <h1 className="font-bold text-center text-6xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent py-2">
-          {userName}
+        <h1
+          className={`font-bold text-center ${
+            UID
+              ? "text-6xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent"
+              : "text-3xl text-white"
+          }  py-2`}
+        >
+          {UID ? userName : "Save them to a list!"}
         </h1>
       </div>
-      <div className="mt-20 px-14 max-w-md w-full flex justify-between">
+      <div className="h-28 px-14 max-w-md w-full flex justify-between">
         <Link
-          to="/toPlay"
+          to={UID ? "/toPlay" : ""}
           className="flex flex-col items-center gap-2 text-white font-bold"
         >
           <img
@@ -32,14 +42,17 @@ const LoggedUser = () => {
             alt="shopping bag with controller icon"
           />
           <div className="flex flex-col items-center">
-            <p>{gameList.filter((game) => game.status === "toPlay").length}</p>
+            <p>
+              {UID &&
+                gameList.filter((game) => game.status === "toPlay").length}
+            </p>
             <p>
               Games <span>{<br />}</span> to play
             </p>
           </div>
         </Link>
         <Link
-          to="/played"
+          to={UID ? "/played" : ""}
           className="flex flex-col items-center gap-2 text-white font-bold"
         >
           <img
@@ -48,7 +61,10 @@ const LoggedUser = () => {
             alt="papers with controller icon"
           />
           <div className="flex flex-col items-center">
-            <p>{gameList.filter((game) => game.status !== "toPlay").length}</p>
+            <p>
+              {UID &&
+                gameList.filter((game) => game.status !== "toPlay").length}
+            </p>
             <p className="">
               Games <span>{<br />}</span> played
             </p>
