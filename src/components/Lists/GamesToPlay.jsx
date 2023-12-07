@@ -26,7 +26,9 @@ export default function GamesToPlay() {
   function renderList() {
     if (gameList.length < 1) {
       if (!UID) {
-        return <p>Please sign up or sign in to see list</p>;
+        return (
+          <p className="text-center">Please sign up or sign in to see list</p>
+        );
       }
       return <p>No games found</p>;
     }
@@ -37,8 +39,8 @@ export default function GamesToPlay() {
   }
 
   return (
-    <div className="gameListContainer mb-14">
-      <h1 className="text-center font-bold text-2xl mb-10">Games To Play</h1>
+    <div className="gameListContainer max-w-2xl min-w-fit mx-auto mb-14">
+      <h1 className="text-center font-bold text-2xl  mb-10">Games To Play</h1>
       {loading ? (
         <Triangle
           height="80"
@@ -54,7 +56,7 @@ export default function GamesToPlay() {
           visible={true}
         />
       ) : (
-        renderList()
+        <div className="mt-24">{renderList()}</div>
       )}
     </div>
   );

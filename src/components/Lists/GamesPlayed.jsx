@@ -74,7 +74,11 @@ export default function GamesPlayed() {
       }
       if (filteredList.length < 1) {
         if (!UID) {
-          return <p>Please sign up or sign in to see list</p>;
+          return (
+            <p className="text-center pt-24">
+              Please sign up or sign in to see list
+            </p>
+          );
         }
         return <p>No games found</p>;
       }
@@ -123,56 +127,58 @@ export default function GamesPlayed() {
         />
       ) : (
         <>
-          <form className="flex flex-col items-start gap-y-4">
-            <div className="mt-4">
-              <div className="dropdown">
-                <div tabIndex={0} role="button" className="m-1">
-                  <i className="fa-solid fa-filter cursor-pointer"></i>
-                </div>
-                <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
-                  <p className="w-max mb-1 font-bold">Filters:</p>
-                  <div className="flex gap-2">
-                    <input
-                      className="input input-primary input-sm"
-                      type="number"
-                      name="yearPlayed"
-                      id="yearPlayed"
-                      min={1900}
-                      max={3000}
-                      value={filterInput.yearPlayed}
-                      onChange={handleChange}
-                      placeholder="YYYY"
-                    />
-                    <select
-                      className="select select-primary select-sm"
-                      name="status"
-                      id="status"
-                      value={filterInput.status}
-                      onChange={handleChange}
-                    >
-                      <option value="">Status</option>
-                      <option value="playing">Playing</option>
-                      <option value="beat">Beat</option>
-                      <option value="dropped">Dropped</option>
-                    </select>
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={applyFilters}
-                    >
-                      Set
-                    </button>
-                    <button
-                      className="btn btn-primary btn-sm"
-                      onClick={clearFilters}
-                    >
-                      Clear
-                    </button>
+          {UID && (
+            <form className="flex flex-col items-start gap-y-4">
+              <div className="mt-4">
+                <div className="dropdown">
+                  <div tabIndex={0} role="button" className="m-1">
+                    <i className="fa-solid fa-filter cursor-pointer"></i>
                   </div>
-                </ul>
+                  <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
+                    <p className="w-max mb-1 font-bold">Filters:</p>
+                    <div className="flex gap-2">
+                      <input
+                        className="input input-primary input-sm"
+                        type="number"
+                        name="yearPlayed"
+                        id="yearPlayed"
+                        min={1900}
+                        max={3000}
+                        value={filterInput.yearPlayed}
+                        onChange={handleChange}
+                        placeholder="YYYY"
+                      />
+                      <select
+                        className="select select-primary select-sm"
+                        name="status"
+                        id="status"
+                        value={filterInput.status}
+                        onChange={handleChange}
+                      >
+                        <option value="">Status</option>
+                        <option value="playing">Playing</option>
+                        <option value="beat">Beat</option>
+                        <option value="dropped">Dropped</option>
+                      </select>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={applyFilters}
+                      >
+                        Set
+                      </button>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={clearFilters}
+                      >
+                        Clear
+                      </button>
+                    </div>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div className="mx-auto flex gap-2"></div>
-          </form>
+              <div className="mx-auto flex gap-2"></div>
+            </form>
+          )}
           {renderList(gameList, filter)}
         </>
       )}

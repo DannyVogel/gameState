@@ -50,7 +50,7 @@ export default function App() {
         <div
           className={`appContainer ${
             isMounting && "fade-in"
-          } flex-grow flex flex-col justify-around items-center`}
+          } flex-grow flex flex-col justify-around items-center overflow-hidden`}
         >
           <Index />
         </div>
