@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ImageGallery from "@/components/ImageGallery";
 import FireStoreController from "@/services/api/firestore";
-
+import useUserStore from "@/stores/userStore";
 export default function GamesPlayedCard(props) {
   const {
     id,
@@ -17,6 +17,7 @@ export default function GamesPlayedCard(props) {
     screenshots,
   } = props.result;
 
+  const UID = useUserStore((state) => state.UID);
   const [showModal, setShowModal] = useState(false);
   const [editItem, setEditItem] = useState(false);
   const [editItemData, setEditItemData] = useState({
@@ -27,7 +28,7 @@ export default function GamesPlayedCard(props) {
   });
 
   function removeFromList(e) {
-    FireStoreController.removeFromList(props.userUID, e.target.id);
+    FireStoreController.removeFromList(UID, e.target.id);
   }
 
   function handleEdit() {
@@ -43,7 +44,7 @@ export default function GamesPlayedCard(props) {
     e.preventDefault();
     setEditItem(false);
     const gameData = { ...props.result, ...editItemData };
-    FireStoreController.addToList(props.userUID, gameData);
+    FireStoreController.addToList(UID, gameData);
   }
 
   useEffect(() => {

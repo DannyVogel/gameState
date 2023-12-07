@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logged from "@/assets/icons/loggedInUser.png";
 import notLogged from "@/assets/icons/loggedOutUser.png";
 
-export default function Header(props) {
+export default function Header() {
   const isLogged = useUserStore((state) => state.isLogged);
   function authOpen() {
     document.getElementById("my_modal_5").showModal();

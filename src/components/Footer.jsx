@@ -3,7 +3,7 @@ import played from "@/assets/icons/gamesPlayed.png";
 import toPlay from "@/assets/icons/gamesToPlay.png";
 import search from "@/assets/icons/search.png";
 
-export default function Footer(props) {
+export default function Footer() {
   return (
     <div className="fixed bottom-0 left-0 right-0 px-10 py-5 rounded-t-lg w-full flex justify-between bg-slate-800">
       <div className="w-full flex justify-between max-w-2xl mx-auto px-5">
