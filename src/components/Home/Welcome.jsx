@@ -17,7 +17,7 @@ const LoggedUser = () => {
         <h1
           className={`font-bold text-center ${
             UID ? "text-4xl" : "text-3xl"
-          } text-white py-2`}
+          } text-primary py-2`}
         >
           {UID ? "Welcome back" : "Find Games!"}
         </h1>
@@ -25,7 +25,7 @@ const LoggedUser = () => {
           className={`font-bold text-center ${
             UID
               ? "text-6xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent"
-              : "text-3xl text-white"
+              : "text-3xl text-primary"
           }  py-2`}
         >
           {UID ? userName : "Save them to a list!"}
@@ -34,7 +34,7 @@ const LoggedUser = () => {
       <div className="h-28 px-14 max-w-md w-full flex justify-between">
         <Link
           to={UID ? "/toPlay" : ""}
-          className="flex flex-col items-center gap-2 text-white font-bold"
+          className="flex flex-col items-center gap-2 text-primary font-bold"
         >
           <img
             className="w-8 h-8"
@@ -53,7 +53,7 @@ const LoggedUser = () => {
         </Link>
         <Link
           to={UID ? "/played" : ""}
-          className="flex flex-col items-center gap-2 text-white font-bold"
+          className="flex flex-col items-center gap-2 text-primary font-bold"
         >
           <img
             className="w-8 h-8"

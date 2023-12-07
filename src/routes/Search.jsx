@@ -31,7 +31,7 @@ const Search = () => {
     });
   }
   return (
-    <div className="text-white mb-14 flex flex-col items-center gap-4">
+    <div className="text-primary mb-14 flex flex-col items-center gap-4">
       <React.Suspense fallback={<TriangleLoader />}>
         <Await resolve={resultsPromise.results}>{renderFiveResults}</Await>
         <div className="flex justify-around">

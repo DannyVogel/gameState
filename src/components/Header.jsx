@@ -14,7 +14,7 @@ export default function Header() {
   }
 
   return (
-    <div className="w-full h-14 flex items-center justify-center max-w-2xl mx-auto">
+    <div className="w-full h-14 flex items-center justify-center max-w-2xl mx-auto px-4 bg-neutral">
       <h1 className="py-1 font-bold text-4xl mx-auto bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
         <Link to="/">
           <span className="italic">game</span>State
