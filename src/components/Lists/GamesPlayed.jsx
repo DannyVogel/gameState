@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import GamesPlayedCard from "@/components/GamesPlayedCard";
 import { Triangle } from "react-loader-spinner";
+import { db, ref, onValue } from "@/config/firebase";
+import GamesPlayedCard from "@/components/GamesPlayedCard";
 import useUserStore from "@/stores/userStore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
   const gameList = useUserStore((state) => state.gameList);
+  const setGameList = useUserStore((state) => state.setGameList);
   const [loading, setLoading] = useState(false);
-  // const [showFilters, setShowFilters] = useState(false);
-  // const [savedList, setSavedList] = useState(() => []);
   const [filter, setFilter] = useState({
     yearPlayed: "",
     status: "",
@@ -17,11 +17,6 @@ export default function GamesPlayed() {
     yearPlayed: "",
     status: "",
   });
-
-  // function handleShowFilters(e) {
-  //   e.preventDefault();
-  //   setShowFilters((prev) => !prev);
-  // }
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -43,21 +38,13 @@ export default function GamesPlayed() {
     setFilter({ yearPlayed: "", status: "" });
   }
 
-  // useEffect(() => {
-  //   try {
-  //     const listRef = ref(db, `gameState/users/${UID}/gameList`);
-  //     onValue(listRef, (snapshot) => {
-  //       const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
-  //       setSavedList(data);
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   } finally {
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1000);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const listRef = ref(db, `gameState/users/${UID}/gameList`);
+    onValue(listRef, (snapshot) => {
+      const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
+      setGameList(data);
+    });
+  }, []);
 
   function renderList(list, filters) {
     let filteredList = list.filter((game) => game.status !== "toPlay");
@@ -87,8 +74,8 @@ export default function GamesPlayed() {
       const years = [
         ...new Set(sortedDataByYear.map((item) => item.yearPlayed)),
       ];
-      return years.map((year) => (
-        <div className="gameCardContainer" key={year}>
+      return years.map((year, index) => (
+        <div className="gameCardContainer" key={index}>
           <h2 className="w-fit font-bold text-xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             {year}
           </h2>

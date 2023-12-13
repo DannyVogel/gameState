@@ -1,27 +1,22 @@
 import React, { useState, useEffect } from "react";
-import GamesToPlayCard from "@/components/GamesToPlayCard";
 import { Triangle } from "react-loader-spinner";
+import { db, ref, onValue } from "@/config/firebase";
+import GamesToPlayCard from "@/components/GamesToPlayCard";
 import useUserStore from "@/stores/userStore";
 
 export default function GamesToPlay() {
   const UID = useUserStore((state) => state.UID);
   const gameList = useUserStore((state) => state.gameList);
+  const setGameList = useUserStore((state) => state.setGameList);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const listRef = ref(db, `gameState/users/${UID}/gameList`);
-  //   onValue(listRef, (snapshot) => {
-  //     snapshot.exists()
-  //       ? setSavedList(Object.values(snapshot.val()))
-  //       : setSavedList([]);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, [savedList]);
+  useEffect(() => {
+    const listRef = ref(db, `gameState/users/${UID}/gameList`);
+    onValue(listRef, (snapshot) => {
+      const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
+      setGameList(data);
+    });
+  }, []);
 
   function renderList() {
     if (gameList.length < 1) {
