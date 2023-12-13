@@ -115,53 +115,50 @@ export default function GamesPlayed() {
       ) : (
         <>
           {UID && (
-            <form className="mt-8 flex flex-col items-start gap-y-4">
-              <div className="h-8 flex items-center gap-2">
+            <form className="mt-2 mb-6 flex flex-col items-start gap-y-4">
+              <div className="mx-auto h-8 flex flex-col items-center gap-2">
                 <i
                   className="fa-solid fa-filter cursor-pointer"
                   onClick={() => setShowFilters((prevState) => !prevState)}
                 ></i>
                 {showFilters && (
-                  <>
-                    <p className="w-max mb-1 font-bold">Filters:</p>
-                    <div className="flex gap-2">
-                      <input
-                        className="input input-primary input-sm"
-                        type="number"
-                        name="yearPlayed"
-                        id="yearPlayed"
-                        min={1900}
-                        max={3000}
-                        value={filterInput.yearPlayed}
-                        onChange={handleChange}
-                        placeholder="YYYY"
-                      />
-                      <select
-                        className="select select-primary select-sm"
-                        name="status"
-                        id="status"
-                        value={filterInput.status}
-                        onChange={handleChange}
-                      >
-                        <option value="">Status</option>
-                        <option value="playing">Playing</option>
-                        <option value="beat">Beat</option>
-                        <option value="dropped">Dropped</option>
-                      </select>
-                      <button
-                        className="btn btn-primary btn-sm"
-                        onClick={applyFilters}
-                      >
-                        Set
-                      </button>
-                      <button
-                        className="btn btn-primary btn-sm"
-                        onClick={clearFilters}
-                      >
-                        Clear
-                      </button>
-                    </div>
-                  </>
+                  <div className="flex justify-center gap-2">
+                    <input
+                      className="input input-primary input-sm"
+                      type="number"
+                      name="yearPlayed"
+                      id="yearPlayed"
+                      min={1900}
+                      max={3000}
+                      value={filterInput.yearPlayed}
+                      onChange={handleChange}
+                      placeholder="YYYY"
+                    />
+                    <select
+                      className="select select-primary select-sm"
+                      name="status"
+                      id="status"
+                      value={filterInput.status}
+                      onChange={handleChange}
+                    >
+                      <option value="">Status</option>
+                      <option value="playing">Playing</option>
+                      <option value="beat">Beat</option>
+                      <option value="dropped">Dropped</option>
+                    </select>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={applyFilters}
+                    >
+                      Set
+                    </button>
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={clearFilters}
+                    >
+                      Clear
+                    </button>
+                  </div>
                 )}
               </div>
             </form>
