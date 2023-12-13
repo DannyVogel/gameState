@@ -10,6 +10,7 @@ const LogIn = (props) => {
   const setLogged = useUserStore((state) => state.setLogged);
   const setGameList = useUserStore((state) => state.setGameList);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -22,12 +23,14 @@ const LogIn = (props) => {
 
   const logIn = async (e) => {
     e.preventDefault();
+    setIsLoggingIn(true);
     setErrorMessage("");
     const res = await AuthController.logIn(logInForm.email, logInForm.password);
     if (res.success) {
       handleAuthSuccess(res.user);
     } else {
       setErrorMessage("Incorrect email or password");
+      setIsLoggingIn(false);
     }
   };
 
@@ -40,6 +43,7 @@ const LogIn = (props) => {
     setGameList(gameList);
     setTimeout(() => {
       props.authClose();
+      setIsLoggingIn(false);
     }, 1000);
   };
 
@@ -70,7 +74,13 @@ const LogIn = (props) => {
           className="input input-primary"
         />
         <p className="errorMessage">{errorMessage ? errorMessage : " "}</p>
-        <button className="btn btn-primary mt-4">Sign In</button>
+        <button disabled={isLoggingIn} className="btn btn-primary mt-4">
+          {isLoggingIn ? (
+            <span className="loading loading-spinner"></span>
+          ) : (
+            "Sign In"
+          )}
+        </button>
       </fieldset>
     </form>
   );

@@ -42,6 +42,14 @@ export default function GameCard(props) {
   }
 
   function addGameToList(e, game) {
+    if (!UID) {
+      setShowConfirmationModal(true);
+      setConfirmationText("Log in to add games to a list");
+      setTimeout(() => {
+        setShowConfirmationModal(false);
+      }, 1500);
+      return;
+    }
     const list = e.target.id;
     if (list === "gamesToPlayList") {
       game.status = "toPlay";
@@ -182,7 +190,7 @@ export default function GameCard(props) {
           {buttonContainerElement}
           {showConfirmationModal ? (
             <div className="font-bold text-lg px-5 py-5 absolute bottom-1/2 translate-y-1/2 right-1/2 translate-x-1/2 bg-green-700 z-20 rounded-lg max-w-xl shadow-lg shadow-black">
-              <p>{confirmationText}</p>
+              <p className="text-center">{confirmationText}</p>
             </div>
           ) : null}
         </div>

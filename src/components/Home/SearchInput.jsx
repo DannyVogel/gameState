@@ -22,7 +22,7 @@ const SearchInput = () => {
 
   return (
     <>
-      <form className="join" onSubmit={processSearch}>
+      <form className="join py-10 sm:py-60" onSubmit={processSearch}>
         <input
           className="input input-bordered border-r-0 input-primary join-item"
           type="text"

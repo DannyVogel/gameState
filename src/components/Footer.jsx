@@ -3,9 +3,9 @@ import played from "@/assets/icons/gamesPlayed.png";
 import toPlay from "@/assets/icons/gamesToPlay.png";
 import search from "@/assets/icons/search.png";
 
-export default function Footer(props) {
+export default function Footer() {
   return (
-    <div className="fixed bottom-0 left-0 right-0 px-10 py-5 rounded-t-lg w-full flex justify-between bg-slate-800">
+    <div className="fixed bottom-0 left-0 right-0 px-10 py-5 rounded-t-lg w-full flex justify-between bg-neutral">
       <div className="w-full flex justify-between max-w-2xl mx-auto px-5">
         <Link to="/toplay">
           <img
@@ -18,7 +18,7 @@ export default function Footer(props) {
         <Link to="/">
           <img
             id="search"
-            className="w-14 h-14 searchIcon absolute -top-4 left-0 right-0 bottom-0 mx-auto bg-slate-800 p-2 rounded-full"
+            className="w-14 h-14 searchIcon absolute -top-4 left-0 right-0 bottom-0 mx-auto bg-neutral p-2 rounded-full"
             src={search}
             alt="magnifying glass search icon"
           />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logged from "@/assets/icons/loggedInUser.png";
 import notLogged from "@/assets/icons/loggedOutUser.png";
 
-export default function Header(props) {
+export default function Header() {
   const isLogged = useUserStore((state) => state.isLogged);
   function authOpen() {
     document.getElementById("my_modal_5").showModal();
@@ -14,7 +14,7 @@ export default function Header(props) {
   }
 
   return (
-    <div className="w-full h-10 flex items-center justify-center max-w-2xl mx-auto">
+    <div className="w-full h-14 flex items-center justify-center max-w-2xl mx-auto px-4">
       <h1 className="py-1 font-bold text-4xl mx-auto bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
         <Link to="/">
           <span className="italic">game</span>State

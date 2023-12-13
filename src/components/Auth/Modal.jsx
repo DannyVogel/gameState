@@ -27,6 +27,7 @@ export default function Modal(props) {
     setLogged(false);
     setGameList([]);
     await AuthController.logOut();
+    props.authClose();
   };
 
   const guestLogIn = async () => {
