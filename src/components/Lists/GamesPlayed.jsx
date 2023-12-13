@@ -9,6 +9,7 @@ export default function GamesPlayed() {
   const gameList = useUserStore((state) => state.gameList);
   const setGameList = useUserStore((state) => state.setGameList);
   const [loading, setLoading] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const [filter, setFilter] = useState({
     yearPlayed: "",
     status: "",
@@ -20,7 +21,6 @@ export default function GamesPlayed() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    console.log(name, value);
     setFilterInput((prevState) => ({
       ...prevState,
       [name]: value,
@@ -29,7 +29,6 @@ export default function GamesPlayed() {
 
   function applyFilters(e) {
     e.preventDefault();
-    console.log("clicked set! filterInput: ", filterInput);
     setFilter(filterInput);
   }
 
@@ -48,17 +47,14 @@ export default function GamesPlayed() {
   }, []);
 
   function renderList(list, filters) {
-    console.log("filters", filters);
     let filteredList = list.filter((game) => game.status !== "toPlay");
     try {
       if (filters.yearPlayed !== "") {
-        console.log("yearPlayed", filters.yearPlayed);
         filteredList = filteredList.filter(
           (game) => game.yearPlayed === filters.yearPlayed
         );
       }
       if (filters.status !== "") {
-        console.log("status", filters.status);
         filteredList = filteredList.filter(
           (game) => game.status === filters.status
         );
@@ -119,13 +115,14 @@ export default function GamesPlayed() {
       ) : (
         <>
           {UID && (
-            <form className="flex flex-col items-start gap-y-4">
-              <div className="mt-4">
-                <div className="dropdown">
-                  <div tabIndex={0} role="button" className="m-1">
-                    <i className="fa-solid fa-filter cursor-pointer"></i>
-                  </div>
-                  <ul className="dropdown-content z-[1] p-2 bg-blue-700 rounded-box">
+            <form className="mt-8 flex flex-col items-start gap-y-4">
+              <div className="h-8 flex items-center gap-2">
+                <i
+                  className="fa-solid fa-filter cursor-pointer"
+                  onClick={() => setShowFilters((prevState) => !prevState)}
+                ></i>
+                {showFilters && (
+                  <>
                     <p className="w-max mb-1 font-bold">Filters:</p>
                     <div className="flex gap-2">
                       <input
@@ -164,10 +161,9 @@ export default function GamesPlayed() {
                         Clear
                       </button>
                     </div>
-                  </ul>
-                </div>
+                  </>
+                )}
               </div>
-              <div className="mx-auto flex gap-2"></div>
             </form>
           )}
           {renderList(gameList, filter)}
