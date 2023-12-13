@@ -47,14 +47,17 @@ export default function GamesPlayed() {
   }, []);
 
   function renderList(list, filters) {
+    console.log("filters", filters);
     let filteredList = list.filter((game) => game.status !== "toPlay");
     try {
       if (filters.yearPlayed !== "") {
+        console.log("yearPlayed", filters.yearPlayed);
         filteredList = filteredList.filter(
           (game) => game.yearPlayed === filters.yearPlayed
         );
       }
       if (filters.status !== "") {
+        console.log("status", filters.status);
         filteredList = filteredList.filter(
           (game) => game.status === filters.status
         );
@@ -86,7 +89,7 @@ export default function GamesPlayed() {
           {sortedDataByYear
             .filter((item) => item.yearPlayed === year)
             .map((item) => (
-              <GamesPlayedCard key={item.id} result={item} userUID={UID} />
+              <GamesPlayedCard key={item.id} result={item} />
             ))}
         </div>
       ));
