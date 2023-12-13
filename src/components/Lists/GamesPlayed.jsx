@@ -30,12 +30,14 @@ export default function GamesPlayed() {
   function applyFilters(e) {
     e.preventDefault();
     setFilter(filterInput);
+    setShowFilters(false);
   }
 
   function clearFilters(e) {
     e.preventDefault();
     setFilterInput({ yearPlayed: "", status: "" });
     setFilter({ yearPlayed: "", status: "" });
+    setShowFilters(false);
   }
 
   useEffect(() => {
