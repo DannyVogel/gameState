@@ -29,6 +29,7 @@ export default function GamesPlayed() {
 
   function applyFilters(e) {
     e.preventDefault();
+    console.log("clicked set! filterInput: ", filterInput);
     setFilter(filterInput);
   }
 
