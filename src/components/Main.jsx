@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { auth, onAuthStateChanged, db, ref, onValue } from "@/config/firebase";
+import { sliceEmail } from "@/utils";
 import Loader from "@/components/Loader";
 import Index from "@/components//Home/Index";
 import useUserStore from "@/stores/userStore";
@@ -9,13 +10,20 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [isUnmounting, setIsUnmounting] = useState(false);
   const [isMounting, setIsMounting] = useState(false);
+  const setLogged = useUserStore((state) => state.setLogged);
+  const setUID = useUserStore((state) => state.setUID);
+  const setUser = useUserStore((state) => state.setUser);
   const setGameList = useUserStore((state) => state.setGameList);
+
   const UID = useUserStore((state) => state.UID);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
+        const { email, uid } = user;
+        setLogged(true);
+        setUID(uid);
+        setUser(sliceEmail(email));
         FireStoreController.getGameList(uid).then((gameList) => {
           setGameList(gameList);
         });
@@ -25,6 +33,10 @@ export default function App() {
           setIsMounting(true);
         }, 1000);
       } else {
+        setLogged(false);
+        setUID("");
+        setUser("");
+        setGameList([]);
         setIsUnmounting(true);
         setTimeout(() => {
           setLoading(false);
