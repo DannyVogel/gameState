@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sliceEmail } from "@/utils";
 import AuthController from "@/services/api/firebase";
 import useUserStore from "@/stores/userStore";
 import LogIn from "@/components/Auth/LogIn";
 import Register from "@/components/Auth/Register";
+import { themeChange } from "theme-change";
 
 export default function Modal(props) {
   const setUser = useUserStore((state) => state.setUser);
@@ -12,11 +13,13 @@ export default function Modal(props) {
   const setGameList = useUserStore((state) => state.setGameList);
   const user = useUserStore((state) => state.user);
   const isLogged = useUserStore((state) => state.isLogged);
-
+  const [theme, setTheme] = useState();
   const [signInMethod, setSignInMethod] = useState(true);
-
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    themeChange(false);
+  }, []);
   const switchSignInMethod = () => {
     setSignInMethod((prev) => !prev);
   };
@@ -85,6 +88,61 @@ export default function Modal(props) {
                 {user}
               </span>
             </p>
+            <div className="flex items-center gap-2">
+              <p className="font-bold">Theme:</p>
+              <div className="form-control">
+                <label className="label cursor-pointer gap-4">
+                  <span className="label-text">Night</span>
+                  <input
+                    type="radio"
+                    name="theme-radios"
+                    className="radio theme-controller"
+                    value="night"
+                    data-set-theme="night"
+                    onChange={(e) => setTheme(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label cursor-pointer gap-4">
+                  <span className="label-text">Light</span>
+                  <input
+                    type="radio"
+                    name="theme-radios"
+                    className="radio theme-controller"
+                    value="light"
+                    data-set-theme="light"
+                    onChange={(e) => setTheme(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label cursor-pointer gap-4">
+                  <span className="label-text">Luxury</span>
+                  <input
+                    type="radio"
+                    name="theme-radios"
+                    className="radio theme-controller"
+                    value="luxury"
+                    data-set-theme="luxury"
+                    onChange={(e) => setTheme(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="form-control">
+                <label className="label cursor-pointer gap-4">
+                  <span className="label-text">Forest</span>
+                  <input
+                    type="radio"
+                    name="theme-radios"
+                    className="radio theme-controller"
+                    value="forest"
+                    data-set-theme="forest"
+                    onChange={(e) => setTheme(e.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
             <button className="btn btn-error" onClick={handleSignOut}>
               Sign Out
             </button>
