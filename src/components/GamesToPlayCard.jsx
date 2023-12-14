@@ -68,7 +68,13 @@ export default function GamesPlayedCard(props) {
   return (
     <>
       <div className="relative my-1 card glass card-side card-compact bg-base-100 shadow-xl border border-primary rounded-lg">
-        <figure></figure>
+        <figure>
+          <img
+            src={image}
+            alt={name}
+            className="hidden sm:block rounded-l-lg h-[92px] w-40"
+          />
+        </figure>
         <div className="max-w-full card-body">
           <h4 className="text-lg font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
             {name}
