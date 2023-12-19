@@ -88,15 +88,15 @@ export default function Modal(props) {
                 {user}
               </span>
             </p>
-            <div className="flex items-center gap-2">
-              <p className="font-bold">Theme:</p>
+            <p className="font-bold text-sm">Choose your color theme:</p>
+            <div className="flex items-center gap-1">
               <div className="form-control">
                 <label className="label cursor-pointer gap-4">
-                  <span className="label-text">Night</span>
+                  <span className="label-text text-xs">Night</span>
                   <input
                     type="radio"
                     name="theme-radios"
-                    className="radio theme-controller"
+                    className="radio theme-controller radio-xs"
                     value="night"
                     data-set-theme="night"
                     onChange={(e) => setTheme(e.target.value)}
@@ -105,11 +105,11 @@ export default function Modal(props) {
               </div>
               <div className="form-control">
                 <label className="label cursor-pointer gap-4">
-                  <span className="label-text">Light</span>
+                  <span className="label-text text-xs">Light</span>
                   <input
                     type="radio"
                     name="theme-radios"
-                    className="radio theme-controller"
+                    className="radio theme-controller radio-xs"
                     value="light"
                     data-set-theme="light"
                     onChange={(e) => setTheme(e.target.value)}
@@ -118,11 +118,11 @@ export default function Modal(props) {
               </div>
               <div className="form-control">
                 <label className="label cursor-pointer gap-4">
-                  <span className="label-text">Luxury</span>
+                  <span className="label-text text-xs">Luxury</span>
                   <input
                     type="radio"
                     name="theme-radios"
-                    className="radio theme-controller"
+                    className="radio theme-controller radio-xs"
                     value="luxury"
                     data-set-theme="luxury"
                     onChange={(e) => setTheme(e.target.value)}
@@ -131,11 +131,11 @@ export default function Modal(props) {
               </div>
               <div className="form-control">
                 <label className="label cursor-pointer gap-4">
-                  <span className="label-text">Forest</span>
+                  <span className="label-text text-xs">Forest</span>
                   <input
                     type="radio"
                     name="theme-radios"
-                    className="radio theme-controller"
+                    className="radio theme-controller radio-xs"
                     value="forest"
                     data-set-theme="forest"
                     onChange={(e) => setTheme(e.target.value)}
