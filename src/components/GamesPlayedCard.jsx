@@ -57,20 +57,19 @@ export default function GamesPlayedCard(props) {
 
   return (
     <>
-      <div className="relative my-1 card glass card-side card-compact bg-base-100 shadow-xl border border-primary rounded-lg">
+      <div
+        className="relative my-1 card glass card-side card-compact bg-base-100 shadow-xl border border-primary rounded-lg grid grid-cols-3 cursor-pointer "
+        onClick={() => setShowModal(true)}
+      >
         <figure>
-          <img
-            src={image}
-            alt={name}
-            className="hidden sm:block rounded-l-lg h-[92px] w-40"
-          />
+          <img src={image} alt={name} className=" rounded-l-lg h-full w-full" />
         </figure>
-        <div className="max-w-full card-body">
-          <h4 className="text-lg font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
+        <div className="max-w-full card-body col-span-2 grid grid-rows-2">
+          <h4 className="text-base flex items-center font-bold bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent truncate">
             {name}
           </h4>
           <div className="flex items-center justify-between font-bold">
-            <div className="flex gap-3">
+            <div className="flex gap-3 text-xs">
               <p>
                 Played: {monthPlayed}
                 {monthPlayed && yearPlayed ? "-" : null}
@@ -78,13 +77,10 @@ export default function GamesPlayedCard(props) {
               </p>
               <p>{status ? `Status: ${status}` : null}</p>
             </div>
-            <button
-              className="gamesPlayedCardBtn btn btn-outline btn-xs"
-              onClick={() => setShowModal(true)}
-            >
-              View card
-            </button>
           </div>
+        </div>
+        <div className="absolute bottom-0 right-0 w-6 h-6 bg-gradient-to-tl from-gray-500 via-transparent to-transparent flex items-baseline justify-end">
+          <span className="pt-1 text-primary text-opacity-40 ">+</span>
         </div>
       </div>
       {showModal && (
