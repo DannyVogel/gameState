@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { sliceEmail } from "@/utils";
+import { themeChange } from "theme-change";
+import logo from "@/assets/gameConsole.png";
 import AuthController from "@/services/api/firebase";
 import useUserStore from "@/stores/userStore";
 import LogIn from "@/components/Auth/LogIn";
 import Register from "@/components/Auth/Register";
-import { themeChange } from "theme-change";
 
 export default function Modal(props) {
   const setUser = useUserStore((state) => state.setUser);
@@ -82,6 +83,7 @@ export default function Modal(props) {
           </>
         ) : (
           <div className="flex flex-col items-center gap-4">
+            <img src={logo} alt="profile" className="hidden" />
             <p className="font-bold text-xl">
               Hello{" "}
               <span className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
