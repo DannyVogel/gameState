@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
 import { db, ref, onValue } from "@/config/firebase";
 import GamesPlayedCard from "@/components/GamesPlayedCard";
@@ -6,9 +6,8 @@ import useUserStore from "@/stores/userStore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
-  const gameList = useUserStore((state) => state.gameList);
-  const setGameList = useUserStore((state) => state.setGameList);
-  const [loading, setLoading] = useState(false);
+  const [gameList, setGameList] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [filter, setFilter] = useState({
     yearPlayed: "",
@@ -46,6 +45,7 @@ export default function GamesPlayed() {
       const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
       setGameList(data);
     });
+    setTimeout(() => setLoading(false), 500);
   }, []);
 
   function renderList(list, filters) {
@@ -80,6 +80,7 @@ export default function GamesPlayed() {
       const years = [
         ...new Set(sortedDataByYear.map((item) => item.yearPlayed)),
       ];
+
       return years.map((year, index) => (
         <div className="gameCardContainer" key={index}>
           <h2 className="w-fit font-bold text-xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
@@ -117,8 +118,8 @@ export default function GamesPlayed() {
       ) : (
         <>
           {UID && (
-            <form className="mt-2 mb-6 flex flex-col items-start gap-y-4">
-              <div className="mx-auto h-8 flex flex-col items-center gap-2">
+            <form className="my-2 flex flex-col items-start gap-y-4">
+              <div className="mx-auto flex flex-col items-center gap-2">
                 <i
                   className="fa-solid fa-filter cursor-pointer"
                   onClick={() => setShowFilters((prevState) => !prevState)}
