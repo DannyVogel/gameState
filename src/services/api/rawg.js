@@ -18,4 +18,21 @@ export class RAWGController {
       return error;
     }
   }
+
+  static async getGameDetails(id) {
+    try {
+      const response = await axios.get(
+        `https://api.rawg.io/api/games/${id}?key=${
+          import.meta.env.VITE_RAWG_API_KEY
+        }`
+      );
+      if (response.status !== 200) {
+        throw new Error("Error: ", response);
+      }
+      return new Result(response.data);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 }
