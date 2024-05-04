@@ -71,22 +71,21 @@ export default function GamesPlayed() {
         }
         return <p>No games found</p>;
       }
-      const sortedDataByMonth = filteredList?.sort(
-        (a, b) => b.monthPlayed - a.monthPlayed
-      );
-      const sortedDataByYear = sortedDataByMonth.sort(
-        (a, b) => b.yearPlayed - a.yearPlayed
-      );
-      const years = [
-        ...new Set(sortedDataByYear.map((item) => item.yearPlayed)),
-      ];
+      const sortedData = filteredList?.sort((a, b) => {
+        if (b.yearPlayed - a.yearPlayed === 0) {
+          return b.monthPlayed - a.monthPlayed;
+        } else {
+          return b.yearPlayed - a.yearPlayed;
+        }
+      });
+      const years = [...new Set(sortedData.map((item) => item.yearPlayed))];
 
       return years.map((year, index) => (
         <div className="gameCardContainer" key={index}>
           <h2 className="w-fit font-bold text-xl bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
             {year}
           </h2>
-          {sortedDataByYear
+          {sortedData
             .filter((item) => item.yearPlayed === year)
             .map((item) => (
               <GamesPlayedCard key={item.id} result={item} />
