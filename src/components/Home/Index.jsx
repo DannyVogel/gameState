@@ -3,9 +3,8 @@ import Welcome from "@/components/Home/Welcome";
 import SearchInput from "@/components/Home/SearchInput";
 
 export default function Index() {
-  const UID = useUserStore((state) => state.UID);
   return (
-    <div className="flex-grow flex flex-col justify-center ">
+    <div className="flex-grow flex flex-col items-center justify-center ">
       <Welcome />
 
       <SearchInput />
