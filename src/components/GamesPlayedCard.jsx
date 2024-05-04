@@ -69,7 +69,7 @@ export default function GamesPlayedCard(props) {
             {name}
           </h4>
           <div className="flex items-center justify-between font-bold">
-            <div className="flex gap-3 text-xs">
+            <div className="flex gap-2 text-xs">
               <p>
                 Played: {monthPlayed}
                 {monthPlayed && yearPlayed ? "-" : null}
