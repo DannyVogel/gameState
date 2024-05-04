@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
-import { db, ref, onValue } from "@/config/firebase";
 import GamesPlayedCard from "@/components/GamesPlayedCard";
 import useUserStore from "@/stores/userStore";
+import FireStoreController from "@/services/api/firestore";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
@@ -40,10 +40,8 @@ export default function GamesPlayed() {
   }
 
   useEffect(() => {
-    const listRef = ref(db, `gameState/users/${UID}/gameList`);
-    onValue(listRef, (snapshot) => {
-      const data = snapshot.exists() ? Object.values(snapshot.val()) : [];
-      setGameList(data);
+    FireStoreController.getGameList(UID).then((gameList) => {
+      setGameList(gameList);
     });
     setTimeout(() => setLoading(false), 500);
   }, []);
