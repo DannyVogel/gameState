@@ -35,4 +35,21 @@ export class RAWGController {
       return error;
     }
   }
+
+  static async getGameScreenshots(id) {
+    try {
+      const response = await axios.get(
+        `https://api.rawg.io/api/games/${id}/screenshots?key=${
+          import.meta.env.VITE_RAWG_API_KEY
+        }`
+      );
+      if (response.status !== 200) {
+        throw new Error("Error: ", response);
+      }
+      return response.data.results.map((result) => result.image);
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 }

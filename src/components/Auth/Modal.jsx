@@ -3,6 +3,8 @@ import { sliceEmail } from "@/utils";
 import { themeChange } from "theme-change";
 import logo from "@/assets/gameConsole.png";
 import AuthController from "@/services/api/firebase";
+import { RAWGController } from "@/services/api/rawg";
+import FireStoreController from "@/services/api/firestore";
 import useUserStore from "@/stores/userStore";
 import LogIn from "@/components/Auth/LogIn";
 import Register from "@/components/Auth/Register";
@@ -13,10 +15,13 @@ export default function Modal(props) {
   const setLogged = useUserStore((state) => state.setLogged);
   const setGameList = useUserStore((state) => state.setGameList);
   const user = useUserStore((state) => state.user);
+  const UID = useUserStore((state) => state.UID);
   const isLogged = useUserStore((state) => state.isLogged);
+  const gameList = useUserStore((state) => state.gameList);
   const [theme, setTheme] = useState();
   const [signInMethod, setSignInMethod] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     themeChange(false);
@@ -53,6 +58,28 @@ export default function Modal(props) {
     }, 1500);
   };
 
+  const updateGameData = async () => {
+    setLoading(true);
+    const gameIDs = gameList.map((game) => game.id);
+    const gameData = await Promise.all(
+      gameIDs.map((id) => {
+        let game;
+        return RAWGController.getGameDetails(id)
+          .then((res) => {
+            game = res;
+            return RAWGController.getGameScreenshots(id);
+          })
+          .then((screenshots) => {
+            game.screenshots = screenshots;
+            return game;
+          });
+      })
+    );
+    gameData.forEach((game) => {
+      FireStoreController.updateList(UID, game.id, game);
+    });
+    setLoading(false);
+  };
   return (
     <div className="modal-overlay" onClick={props.authClose}>
       <div
@@ -145,7 +172,14 @@ export default function Modal(props) {
                 </label>
               </div>
             </div>
-            <button className="btn btn-error" onClick={handleSignOut}>
+            <button
+              className="btn btn-sm btn-secondary"
+              onClick={updateGameData}
+            >
+              {loading && <span className="loading loading-spinner"></span>}
+              {!loading && "Update Game Data"}
+            </button>
+            <button className="btn btn-sm btn-error" onClick={handleSignOut}>
               Sign Out
             </button>
           </div>

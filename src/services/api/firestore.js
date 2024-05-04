@@ -29,6 +29,11 @@ export default class FireStoreController {
     const gameRef = ref(db, `gameState/users/${UID}/gameList/${gameID}`);
     remove(gameRef);
   }
+
+  static async updateList(UID, gameID, data) {
+    const gameRef = ref(db, `gameState/users/${UID}/gameList/${gameID}`);
+    update(gameRef, data);
+  }
 }
 
 // Use this with admin account to migrate data from old to new DB structure
