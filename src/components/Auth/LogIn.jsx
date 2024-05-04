@@ -60,7 +60,9 @@ const LogIn = (props) => {
           id="email"
           value={logInForm.email}
           onChange={handleChange}
-          className="input input-primary"
+          className={`input input-primary ${
+            errorMessage ? "border-red-500" : ""
+          } `}
         />
         <label htmlFor="password" className="label">
           Password:
@@ -71,9 +73,11 @@ const LogIn = (props) => {
           id="password"
           value={logInForm.password}
           onChange={handleChange}
-          className="input input-primary"
+          className={`input input-primary ${
+            errorMessage ? "border-red-500" : ""
+          } `}
         />
-        <p className="errorMessage">{errorMessage ? errorMessage : " "}</p>
+        <p className="text-red-500">{errorMessage ? errorMessage : " "}</p>
         <button disabled={isLoggingIn} className="btn btn-primary mt-4">
           {isLoggingIn ? (
             <span className="loading loading-spinner"></span>

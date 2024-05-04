@@ -20,11 +20,10 @@ export default class AuthController {
         };
       }
     } catch (error) {
-      console.log(error.code, error.message);
+      console.log(error.message);
       return {
         success: false,
-        errorCode: errorCode,
-        errorMessage: errorMessage,
+        errorMessage: error.message,
       };
     }
   }
@@ -41,12 +40,10 @@ export default class AuthController {
         user: userCredential.user,
       };
     } catch (error) {
-      const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      console.log(errorMessage);
       return {
         success: false,
-        errorCode: errorCode,
         errorMessage: errorMessage,
       };
     }
@@ -54,11 +51,10 @@ export default class AuthController {
 
   static async logOut() {
     try {
-      const res = await signOut(auth);
+      await signOut(auth);
     } catch (error) {
-      const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      console.log(errorMessage);
     }
   }
 
@@ -76,10 +72,9 @@ export default class AuthController {
         };
       }
     } catch (error) {
-      console.log(error.code, error.message);
+      console.log(error.message);
       return {
         success: false,
-        errorCode: errorCode,
         errorMessage: errorMessage,
       };
     }
