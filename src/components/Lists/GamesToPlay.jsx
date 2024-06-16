@@ -32,7 +32,7 @@ export default function GamesToPlay() {
   }
 
   return (
-    <div className="gameListContainer max-w-2xl min-w-fit mx-auto mb-14">
+    <div className="gameListContainer max-w-2xl mx-auto mb-14">
       <h1 className="text-center font-bold text-2xl">Games To Play</h1>
       {loading ? (
         <Triangle
