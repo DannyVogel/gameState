@@ -6,7 +6,7 @@ import Index from "@/components//Home/Index";
 import useUserStore from "@/stores/userStore";
 import FireStoreController from "@/services/api/firestore";
 
-export default function App() {
+export default function Main() {
   const [loading, setLoading] = useState(true);
   const [isUnmounting, setIsUnmounting] = useState(false);
   const [isMounting, setIsMounting] = useState(false);
