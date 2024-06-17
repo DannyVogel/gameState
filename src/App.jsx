@@ -11,7 +11,7 @@ import ToPlay from "./routes/ToPlay";
 import Played from "./routes/Played";
 import ErrorPage from "./error.page";
 import NotFound from "./NotFound";
-import { IGDBController } from "@/services/twitchIGDB";
+// import { IGDBController } from "@/services/api/IGDB";
 import useUserStore from "@/stores/userStore";
 
 const router = createBrowserRouter(
@@ -31,9 +31,9 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-  const setToken = useUserStore((state) => state.setToken);
-  IGDBController.init().then((token) => {
-    setToken(token);
-  });
+  // const setToken = useUserStore((state) => state.setToken);
+  // IGDBController.init().then((token) => {
+  //   setToken(token);
+  // });
   return <RouterProvider router={router} />;
 }
