@@ -94,7 +94,7 @@ export default function GamesPlayedCard(props) {
               <ImageGallery screenshots={screenshots} />
               <h2 className="px-5 text-2xl w-max font-bold bg-gradient-to-r from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent">
                 <a
-                  href={`https://www.rawg.io/games/${slug}`}
+                  href={`https://www.igdb.com/games/${slug}`}
                   target="_blank"
                   rel="noreferrer"
                 >

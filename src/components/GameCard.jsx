@@ -161,7 +161,7 @@ export default function GameCard(props) {
         <h2 className="card-title">
           <a
             className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent"
-            href={`https://www.rawg.io/games/${props.result.slug}`}
+            href={`https://www.igdb.com/games/${props.result.slug}`}
             target="_blank"
             rel="noreferrer"
           >
