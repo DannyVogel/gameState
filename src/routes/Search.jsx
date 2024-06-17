@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { defer, Await, useLoaderData, useParams } from "react-router-dom";
-import { RAWGController } from "@/services/api/rawg";
+import { IGDBController } from "@/services/api/IGDB";
 import GameCard from "@/components/GameCard";
 import TriangleLoader from "@/components/TriangleLoader";
 import SearchInput from "@/components/Home/SearchInput";
 
 export async function loader({ request, params }) {
   return defer({
-    results: RAWGController.searchGames(params.searchTerm),
+    results: IGDBController.search(params.searchTerm),
   });
 }
 
