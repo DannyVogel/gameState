@@ -83,7 +83,7 @@ export class IGDBController {
     console.log("retrieving token");
     try {
       const token = JSON.parse(localStorage.getItem("igdb_access_token"));
-      console.log("is expired?", new Date(token.expires) < new Date());
+      token && console.log("is expired?", new Date(token.expires) < new Date());
       if (token && new Date(token.expires) > new Date()) {
         return token;
       } else {
