@@ -3,8 +3,8 @@ import { sliceEmail } from "@/utils";
 import { themeChange } from "theme-change";
 import logo from "@/assets/gameConsole.png";
 import AuthController from "@/services/api/firebase";
-import { RAWGController } from "@/services/api/rawg";
-import FireStoreController from "@/services/api/firestore";
+// import { RAWGController } from "@/services/api/rawg";
+// import FireStoreController from "@/services/api/firestore";
 import useUserStore from "@/stores/userStore";
 import LogIn from "@/components/Auth/LogIn";
 import Register from "@/components/Auth/Register";
@@ -58,28 +58,29 @@ export default function Modal(props) {
     }, 1500);
   };
 
-  const updateGameData = async () => {
-    setLoading(true);
-    const gameIDs = gameList.map((game) => game.id);
-    const gameData = await Promise.all(
-      gameIDs.map((id) => {
-        let game;
-        return RAWGController.getGameDetails(id)
-          .then((res) => {
-            game = res;
-            return RAWGController.getGameScreenshots(id);
-          })
-          .then((screenshots) => {
-            game.screenshots = screenshots;
-            return game;
-          });
-      })
-    );
-    gameData.forEach((game) => {
-      FireStoreController.updateList(UID, game.id, game);
-    });
-    setLoading(false);
-  };
+  // TODO: Fix this function
+  // const updateGameData = async () => {
+  //   setLoading(true);
+  //   const gameIDs = gameList.map((game) => game.id);
+  //   const gameData = await Promise.all(
+  //     gameIDs.map((id) => {
+  //       let game;
+  //       return RAWGController.getGameDetails(id)
+  //         .then((res) => {
+  //           game = res;
+  //           return RAWGController.getGameScreenshots(id);
+  //         })
+  //         .then((screenshots) => {
+  //           game.screenshots = screenshots;
+  //           return game;
+  //         });
+  //     })
+  //   );
+  //   gameData.forEach((game) => {
+  //     FireStoreController.updateList(UID, game.id, game);
+  //   });
+  //   setLoading(false);
+  // };
   return (
     <div className="modal-overlay" onClick={props.authClose}>
       <div
@@ -172,13 +173,13 @@ export default function Modal(props) {
                 </label>
               </div>
             </div>
-            <button
+            {/* <button
               className="btn btn-sm btn-secondary"
               onClick={updateGameData}
             >
               {loading && <span className="loading loading-spinner"></span>}
               {!loading && "Update Game Data"}
-            </button>
+            </button> */}
             <button className="btn btn-sm btn-error" onClick={handleSignOut}>
               Sign Out
             </button>

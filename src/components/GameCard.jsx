@@ -161,7 +161,7 @@ export default function GameCard(props) {
         <h2 className="card-title">
           <a
             className="bg-gradient-to-l from-fuchsia-500 via-red-600 to-orange-400 bg-clip-text text-transparent"
-            href={`https://www.rawg.io/games/${props.result.slug}`}
+            href={`https://www.igdb.com/games/${props.result.slug}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -170,9 +170,9 @@ export default function GameCard(props) {
         </h2>
         <p className="flex justify-around">
           {props.result.genres.map((genre, index, array) => (
-            <React.Fragment key={genre.id}>
+            <React.Fragment key={genre}>
               <button className="btn btn-outline btn-xs cursor-default">
-                {genre.name}
+                {genre}
               </button>
             </React.Fragment>
           ))}
@@ -180,7 +180,7 @@ export default function GameCard(props) {
         <p className="resultText">Released: {props.result.released}</p>
         <a
           className="link text-primary"
-          href={`https://www.rawg.io/games/${props.result.slug}`}
+          href={`https://www.igdb.com/games/${props.result.slug}`}
           target="_blank"
           rel="noreferrer"
         >

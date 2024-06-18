@@ -35,31 +35,3 @@ export default class FireStoreController {
     update(gameRef, data);
   }
 }
-
-// Use this with admin account to migrate data from old to new DB structure
-// function migrate() {
-//   let oldPlayedData;
-//   let xUID = ""; // Add UID here if migration is needed
-//   const gamesPlayedRef = ref(db, `gameState/users/${xUID}/gamesPlayedList`);
-//   onValue(gamesPlayedRef, (snapshot) => {
-//     oldPlayedData = snapshot.exists() ? Object.values(snapshot.val()) : [];
-//   });
-
-//   let oldToPlayData;
-//   const gamesToPlayRef = ref(db, `gameState/users/${xUID}/gamesToPlayList`);
-//   onValue(gamesToPlayRef, (snapshot) => {
-//     oldToPlayData = snapshot.exists() ? Object.values(snapshot.val()) : [];
-//   });
-
-//   if (oldPlayedData) {
-//     oldPlayedData.flat().forEach((game) => {
-//       FireStoreController.addToList(xUID, game);
-//     });
-//   }
-//   if (oldToPlayData) {
-//     oldToPlayData.flat().forEach((game) => {
-//       game.status = "toPlay";
-//       FireStoreController.addToList(xUID, game);
-//     });
-//   }
-// }
