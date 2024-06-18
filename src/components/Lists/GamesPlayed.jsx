@@ -3,7 +3,7 @@ import { Triangle } from "react-loader-spinner";
 import GamesPlayedCard from "@/components/GamesPlayedCard";
 import useUserStore from "@/stores/userStore";
 import FireStoreController from "@/services/api/firestore";
-// import { IGDBController } from "@/services/api/IGDB";
+// import { SearchController } from "@/services/api/search";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
@@ -49,7 +49,7 @@ export default function GamesPlayed() {
     });
     // FireStoreController.getGameListRaw(UID).then((gameList) => {
     //   console.log("gameList", gameList);
-    //   IGDBController.getGameInfo(gameList, access_token);
+    //   SearchController.getGameInfo(gameList, access_token);
     // });
     setTimeout(() => setLoading(false), 500);
   }, []);

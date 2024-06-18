@@ -11,7 +11,7 @@ import ToPlay from "./routes/ToPlay";
 import Played from "./routes/Played";
 import ErrorPage from "./error.page";
 import NotFound from "./NotFound";
-// import { IGDBController } from "@/services/api/IGDB";
+// import { SearchController } from "@/services/api/search";
 import useUserStore from "@/stores/userStore";
 
 const router = createBrowserRouter(
@@ -32,7 +32,7 @@ const router = createBrowserRouter(
 
 export default function App() {
   // const setToken = useUserStore((state) => state.setToken);
-  // IGDBController.init().then((token) => {
+  // SearchController.init().then((token) => {
   //   setToken(token);
   // });
   return <RouterProvider router={router} />;
