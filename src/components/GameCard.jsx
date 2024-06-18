@@ -180,7 +180,7 @@ export default function GameCard(props) {
         <p className="resultText">Released: {props.result.released}</p>
         <a
           className="link text-primary"
-          href={`https://www.rawg.io/games/${props.result.slug}`}
+          href={`https://www.igdb.com/games/${props.result.slug}`}
           target="_blank"
           rel="noreferrer"
         >
