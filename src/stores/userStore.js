@@ -8,12 +8,10 @@ const useUserStore = create(
       UID: "",
       user: "",
       gameList: [],
-      access_token: "",
       setUser: (user) => set((state) => ({ user: user })),
       setUID: (id) => set((state) => ({ UID: id })),
       setLogged: (bool) => set((state) => ({ isLogged: bool })),
       setGameList: (list) => set((state) => ({ gameList: list })),
-      setToken: (token) => set((state) => ({ access_token: token })),
     }),
     {
       name: "user-storage",

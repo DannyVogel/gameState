@@ -3,11 +3,9 @@ import { Triangle } from "react-loader-spinner";
 import GamesPlayedCard from "@/components/GamesPlayedCard";
 import useUserStore from "@/stores/userStore";
 import FireStoreController from "@/services/api/firestore";
-// import { SearchController } from "@/services/api/search";
 
 export default function GamesPlayed() {
   const UID = useUserStore((state) => state.UID);
-  // const access_token = useUserStore((state) => state.access_token);
   const [gameList, setGameList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -42,15 +40,9 @@ export default function GamesPlayed() {
   }
 
   useEffect(() => {
-    //
-    //
     FireStoreController.getGameList(UID).then((gameList) => {
       setGameList(gameList);
     });
-    // FireStoreController.getGameListRaw(UID).then((gameList) => {
-    //   console.log("gameList", gameList);
-    //   SearchController.getGameInfo(gameList, access_token);
-    // });
     setTimeout(() => setLoading(false), 500);
   }, []);
 

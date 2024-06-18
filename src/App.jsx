@@ -11,8 +11,6 @@ import ToPlay from "./routes/ToPlay";
 import Played from "./routes/Played";
 import ErrorPage from "./error.page";
 import NotFound from "./NotFound";
-// import { SearchController } from "@/services/api/search";
-import useUserStore from "@/stores/userStore";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,9 +29,5 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-  // const setToken = useUserStore((state) => state.setToken);
-  // SearchController.init().then((token) => {
-  //   setToken(token);
-  // });
   return <RouterProvider router={router} />;
 }
