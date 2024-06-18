@@ -14,16 +14,23 @@ export async function loader({ request, params }) {
 const Search = () => {
   const [num, setNum] = useState(0);
   const [resultsTotal, setResultsTotal] = useState([]);
+  const [noResults, setNoResults] = useState(false);
   const resultsPromise = useLoaderData();
 
   useEffect(() => {
     const getTotalResults = async () => {
+      setNoResults(false);
+      if ((await resultsPromise.results) === null) {
+        setNoResults(true);
+        return;
+      }
       setResultsTotal(await resultsPromise.results);
     };
     getTotalResults();
   }, [resultsPromise.results]);
 
   function renderFiveResults(results) {
+    if (results === null) return;
     return results.map((result, index) => {
       if (index >= num + 0 && index < num + 3) {
         return <GameCard key={result.id} result={result} />;
@@ -33,8 +40,7 @@ const Search = () => {
   return (
     <div className="text-primary mb-14 flex flex-col items-center gap-4">
       <React.Suspense fallback={<TriangleLoader />}>
-        {resultsPromise.results !== null &&
-        resultsPromise.results.length > 0 ? (
+        {!noResults ? (
           <>
             <Await resolve={resultsPromise.results}>{renderFiveResults}</Await>
             <div className="flex justify-around">
